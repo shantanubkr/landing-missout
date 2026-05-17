@@ -1,0 +1,19 @@
+---
+description: Product manage bento — layout frozen unless user asks
+globs: src/components/product/ProductManageBentoSection.tsx
+alwaysApply: false
+---
+
+# Product manage bento (`ProductManageBentoSection`)
+
+Treat this file’s **layout and spacing as finalized**. Do **not** refactor or “improve” it unless the user clearly asks to change this section.
+
+## Leave unchanged unless explicitly requested
+
+- Outer grid/flex structure for the three columns and the bottom strip.
+- Gutters (`gap-[10px]`), left rail width (`md:w-[32.5%]`), middle/right flex ratios (`flex-[7]`).
+- Bottom row: full-width track alignment, `BOTTOM_PAIR_ROW_ASPECT` (`md:aspect-[43/9]`), proportional wrappers (`md:flex-[18]` / `md:flex-[25]`), and `equalHeightPair` image sizing (`object-contain`, `object-bottom`).
+- `TopTile` uses `BentoCard` **`variant="flush"`** (no stroke); keep unless the user asks to change chrome.
+- Layered scroll parallax (`useScrollProgressDrift` on header, three columns, bottom row)—keep `peakPx` relationships unless the user asks to change motion.
+
+Copy, CTAs, accessibility strings, and asset paths may still be updated when the user asks for content changes only—without altering the grid math above.

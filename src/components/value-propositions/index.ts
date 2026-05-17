@@ -1,0 +1,1 @@
+export { ValuePropositionsSection } from './ValuePropositionsSection'

@@ -1,0 +1,266 @@
+/* Self-hosted: public/fonts/ — OTF, font-display: swap */
+
+/* ----- Polymath Text ----- */
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Thin.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-ThinIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-XLight.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-XLightIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-LightIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Italic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-MediumIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-SemiboldIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-BoldIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-BlackIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-Super.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Text';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/polymath_text/PolymathTextDemo-SuperIt.otf') format('opentype');
+}
+
+/* ----- Polymath Display ----- */
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Thin.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-ThinIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-XLight.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-XLightIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Light.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-LightIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Regular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Italic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-MediumIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-SemiboldIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-BoldIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-BlackIt.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-Super.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Polymath Display';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/polymath_display/PolymathDispDemo-SuperIt.otf') format('opentype');
+}
+
+/* Hero / “people involved” — Argent Pixel CF */
+@font-face {
+  font-family: 'Argent Pixel CF';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/argent_pixel/ArgentPixelCF-Regular.otf') format('opentype');
+}

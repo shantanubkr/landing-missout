@@ -1,0 +1,1 @@
+export { PeopleInvolvedSection } from './PeopleInvolvedSection'

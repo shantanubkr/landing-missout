@@ -1,0 +1,239 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+@theme {
+  /* Families loaded in `fonts.css` from `public/fonts/` */
+  --font-sans: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
+  --font-missout-display: 'Polymath Display', ui-serif, Georgia, serif;
+  --font-missout-pixel: 'Argent Pixel CF', 'Polymath Display', ui-serif, serif;
+}
+
+@layer base {
+  :root {
+    --color-brand-pink: #f92c99;
+    --color-brand-blue: #006afe;
+    --color-ink: #1a1a1a;
+    --color-canvas: #ffffff;
+    /* Glass: Figma fill #BEBEBE @ 11%, stroke #C5C5C5 @ 0.6px; blur layers content behind the surface */
+    --nav-surface: rgba(190, 190, 190, 0.11);
+    --nav-surface-elevated: rgba(255, 255, 255, 0.82);
+    --nav-stroke: #c5c5c5;
+    --nav-backdrop-blur: 12px;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  /**
+   * Deepest layer under hero content and `background_graphic`.
+   * Single `bg_grid.svg` scaled to cover the section (not tiled).
+   */
+  .hero-bg-grid {
+    background-color: #ffffff;
+    background-image: url('/hero/bg_grid.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /** Same asset as `.hero-bg-grid`; duplicated at `/product/bg_grid.svg` for the product route. */
+  .product-hero-bg-grid {
+    background-color: #ffffff;
+    background-image: url('/product/bg_grid.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .missout-glass {
+    -webkit-backdrop-filter: blur(var(--nav-backdrop-blur, 12px));
+    backdrop-filter: blur(var(--nav-backdrop-blur, 12px));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .missout-glass {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @keyframes hero-beat {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.08);
+    }
+  }
+
+  .hero-beat {
+    animation: hero-beat 1s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-beat {
+      animation: none;
+    }
+  }
+
+  /** Subtle move + “breathing” for value-proposition card glows */
+  @keyframes value-prop-glow-pulse {
+    0%,
+    100% {
+      transform: scale(0.92) translate(0, 0);
+      opacity: 0.8;
+    }
+    35% {
+      transform: scale(1.05) translate(5px, -4px);
+      opacity: 1;
+    }
+    70% {
+      transform: scale(0.97) translate(-4px, 3px);
+      opacity: 0.9;
+    }
+  }
+
+  .value-prop-glow-pulse {
+    transform-origin: center;
+    animation: value-prop-glow-pulse 3.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .value-prop-glow-pulse {
+      animation: none;
+    }
+  }
+
+  /* People Involved — only the front face animates; gray back layers stay put */
+  @keyframes people-card-exit-to-left {
+    from {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    to {
+      transform: translate3d(calc(-100% - 0.5rem), 0, 0) rotate(-2deg);
+    }
+  }
+
+  @keyframes people-card-exit-to-right {
+    from {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    to {
+      transform: translate3d(calc(100% + 0.5rem), 0, 0) rotate(2deg);
+    }
+  }
+
+  @keyframes people-card-rise {
+    from {
+      opacity: 0.86;
+      transform: translate3d(0, 0.5rem, 0) scale(0.99);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  .people-card-exit--next {
+    transform-origin: 50% 50%;
+    animation: people-card-exit-to-left 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .people-card-exit--prev {
+    transform-origin: 50% 50%;
+    animation: people-card-exit-to-right 0.38s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .people-card-rise {
+    transform-origin: 50% 100%;
+    /* Shorter than exit so the face feels settled when the exit layer unmounts */
+    animation: people-card-rise 0.32s cubic-bezier(0.22, 0.9, 0.2, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .people-card-exit--next,
+    .people-card-exit--prev,
+    .people-card-rise {
+      animation: none;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-missout-display);
+  }
+
+  .font-body {
+    font-family: var(--font-sans);
+  }
+
+  .font-pixel-hero {
+    font-family: var(--font-missout-pixel);
+  }
+
+  /**
+   * Hero subhead (“Handle registrations…”) — 20px, medium, 26 line height, tight tracking.
+   * Color is set on the element (e.g. `text-[#5A5A5A]`).
+   */
+  .text-hero-subhead {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.3; /* 26 / 20 */
+    letter-spacing: 0.35px;
+  }
+
+  /**
+   * Hero pixel headline — comp: 80–120px, black, extremely tight tracking & line-height.
+   * Two lines: “Missout,” / “no more.” (Argent Pixel CF; Regular, weight is from the design).
+   * Keep line-height low so the wrapped pair reads as one block without a tall gap.
+   */
+  .text-hero-headline {
+    font-family: var(--font-missout-pixel);
+    color: #000000;
+    font-size: clamp(3.5rem, 10.5vw, 7.5rem);
+    font-weight: 400;
+    line-height: 0.68;
+    letter-spacing: -0.075em;
+  }
+
+  @media (min-width: 640px) {
+    .text-hero-headline {
+      letter-spacing: -0.085em;
+    }
+  }
+
+  /**
+   * About hero — two-line headline (“Every event deserves” / “a full house”).
+   * Below `sm`, use a lower minimum size than `.text-hero-headline` so the first line does not break into three.
+   */
+  .text-about-hero-headline {
+    font-family: var(--font-missout-pixel);
+    color: #000000;
+    font-size: clamp(1.75rem, calc(0.35rem + 5.5vw), 7.5rem);
+    font-weight: 400;
+    line-height: 0.86;
+    letter-spacing: -0.075em;
+  }
+
+  @media (min-width: 640px) {
+    .text-about-hero-headline {
+      font-size: clamp(3.5rem, 10.5vw, 7.5rem);
+      letter-spacing: -0.085em;
+    }
+  }
+}
