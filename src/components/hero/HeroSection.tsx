@@ -77,10 +77,8 @@ export function HeroSection() {
               no more.
             </h1>
 
-            <p className="text-hero-subhead mx-auto mt-3 max-w-2xl text-[#5A5A5A] sm:mt-4">
-              Handle registrations, teams, and updates
-              <br />
-              No back and forth
+            <p className="text-hero-subhead mx-auto mt-3 max-w-2xl text-balance text-[#5A5A5A] sm:mt-4">
+              Backstage for the ones running the show
             </p>
 
             <div className="mt-5 flex flex-col items-center sm:mt-6">
