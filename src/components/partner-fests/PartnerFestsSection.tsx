@@ -206,7 +206,7 @@ export function PartnerFestsSection() {
                       size="md"
                       className="!bg-white !text-[#F92C99] !shadow-none hover:!bg-white/90 hover:!text-[#E11E85] active:!text-[#C91872]"
                     >
-                      Join now
+                      Partner with us
                     </ButtonLink>
                   </div>
                 </div>
