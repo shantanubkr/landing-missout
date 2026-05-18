@@ -27,13 +27,15 @@ export const PARTNER_FESTS: readonly PartnerFest[] = [
     id: 'evo-bits-design',
     festName: 'Evo',
     college: 'BITS Design',
-    logoFile: 'placeholder-fest.svg', // swap filename when you add the logo
+    logoFile: 'evo_logo.png',
+    logoFrame: 'dark',
   },
   {
     id: 'rangreza-bits-design',
     festName: 'Rangreza',
     college: 'BITS Design',
-    logoFile: 'placeholder-fest.svg', // swap filename when you add the logo
+    logoFile: 'Rangreza_Logo.png',
+    logoFrame: 'dark',
   },
 ]
 

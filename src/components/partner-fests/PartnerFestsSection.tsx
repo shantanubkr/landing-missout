@@ -30,10 +30,11 @@ function PartnerFestCard({
   return (
     <div
       className={cn(
-        'missout-glass box-border flex aspect-square w-full min-w-0 max-w-full flex-col items-center justify-center border border-solid border-[#D6D6D6]',
+        /* No fixed aspect — square left too much empty glass; hug content + padding */
+        'missout-glass box-border mx-auto flex h-fit w-fit max-w-full min-w-0 flex-col items-center justify-center border border-solid border-[#D6D6D6]',
         isCenter
-          ? 'max-w-[min(38rem,100%)] gap-1 rounded-[0.5rem] px-1 py-1.5 sm:gap-3 sm:rounded-[1.25rem] sm:px-3 sm:py-4 md:gap-4 md:rounded-[1.5rem] md:px-4 md:py-5 lg:gap-5 lg:px-5 lg:py-6 xl:gap-5 xl:px-6 xl:py-7'
-          : 'max-w-[min(26.6rem,100%)] gap-0.5 rounded-[0.4rem] px-0.5 py-1 sm:gap-2 sm:rounded-[0.8rem] sm:px-2 sm:py-2.5 md:gap-2.5 md:px-[0.9rem] md:py-3.5',
+          ? 'gap-1 rounded-[0.5rem] px-1 py-1 sm:gap-2.5 sm:rounded-[1rem] sm:px-2 sm:py-2 md:gap-3 md:rounded-[1.25rem] md:px-3 md:py-3 lg:gap-4 lg:rounded-[1.35rem] lg:px-3.5 lg:py-3.5 xl:gap-4 xl:px-4 xl:py-4'
+          : 'gap-0.5 rounded-[0.4rem] px-0.5 py-0.5 sm:gap-1.5 sm:rounded-[0.7rem] sm:px-1.5 sm:py-1.5 md:gap-2 md:rounded-[1rem] md:px-2 md:py-2 lg:gap-2.5 lg:px-2.5 lg:py-2.5',
       )}
       style={partnerFestCardBackground}
     >
@@ -46,7 +47,7 @@ function PartnerFestCard({
           p.logoFrame === 'dark' &&
             (isCenter
               ? 'rounded-md bg-[#0B0B0B] p-1.5 shadow-inner sm:rounded-2xl sm:p-2.5 md:rounded-[28px] md:p-4 lg:p-6 xl:p-7'
-              : 'rounded-md bg-[#0B0B0B] p-1 shadow-inner sm:rounded-[12px] sm:p-1.5 md:rounded-[18px] md:p-3.5'),
+              : 'rounded-md bg-[#0B0B0B] p-1 shadow-inner sm:rounded-2xl sm:p-1.5 md:rounded-[28px] md:p-3.5 lg:p-4 xl:p-5'),
         )}
       >
         <img
@@ -123,7 +124,7 @@ export function PartnerFestsSection() {
         <div className="relative z-20 mx-auto mt-10 w-full min-w-0 max-w-[min(100%,72rem)] -translate-y-7 px-4 max-md:-translate-y-2 max-md:px-3 sm:mt-12 sm:px-6 md:mt-14 md:px-8">
           <div ref={partnerCardsParallaxRef} className="w-full min-w-0">
             <ul
-              className="m-0 grid min-w-0 list-none grid-cols-[1fr_1.22fr_1fr] items-center justify-center gap-2 p-0 pt-1 max-md:gap-1.5 sm:grid-cols-[1fr_1.4fr_1fr] sm:gap-3 sm:pt-1 md:gap-4 md:pt-2 lg:gap-6"
+              className="m-0 grid min-w-0 list-none grid-cols-[1fr_1.22fr_1fr] items-center justify-center gap-1 p-0 pt-1 sm:grid-cols-[1fr_1.4fr_1fr] sm:gap-2 sm:pt-1 md:gap-2.5 md:pt-2 lg:gap-3"
               aria-label="Partner fests"
             >
             <li className="flex min-w-0 justify-center [list-style:none]">
