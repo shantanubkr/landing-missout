@@ -1,6 +1,6 @@
 import { usePageMeta } from '../hooks/usePageMeta'
 
-const LAST_UPDATED = 'May 19, 2026'
+const LAST_UPDATED = 'May 19, 2026 (updated)'
 
 interface SectionProps {
   title: string
@@ -153,10 +153,44 @@ export function PrivacyPage() {
             <li>Object to or restrict certain processing activities.</li>
             <li>Withdraw consent where processing is based on consent.</li>
           </ul>
-          <p>To exercise any of these rights, contact us at the address in Section 8.</p>
+          <p>To exercise any of these rights, contact us at the address in Section 9.</p>
         </Section>
 
-        <Section title="8. Contact Us">
+        <Section title="8. Deleting Your Account & Data">
+          <p>
+            You have the right to request the deletion of your Missout profile and all associated
+            platform-level data at any time. To submit a deletion request, write to us at:
+          </p>
+          <div className="my-2 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-5 py-4">
+            <p>
+              Email:{' '}
+              <a
+                href="mailto:hello@missout.in"
+                className="font-medium text-[#F92C99] underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                hello@missout.in
+              </a>
+            </p>
+            <p className="mt-1 text-xs text-[#8A8A8A] sm:text-sm">
+              Subject: Account Deletion Request — please include the email address linked to your account.
+            </p>
+          </div>
+          <p>
+            We will acknowledge your request and action it within{' '}
+            <span className="font-medium text-[#1A1A1A]">48 hours</span>. Once processed, your
+            profile, event registrations, and any personally identifiable information will be
+            permanently removed from our active systems.
+          </p>
+          <p>
+            <span className="font-medium text-[#1A1A1A]">What we retain.</span> Notwithstanding
+            the above, we will retain certain records as required by applicable Indian law — including
+            audit logs, transaction records, and data necessary for financial compliance, fraud
+            prevention, or ongoing legal proceedings. This data is kept only for as long as
+            mandated by law and is not used for any other purpose.
+          </p>
+        </Section>
+
+        <Section title="9. Contact Us">
           <p>
             If you have any questions, concerns, or requests regarding this Privacy Policy, please
             reach out to us:
@@ -176,7 +210,7 @@ export function PrivacyPage() {
           </div>
         </Section>
 
-        <Section title="9. Changes to This Policy">
+        <Section title="10. Changes to This Policy">
           <p>
             We may update this Privacy Policy from time to time. When we do, we will revise the
             "Last updated" date at the top of this page and, for material changes, notify you via
