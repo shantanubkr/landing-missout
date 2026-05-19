@@ -47,7 +47,7 @@ function PartnerFestCard({
           p.logoFrame === 'dark' &&
             (isCenter
               ? 'rounded-md bg-[#0B0B0B] p-1.5 shadow-inner sm:rounded-2xl sm:p-2.5 md:rounded-[28px] md:p-4 lg:p-6 xl:p-7'
-              : 'rounded-md bg-[#0B0B0B] p-1 shadow-inner sm:rounded-2xl sm:p-1.5 md:rounded-[28px] md:p-3.5 lg:p-4 xl:p-5'),
+              : 'rounded-md bg-[#0B0B0B] p-1 shadow-inner sm:rounded-[12px] sm:p-1.5 md:rounded-[18px] md:p-3.5'),
         )}
       >
         <img

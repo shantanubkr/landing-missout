@@ -28,14 +28,12 @@ export const PARTNER_FESTS: readonly PartnerFest[] = [
     festName: 'Evo',
     college: 'BITS Design',
     logoFile: 'evo_logo.png',
-    logoFrame: 'dark',
   },
   {
     id: 'rangreza-bits-design',
     festName: 'Rangreza',
     college: 'BITS Design',
     logoFile: 'Rangreza_Logo.png',
-    logoFrame: 'dark',
   },
 ]
 
