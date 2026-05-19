@@ -106,7 +106,7 @@ export function FaqSection() {
           aria-hidden
           className={cn(
             'pointer-events-none absolute left-0 z-0 block',
-            'top-52 h-[min(15rem,38vh)]',
+            'top-28 h-[min(15rem,38vh)]',
             'sm:top-64 sm:h-[min(26rem,54vh)]',
             'md:top-72 md:h-[min(36rem,62vh)]',
             'lg:top-80 lg:h-[min(38rem,64vh)]',
@@ -129,7 +129,7 @@ export function FaqSection() {
           aria-hidden
           className={cn(
             'pointer-events-none absolute right-0 z-0 block',
-            'top-52 h-[min(15rem,38vh)]',
+            'top-28 h-[min(15rem,38vh)]',
             'sm:top-64 sm:h-[min(26rem,54vh)]',
             'md:top-72 md:h-[min(36rem,62vh)]',
             'lg:top-80 lg:h-[min(38rem,64vh)]',
