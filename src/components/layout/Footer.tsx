@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { SocialIcons } from '../ui/SocialIcons'
 
 const MISSOUT_HORIZONTAL = '/brand/missout_horizontal.svg'
@@ -42,7 +42,21 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="h-12 min-h-12 w-full shrink-0 bg-black sm:h-14" aria-hidden />
+      <div className="flex items-center justify-center gap-4 bg-black px-4 py-3 sm:py-4">
+        <Link
+          to="/privacy"
+          className="font-sans text-xs text-[#6A6A6A] transition-colors hover:text-white sm:text-sm"
+        >
+          Privacy Policy
+        </Link>
+        <span className="text-[#3A3A3A]" aria-hidden>·</span>
+        <Link
+          to="/terms-of-service"
+          className="font-sans text-xs text-[#6A6A6A] transition-colors hover:text-white sm:text-sm"
+        >
+          Terms of Service
+        </Link>
+      </div>
     </footer>
   )
 }
