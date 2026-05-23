@@ -17,7 +17,6 @@ export const PEOPLE_INVOLVED: readonly PeopleInvolvedMember[] = [
   { id: 'shantanu', name: 'Shantanu Borkar', portraitFile: 'Shantanu.png' },
   { id: 'aryan', name: 'Aryan Puri', portraitFile: 'Aryan.png' },
   { id: 'samarth', name: 'Samarth Saluja', portraitFile: 'Samarth.png' },
-  { id: 'siddharth', name: 'Siddharth Saripalle', portraitFile: 'Siddharth.png' },
 ]
 
 export function peoplePortraitPath(file: string): string {
