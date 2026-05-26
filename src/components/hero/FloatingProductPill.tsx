@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { cn } from '../../lib/cn'
 
 type FloatingProductPillProps = {
-  label: 'Missout' | 'Backnd'
+  label: 'Missout' | 'Backstage'
   className?: string
   /** Slight vertical offset (right tile sits a bit higher in the comp) */
   align?: 'left' | 'right'
@@ -17,11 +17,11 @@ export function FloatingProductPill({
   align = 'left',
 }: FloatingProductPillProps) {
   const to =
-    label === 'Missout' ? '/product#discover-events' : '/product#manage-backnd'
+    label === 'Missout' ? '/product#discover-events' : '/product#manage-backstage'
   const ariaLabel =
     label === 'Missout'
       ? 'Missout — discover events'
-      : 'Backnd — manage your event'
+      : 'Backstage — manage your event'
 
   return (
     <Link

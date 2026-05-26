@@ -97,7 +97,7 @@ function TopTile({
 }
 
 /**
- * “Manage through backnd.” — headline + subcopy + CTA + manage bento preview.
+ * “Manage through Backstage.” — headline + subcopy + CTA + manage bento preview.
  *
  * Gutters: `gap-[10px]` row + column. Left rail ~32.5% so whole/PBAC scale uniformly (`w-full`);
  * Bottom strip: full-width row (`aspect-[43/9]`); proportional cols `18:25`; equal rendered heights.
@@ -121,17 +121,17 @@ export function ProductManageBentoSection() {
   return (
     <section
       ref={sectionRef}
-      id="manage-backnd"
-      aria-labelledby="manage-backnd-heading"
+      id="manage-backstage"
+      aria-labelledby="manage-backstage-heading"
       className="bg-white pb-16 pt-12 sm:pb-20 sm:pt-16 md:pb-24 md:pt-20"
     >
       <div className="mx-auto flex w-full max-w-[min(100%,80.5rem)] flex-col px-4 sm:px-6 lg:px-8">
         <header ref={headerDriftRef} className="flex flex-col items-center gap-4 text-center md:gap-5">
           <h2
-            id="manage-backnd-heading"
+            id="manage-backstage-heading"
             className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-[#1A1A1A]"
           >
-            Manage through backnd.
+            Manage through Backstage.
           </h2>
           <p className="max-w-xl font-body text-base leading-relaxed text-[#6B6B6B] md:text-[17px]">
             <span className="block">Handle registrations, teams, and updates</span>

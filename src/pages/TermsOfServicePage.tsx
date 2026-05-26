@@ -45,7 +45,7 @@ export function TermsOfServicePage() {
         <p className="mb-10 font-sans text-sm leading-relaxed text-[#5A5A5A] sm:text-base">
           These Terms of Service ("Terms") govern your access to and use of{' '}
           <span className="font-medium text-[#1A1A1A]">findus.missout.in</span> and all related
-          products and services operated by Missout ("we", "us", or "our"), including the Backnd
+          products and services operated by Missout ("we", "us", or "our"), including the Backstage
           event-management suite. Please read them carefully. By creating an account or using any
           part of the platform, you agree to be bound by these Terms. If you do not agree, do not
           use Missout.
@@ -58,7 +58,7 @@ export function TermsOfServicePage() {
             you represent and warrant that you meet these requirements.
           </p>
           <p>
-            Access to certain organiser features (Backnd) may require additional verification of
+            Access to certain organiser features (Backstage) may require additional verification of
             your college affiliation.
           </p>
         </Section>
@@ -147,7 +147,7 @@ export function TermsOfServicePage() {
 
         <Section title="6. Payments & Fees">
           <p>
-            Certain features — such as paid ticket processing through Backnd — may involve fees.
+            Certain features — such as paid ticket processing through Backstage — may involve fees.
             All applicable fees will be disclosed to you before any charge is made. Payments are
             processed by third-party payment providers; their terms and privacy policies apply to
             payment transactions.

@@ -3,9 +3,9 @@ import { useProductHeroParallax } from '../../hooks/useProductHeroParallax'
 
 const PRODUCT_ROBOT_ICON = '/product/Robot.svg'
 const PRODUCT_BG_GRAPHIC = '/product/product_bg.svg'
-/** Card screenshots — `public/product/missout.png`, `public/product/backnd.png` */
+/** Card screenshots — `public/product/missout.png`, `public/product/backstage.png` */
 const PRODUCT_HERO_DISCOVER_IMG = '/product/missout.png'
-const PRODUCT_HERO_MANAGE_IMG = '/product/backnd.png'
+const PRODUCT_HERO_MANAGE_IMG = '/product/backstage.png'
 
 /** Matches `viewBox` / root `<svg width height>` in `public/product/product_bg.svg` (update if the asset changes). */
 const PRODUCT_BG_SIZE = { w: 1246, h: 1033 } as const
@@ -76,7 +76,7 @@ function ProductGlassManageCard() {
   return (
     <ProductGlassShell
       src={PRODUCT_HERO_MANAGE_IMG}
-      alt="Backnd — manage events"
+      alt="Backstage — manage events"
     />
   )
 }
@@ -125,7 +125,7 @@ function ProductHeroVisual({
       <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[4%] z-[2] max-md:bottom-[8%] max-md:top-[10%] md:bottom-[6%] md:top-[10%] lg:top-[12%] xl:top-[14%]">
         <div className="relative mx-auto h-full w-full max-md:max-w-full max-w-[28rem] md:max-w-[min(100%,71rem)] lg:max-w-[min(100%,76rem)]">
           {/*
-            Mobile (< md): same row — Missout left, Backnd right — keeps pixel wings visible in the gap.
+            Mobile (< md): same row — Missout left, Backstage right — keeps pixel wings visible in the gap.
             md+: diagonal layout unchanged.
           */}
           <div className="pointer-events-auto absolute left-1/2 top-[1%] z-[3] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-8 max-md:left-0 max-md:right-auto max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-10 md:left-0 md:top-0 md:w-[50%] md:max-w-none md:-translate-x-6 md:-translate-y-11 lg:w-[49%] lg:-translate-x-10 lg:-translate-y-[3.35rem] xl:w-[48%] xl:-translate-x-14 xl:-translate-y-[3.85rem] 2xl:-translate-x-[4.5rem] 2xl:-translate-y-[3.95rem]">

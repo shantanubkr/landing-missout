@@ -80,7 +80,7 @@ export function PrivacyPage() {
         <Section title="2. How We Use Your Information">
           <p>We use the information we collect to:</p>
           <ul className="ml-5 list-disc space-y-2">
-            <li>Provide, maintain, and improve the Missout platform and Backnd event-management tools.</li>
+            <li>Provide, maintain, and improve the Missout platform and Backstage event-management tools.</li>
             <li>Personalise your event discovery feed based on your college and interests.</li>
             <li>Send transactional emails such as registration confirmations and event reminders.</li>
             <li>Respond to your support requests or enquiries.</li>

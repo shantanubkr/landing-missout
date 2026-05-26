@@ -17,7 +17,7 @@ Marketing landing site for [Missout](https://missout.in) — a college event dis
 | Route | Page |
 |-------|------|
 | `/` | Home — hero, value props, FAQ, partners, contact |
-| `/product` | Product — discover events (Missout) + manage events (Backnd) |
+| `/product` | Product — discover events (Missout) + manage events (Backstage) |
 | `/about` | About — mission, audience, team |
 | `*` | 404 |
 
@@ -56,7 +56,7 @@ Images that need to be added to `public/` before deploy:
 | Folder | Contents |
 |--------|----------|
 | `public/people/` | Team portrait PNGs: `Shantanu.png`, `Aryan.png`, `Samarth.png` (504×630 px) |
-| `public/product/` | `missout.png`, `backnd.png` (product hero cards) |
+| `public/product/` | `missout.png`, `backstage.png` (product hero cards) |
 | `public/product/discover-bento/` | `1_missout.png` … `8_logo.png` |
 | `public/product/manage-bento/` | `1_Your_whole.png` … `8_manage_event.png` |
 | `public/partner_fests/logos/` | `umang_logo.jpg` + logos for other partner fests |
