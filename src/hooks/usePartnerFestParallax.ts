@@ -2,11 +2,14 @@ import { useEffect } from 'react'
 import type { RefObject } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-/** Pink stripe — moves farther vs scroll than the cards (depth cue). */
-const GRAPHIC_PARALLAX_Y_MAX = 44
+/** Pink stripe — drifts with scroll. */
+const GRAPHIC_PARALLAX_Y_MAX = 52
+
+/** CTA copy — counter-drifts vs graphic for layered depth. */
+const TEXT_PARALLAX_Y_MAX = -36
 
 /** Card row counter-drift vs stripe (pixels at full progress ±1). */
-const CARDS_PARALLAX_Y_MAX = -26
+const CARDS_PARALLAX_Y_MAX = -22
 
 function clampProgress(n: number) {
   return Math.max(-1, Math.min(1, n))
@@ -18,23 +21,37 @@ function clearTransform(el: HTMLElement | null) {
   el.style.removeProperty('transform')
 }
 
+function applyParallaxY(el: HTMLElement | null, progress: number, peakPx: number, hide: boolean) {
+  if (!el) return
+  if (hide) {
+    clearTransform(el)
+    return
+  }
+  const ty = progress * peakPx
+  el.style.willChange = 'transform'
+  el.style.transform = `translate3d(0, ${ty}px, 0)`
+}
+
 /**
- * Section-scrolled parallax: CTA SVG drifts vertically; optional card strip drifts opposite.
+ * Section-scrolled parallax: CTA graphic and copy drift on separate layers; optional card strip drifts opposite.
  * Applies direct `transform` — keep layout offsets (Tailwind `-translate-*`) on a parent.
  */
 export function usePartnerFestParallax(
   scopeRef: RefObject<HTMLElement | null>,
   graphicRef: RefObject<HTMLElement | null>,
+  textRef: RefObject<HTMLElement | null>,
   cardsStripRef?: RefObject<HTMLElement | null>,
 ) {
   const reduced = usePrefersReducedMotion()
 
   useEffect(() => {
     const graphicUnmount = graphicRef.current
+    const textUnmount = textRef.current
     const cardsUnmount = cardsStripRef?.current ?? null
 
     if (reduced) {
       clearTransform(graphicUnmount)
+      clearTransform(textUnmount)
       clearTransform(cardsUnmount)
       return undefined
     }
@@ -44,8 +61,6 @@ export function usePartnerFestParallax(
     const flush = () => {
       raf = 0
       const scope = scopeRef.current
-      const graphic = graphicRef.current
-      const cards = cardsStripRef?.current ?? null
       if (!scope) return
 
       const rect = scope.getBoundingClientRect()
@@ -54,26 +69,11 @@ export function usePartnerFestParallax(
       const range = rect.height + vh * 0.82
       const progress = clampProgress((vh / 2 - midY) / Math.max(range * 0.34, 1))
 
-      const hideParallax =
-        rect.bottom < -120 || rect.top > vh + 160
+      const hideParallax = rect.bottom < -120 || rect.top > vh + 160
 
-      if (graphic) {
-        if (hideParallax) clearTransform(graphic)
-        else {
-          const gy = progress * GRAPHIC_PARALLAX_Y_MAX
-          graphic.style.willChange = 'transform'
-          graphic.style.transform = `translate3d(0, ${gy}px, 0)`
-        }
-      }
-
-      if (cards) {
-        if (hideParallax) clearTransform(cards)
-        else {
-          const cy = progress * CARDS_PARALLAX_Y_MAX
-          cards.style.willChange = 'transform'
-          cards.style.transform = `translate3d(0, ${cy}px, 0)`
-        }
-      }
+      applyParallaxY(graphicRef.current, progress, GRAPHIC_PARALLAX_Y_MAX, hideParallax)
+      applyParallaxY(textRef.current, progress, TEXT_PARALLAX_Y_MAX, hideParallax)
+      applyParallaxY(cardsStripRef?.current ?? null, progress, CARDS_PARALLAX_Y_MAX, hideParallax)
     }
 
     const schedule = () => {
@@ -91,7 +91,8 @@ export function usePartnerFestParallax(
       cancelAnimationFrame(raf)
 
       clearTransform(graphicUnmount)
+      clearTransform(textUnmount)
       clearTransform(cardsUnmount)
     }
-  }, [reduced, scopeRef, graphicRef, cardsStripRef])
+  }, [reduced, scopeRef, graphicRef, textRef, cardsStripRef])
 }
