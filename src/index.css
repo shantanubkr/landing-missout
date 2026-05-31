@@ -117,6 +117,38 @@
     }
   }
 
+  /** Partner fests — infinite horizontal logo strip */
+  @keyframes partner-marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .partner-marquee-track {
+    animation: partner-marquee-scroll 28s linear infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partner-marquee-track {
+      animation: none;
+      will-change: auto;
+    }
+  }
+
+  .partner-marquee-fade {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
   /* People Involved — only the front face animates; gray back layers stay put */
   @keyframes people-card-exit-to-left {
     from {

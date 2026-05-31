@@ -1,7 +1,7 @@
-import { useId, useRef } from 'react'
-import { usePartnerFestParallax } from '../../hooks/usePartnerFestParallax'
+import { useId } from 'react'
 import { ButtonLink } from '../ui'
 import { cn } from '../../lib/cn'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { ScrollReveal } from '../motion/ScrollReveal'
 import {
   type PartnerFest,
@@ -9,75 +9,36 @@ import {
   partnerFestLogoPath,
 } from '../../lib/partnerFestsData'
 
-/**
- * Linear bottom → top: #F92C99 @ 14% → #003F98 @ 0%; over #D6D6D6 @ 11% + blur
- */
-const partnerFestCardBackground = {
-  background: `linear-gradient(to top, rgba(249, 44, 153, 0.14) 0%, rgba(0, 63, 152, 0) 100%), color-mix(in srgb, #d6d6d6 11%, transparent)`,
-} as const
-
 const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.svg'
 
-/** Sides: linear dimensions 0.7× center (30% smaller); e.g. max width 26.6rem = 0.7×38rem. */
-function PartnerFestCard({
-  p,
-  variant,
-}: {
-  p: PartnerFest
-  variant: 'center' | 'side'
-}) {
-  const isCenter = variant === 'center'
+function PartnerStripItem({ p }: { p: PartnerFest }) {
   return (
     <div
-      className={cn(
-        /* No fixed aspect — square left too much empty glass; hug content + padding */
-        'missout-glass box-border mx-auto flex h-fit w-fit max-w-full min-w-0 flex-col items-center justify-center border border-solid border-[#D6D6D6]',
-        isCenter
-          ? 'gap-1.5 rounded-[0.5rem] px-1.5 py-1.5 sm:gap-2.5 sm:rounded-[1rem] sm:px-2 sm:py-2 md:gap-3 md:rounded-[1.25rem] md:px-3 md:py-3 lg:gap-4 lg:rounded-[1.35rem] lg:px-3.5 lg:py-3.5 xl:gap-4 xl:px-4 xl:py-4'
-          : 'gap-1 rounded-[0.4rem] px-1 py-1 sm:gap-1.5 sm:rounded-[0.7rem] sm:px-1.5 sm:py-1.5 md:gap-2 md:rounded-[1rem] md:px-2 md:py-2 lg:gap-2.5 lg:px-2.5 lg:py-2.5',
-      )}
-      style={partnerFestCardBackground}
+      className="flex shrink-0 items-center gap-3 px-6 sm:gap-4 sm:px-8"
+      aria-label={`${p.festName}, ${p.college}`}
     >
       <div
         className={cn(
-          'flex shrink-0 items-center justify-center',
-          isCenter
-            ? 'h-16 w-16 md:h-[11.4rem] md:w-[11.4rem] lg:h-[14.6rem] lg:w-[14.6rem] xl:h-[16.25rem] xl:w-[16.25rem]'
-            : 'h-11 w-11 sm:h-[2.8rem] sm:w-[2.8rem] md:h-[7.95rem] md:w-[7.95rem] lg:h-[10.2rem] lg:w-[10.2rem] xl:h-[11.4rem] xl:w-[11.4rem]',
-          p.logoFrame === 'dark' &&
-            (isCenter
-              ? 'rounded-md bg-[#0B0B0B] p-2 shadow-inner sm:rounded-2xl sm:p-2.5 md:rounded-[28px] md:p-4 lg:p-6 xl:p-7'
-              : 'rounded-md bg-[#0B0B0B] p-1.5 shadow-inner sm:rounded-[12px] sm:p-1.5 md:rounded-[18px] md:p-3.5'),
+          'flex h-11 w-11 shrink-0 items-center justify-center sm:h-12 sm:w-12',
+          p.logoFrame === 'dark' && 'rounded-lg bg-[#0B0B0B] p-1 sm:rounded-xl sm:p-1.5',
         )}
       >
         <img
           src={partnerFestLogoPath(p.logoFile)}
-          alt={`${p.festName} logo`}
+          alt=""
           className="max-h-full max-w-full object-contain"
+          width={48}
+          height={48}
           loading="lazy"
           decoding="async"
           draggable={false}
         />
       </div>
-      <div className="text-center">
-        <p
-          className={cn(
-            'font-sans font-bold leading-tight text-[#1A1A1A]',
-            isCenter
-              ? 'text-sm leading-tight sm:text-sm md:text-2xl md:leading-tight lg:text-4xl lg:leading-tight xl:text-5xl 2xl:text-6xl'
-              : 'text-xs leading-tight sm:text-xs md:leading-tight md:text-[1.05rem] lg:text-[1.4rem] xl:text-[1.8rem] 2xl:text-[2.1rem]',
-          )}
-        >
+      <div className="min-w-0 text-left">
+        <p className="font-sans text-base font-bold leading-tight text-[#1A1A1A] sm:text-lg">
           {p.festName}
         </p>
-        <p
-          className={cn(
-            'mt-1.5 font-sans text-[#5A5A5A] sm:mt-2',
-            isCenter
-              ? 'text-xs leading-tight sm:text-xs md:text-base md:leading-tight lg:text-lg xl:text-xl 2xl:text-2xl'
-              : 'text-[0.7rem] leading-tight sm:text-[0.6rem] md:text-xs lg:text-sm xl:text-base',
-          )}
-        >
+        <p className="mt-0.5 font-sans text-sm leading-snug text-[#5A5A5A] sm:text-[15px]">
           {p.college}
         </p>
       </div>
@@ -85,28 +46,58 @@ function PartnerFestCard({
   )
 }
 
+function PartnerMarquee({ partners }: { partners: readonly PartnerFest[] }) {
+  const reducedMotion = usePrefersReducedMotion()
+
+  if (partners.length === 0) return null
+
+  if (reducedMotion) {
+    return (
+      <ul
+        className="m-0 flex list-none flex-wrap items-center justify-center gap-x-2 gap-y-4 px-4 py-2 sm:gap-x-4"
+        aria-label="Partner fests"
+      >
+        {partners.map((p) => (
+          <li key={p.id} className="[list-style:none]">
+            <PartnerStripItem p={p} />
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  const loop = [...partners, ...partners]
+
+  return (
+    <>
+      <ul className="sr-only">
+        {partners.map((p) => (
+          <li key={p.id}>
+            {p.festName}, {p.college}
+          </li>
+        ))}
+      </ul>
+      <div className="partner-marquee-fade relative w-full overflow-hidden">
+        <div className="partner-marquee-track flex w-max items-center py-2">
+          {loop.map((p, i) => (
+            <PartnerStripItem key={`${p.id}-${i}`} p={p} />
+          ))}
+        </div>
+      </div>
+    </>
+  )
+}
+
 export function PartnerFestsSection() {
   const headingId = useId()
   const partners = PARTNER_FESTS
-  const n = partners.length
-
-  const sectionRef = useRef<HTMLElement | null>(null)
-  const ctaGraphicRef = useRef<HTMLDivElement | null>(null)
-  const partnerCardsParallaxRef = useRef<HTMLDivElement | null>(null)
-  usePartnerFestParallax(sectionRef, ctaGraphicRef, partnerCardsParallaxRef)
-
-  const evo = partners.find((p) => p.id === 'evo-bits-design')
-  const umang = partners.find((p) => p.id === 'umang')
-  const rangreza = partners.find((p) => p.id === 'rangreza-bits-design')
-  const rowReady = n >= 3 && evo && umang && rangreza
 
   return (
     <section
-      ref={sectionRef}
-      className="relative overflow-x-visible overflow-y-visible bg-white"
+      className="relative overflow-hidden bg-white pb-10 pt-8 sm:pb-12 sm:pt-10 md:pb-14 md:pt-12"
       aria-labelledby={headingId}
     >
-      <div className="mx-auto max-w-6xl px-4 pt-8 text-center sm:px-6 sm:pt-10 md:pt-12">
+      <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <ScrollReveal>
           <p className="font-sans text-base font-medium tracking-normal text-[#F92C99] sm:text-lg md:text-xl">
             Who we are working with?
@@ -120,99 +111,50 @@ export function PartnerFestsSection() {
         </ScrollReveal>
       </div>
 
-      {n > 0 && rowReady && (
-        <div className="relative z-20 mx-auto mt-10 w-full min-w-0 max-w-[min(100%,72rem)] -translate-y-7 px-4 max-md:-translate-y-2 max-md:px-3 sm:mt-12 sm:px-6 md:mt-14 md:px-8">
-          <div ref={partnerCardsParallaxRef} className="w-full min-w-0">
-            <ul
-              className="m-0 flex min-w-0 list-none flex-wrap items-center justify-center gap-2 p-0 pt-1 sm:gap-2.5 sm:pt-1 md:gap-3 md:pt-2 lg:gap-3.5"
-              aria-label="Partner fests"
-            >
-            <li className="flex shrink-0 justify-center [list-style:none]">
-              <ScrollReveal delayMs={0} className="w-fit">
-                <PartnerFestCard p={evo!} variant="side" />
-              </ScrollReveal>
-            </li>
-            <li className="relative z-[1] flex shrink-0 justify-center [list-style:none] max-md:z-0">
-              <ScrollReveal delayMs={95} className="w-fit">
-                <PartnerFestCard p={umang!} variant="center" />
-              </ScrollReveal>
-            </li>
-            <li className="flex shrink-0 justify-center [list-style:none]">
-              <ScrollReveal delayMs={190} className="w-fit">
-                <PartnerFestCard p={rangreza!} variant="side" />
-              </ScrollReveal>
-            </li>
-            </ul>
-          </div>
+      {partners.length > 0 && (
+        <div className="mt-8 w-full sm:mt-10" aria-label="Partner fests">
+          <PartnerMarquee partners={partners} />
         </div>
       )}
 
-      {n > 0 && !rowReady && (
-        <div className="relative z-20 mx-auto mt-10 w-full min-w-0 max-w-6xl -translate-y-7 px-4 max-md:-translate-y-2 sm:mt-12 sm:px-6">
-          <div ref={partnerCardsParallaxRef} className="w-full min-w-0">
-            <ul className="list-none" aria-label="Partner fests">
-            {partners.map((p, i) => (
-              <li key={p.id} className="flex justify-center">
-                <ScrollReveal delayMs={i * 90} className="w-full">
-                  <PartnerFestCard p={p} variant="center" />
-                </ScrollReveal>
-              </li>
-            ))}
-            </ul>
+      <div className="relative mx-auto mt-10 w-full max-w-[min(100%,92rem)] px-2 sm:mt-12 sm:px-3 md:mt-14 md:px-4">
+        <div className="relative w-full translate-x-[2.5%] overflow-visible sm:translate-x-[3%] md:translate-x-[2%]">
+          <div className="w-full origin-bottom scale-[1.06] sm:scale-[1.1] md:scale-[1.12]">
+            <img
+              src={PARTNER_CTA_GRAPHIC}
+              alt=""
+              className="block h-auto w-full min-w-0 max-w-none select-none object-contain object-bottom"
+              width={1240}
+              height={381}
+              loading="lazy"
+              decoding="async"
+              draggable={false}
+            />
           </div>
-        </div>
-      )}
-
-      <div className="relative z-10 -mt-20 w-full min-w-0 overflow-visible pb-8 max-md:-mt-14 sm:-mt-28 sm:pb-10 md:-mt-32 md:pb-12 lg:-mt-36 lg:pb-14">
-        <div className="mx-auto w-full min-w-0 max-w-7xl px-4 sm:px-5 md:px-6">
-          <div className="relative flex w-full justify-center">
-            <div
-              ref={ctaGraphicRef}
-              className="mx-auto w-full max-w-[min(100%,80rem)] min-w-0"
+          <div className="absolute inset-x-0 top-0 bottom-[18%] flex flex-col items-center justify-center px-4 text-center sm:bottom-[16%] sm:px-6 md:bottom-[14%]">
+            <ScrollReveal
+              delayMs={120}
+              className="mx-auto w-full max-w-lg translate-y-1 sm:translate-y-2 md:translate-y-3"
             >
-              <img
-                src={PARTNER_CTA_GRAPHIC}
-                alt=""
-                className="block h-auto w-full min-w-0 select-none object-contain object-bottom"
-                width={1240}
-                height={381}
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-              />
-            </div>
-            {/*
-              Band starts below the card overlap; stays on the art only (does not change the image/cards).
-            */}
-            <div className="absolute inset-x-0 top-[26%] bottom-[13%] z-[1] flex flex-col items-center justify-center px-5 text-center max-md:top-[22%] max-md:bottom-[18%] max-md:px-4 sm:top-[26%] sm:bottom-[11%] sm:px-5 md:top-[24%] md:bottom-[10%] md:px-6">
-              <ScrollReveal delayMs={260} className="mx-auto w-full max-w-md sm:max-w-lg">
-                <div className="translate-y-2 sm:translate-y-3 md:translate-y-4">
-                  <p className="font-display text-balance text-xl font-bold leading-[1.15] text-white drop-shadow-sm max-md:text-lg sm:text-3xl sm:leading-tight md:text-4xl md:leading-tight lg:text-5xl">
-                    <span className="block">Want to be one</span>
-                    <span className="mt-0 block">of them?</span>
-                  </p>
-                  <p className="mt-1.5 font-sans text-xs font-semibold leading-snug text-white max-md:mx-auto max-md:max-w-[19rem] max-md:text-[13px] sm:mt-2 sm:text-base md:mt-2 md:text-lg lg:mt-2.5 lg:text-xl">
-                    <span className="sm:hidden">Handle registrations, teams, and updates.</span>
-                    <span className="hidden sm:inline">
-                      Handle registrations, teams,
-                      <br />
-                      and updates.
-                    </span>
-                  </p>
-                  <div className="mt-3 flex justify-center sm:mt-3.5">
-                    <ButtonLink
-                      to="/#contact"
-                      variant="primary"
-                      theme="home"
-                      size="md"
-                      className="!bg-white !text-[#F92C99] !shadow-none hover:!bg-white/90 hover:!text-[#E11E85] active:!text-[#C91872]"
-                    >
-                      Partner with us
-                    </ButtonLink>
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
+              <p className="font-display text-balance text-xl font-bold leading-[1.08] text-white drop-shadow-sm sm:text-3xl sm:leading-tight md:text-4xl lg:text-5xl">
+                <span className="block">Want to be one</span>
+                <span className="block">of them?</span>
+              </p>
+              <p className="mt-1.5 font-sans text-sm font-semibold leading-snug text-white sm:mt-2 sm:text-base md:text-lg">
+                Handle registrations, teams, and updates.
+              </p>
+              <div className="mt-2 flex justify-center sm:mt-2.5">
+                <ButtonLink
+                  to="/#contact"
+                  variant="primary"
+                  theme="home"
+                  size="sm"
+                  className="!bg-white !px-5 !py-2 !text-sm !font-semibold !text-[#F92C99] !shadow-none hover:!bg-white/90 hover:!text-[#E11E85] active:!text-[#C91872]"
+                >
+                  Partner with us
+                </ButtonLink>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

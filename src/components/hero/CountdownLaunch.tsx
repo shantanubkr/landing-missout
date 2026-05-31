@@ -39,7 +39,7 @@ export function CountdownLaunch({ className }: CountdownLaunchProps) {
   if (left.done) {
     return (
       <div
-        className={cn('flex flex-col items-center gap-3 text-center', className)}
+        className={cn('flex flex-col items-center gap-1.5 text-center sm:gap-2', className)}
         aria-live="polite"
       >
         <ClockBadge />
@@ -52,7 +52,7 @@ export function CountdownLaunch({ className }: CountdownLaunchProps) {
 
   return (
     <div
-      className={cn('flex flex-col items-center gap-3 text-center', className)}
+      className={cn('flex flex-col items-center gap-1.5 text-center sm:gap-2', className)}
       aria-live="polite"
       aria-atomic
     >
@@ -68,7 +68,7 @@ function ClockBadge() {
   return (
     <div
       className={cn(
-        'box-border flex h-14 w-14 shrink-0 items-center justify-center rounded-full sm:h-16 sm:w-16',
+        'box-border flex h-11 w-11 shrink-0 items-center justify-center rounded-full sm:h-12 sm:w-12',
         'bg-[#FCE8F2]',
       )}
       aria-hidden
@@ -78,7 +78,7 @@ function ClockBadge() {
         alt=""
         width={22}
         height={22}
-        className="hero-beat pointer-events-none h-6 w-6 select-none object-contain sm:h-7 sm:w-7"
+        className="hero-beat pointer-events-none h-5 w-5 select-none object-contain sm:h-6 sm:w-6"
         loading="eager"
         decoding="async"
         draggable={false}
