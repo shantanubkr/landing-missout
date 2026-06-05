@@ -123,17 +123,17 @@ function ProductHeroVisual({
 
       {/* Cards: sibling overlay — independent of SVG clip / border-radius stacking */}
       <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[4%] z-[2] max-md:bottom-[8%] max-md:top-[10%] md:bottom-[6%] md:top-[10%] lg:top-[12%] xl:top-[14%]">
-        <div className="relative mx-auto h-full w-full max-md:max-w-full max-w-[28rem] md:max-w-[min(100%,71rem)] lg:max-w-[min(100%,76rem)]">
+        <div className="relative mx-auto h-full w-full max-md:max-w-full max-w-[26rem] md:max-w-[min(100%,64rem)] lg:max-w-[min(100%,68rem)]">
           {/*
             Mobile (< md): same row — Missout left, Backstage right — keeps pixel wings visible in the gap.
             md+: diagonal layout unchanged.
           */}
-          <div className="pointer-events-auto absolute left-1/2 top-[1%] z-[3] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-8 max-md:left-0 max-md:right-auto max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-10 md:left-0 md:top-0 md:w-[50%] md:max-w-none md:-translate-x-6 md:-translate-y-11 lg:w-[49%] lg:-translate-x-10 lg:-translate-y-[3.35rem] xl:w-[48%] xl:-translate-x-14 xl:-translate-y-[3.85rem] 2xl:-translate-x-[4.5rem] 2xl:-translate-y-[3.95rem]">
+          <div className="pointer-events-auto absolute left-1/2 top-[1%] z-[3] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-8 max-md:left-0 max-md:right-auto max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-10 md:left-0 md:top-0 md:w-[47%] md:max-w-none md:-translate-x-4 md:-translate-y-11 lg:w-[46%] lg:-translate-x-6 lg:-translate-y-[3.35rem] xl:w-[45%] xl:-translate-x-8 xl:-translate-y-[3.85rem] 2xl:-translate-x-12 2xl:-translate-y-[3.95rem]">
             <div ref={discoverCardRef} className="will-change-transform">
               <ProductGlassDiscoverCard />
             </div>
           </div>
-          <div className="pointer-events-auto absolute bottom-[1%] left-1/2 z-[4] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-11 max-md:bottom-auto max-md:left-auto max-md:right-0 max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-[2.875rem] md:bottom-[28%] md:right-0 md:top-auto md:w-[50%] md:max-w-none md:translate-x-6 md:-translate-y-[4.125rem] lg:w-[49%] lg:translate-x-10 lg:-translate-y-[4.625rem] xl:w-[48%] xl:translate-x-14 xl:-translate-y-[5.35rem] 2xl:translate-x-[4.5rem] 2xl:-translate-y-[5.65rem]">
+          <div className="pointer-events-auto absolute bottom-[1%] left-1/2 z-[4] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-11 max-md:bottom-auto max-md:left-auto max-md:right-0 max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-[2.875rem] md:bottom-[28%] md:right-0 md:top-auto md:w-[47%] md:max-w-none md:translate-x-4 md:-translate-y-[4.125rem] lg:w-[46%] lg:translate-x-6 lg:-translate-y-[4.625rem] xl:w-[45%] xl:translate-x-8 xl:-translate-y-[5.35rem] 2xl:translate-x-12 2xl:-translate-y-[5.65rem]">
             <div ref={manageCardRef} className="will-change-transform">
               <ProductGlassManageCard />
             </div>
@@ -179,7 +179,7 @@ export function ProductHeroSection() {
       </div>
 
       {/* Full-bleed visual — not constrained by `max-w-6xl` so cards + graphic can scale */}
-      <div className="relative z-[1] mx-auto mt-5 w-full max-w-[min(100%,76rem)] px-2 max-md:mt-10 sm:mt-6 sm:px-3 md:px-4 lg:mt-8 lg:px-5 xl:px-6">
+      <div className="relative z-[1] mx-auto mt-5 w-full max-w-[min(100%,68rem)] origin-top px-2 max-md:mt-10 sm:mt-6 sm:px-3 md:origin-center md:scale-[0.94] md:px-5 lg:mt-8 lg:px-6 lg:scale-[0.92] xl:scale-[0.94]">
         <ProductHeroVisual
           imageLayerRef={imageLayerRef}
           discoverCardRef={discoverCardRef}

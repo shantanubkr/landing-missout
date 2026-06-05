@@ -8,6 +8,9 @@ import { FaqSection } from '../components/faq'
 import { PeopleInvolvedSection } from '../components/people-involved'
 import { ValuePropositionsSection } from '../components/value-propositions'
 
+/** Re-enable when partner fests are ready to show on the homepage. */
+const SHOW_PARTNER_FESTS_SECTION = false
+
 export function HomePage() {
   const { hash } = useLocation()
 
@@ -30,7 +33,7 @@ export function HomePage() {
 
       <ValuePropositionsSection />
 
-      <PartnerFestsSection />
+      {SHOW_PARTNER_FESTS_SECTION ? <PartnerFestsSection /> : null}
       <PeopleInvolvedSection />
       <FaqSection />
       <ContactSection />
