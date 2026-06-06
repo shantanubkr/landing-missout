@@ -7,8 +7,8 @@ const MS_HOUR = 3_600_000
 const MS_MIN = 60_000
 const MS_SEC = 1_000
 
-/** 12 June 2026, start of day (IST). */
-const LAUNCH_END = new Date('2026-06-12T00:00:00+05:30')
+/** 21 June 2026, start of day (IST) — ~15 days out. */
+const LAUNCH_END = new Date('2026-06-21T00:00:00+05:30')
 
 function pad2(n: number) {
   return n.toString().padStart(2, '0')
