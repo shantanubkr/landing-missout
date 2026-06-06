@@ -84,14 +84,14 @@ export function HeroSection() {
 
       {/* Zone 2 — hero graphic fills remaining viewport height, shifted up toward copy */}
       <div
-        className="pointer-events-none relative z-[1] -mt-[8rem] flex min-h-[min(22vh,380px)] w-full flex-1 flex-col justify-end max-sm:overflow-visible sm:-mt-[11.4rem] sm:min-h-[min(21vh,420px)] md:-mt-[13.7rem] md:min-h-0 lg:-mt-[18.25rem] xl:-mt-[20.5rem]"
+        className="pointer-events-none relative z-[1] -mt-[15.93rem] flex min-h-[min(22vh,380px)] w-full flex-1 flex-col justify-end max-sm:overflow-visible sm:-mt-[20.35rem] sm:min-h-[min(21vh,420px)] md:-mt-[23.34rem] md:min-h-0 lg:-mt-[29.25rem] xl:-mt-[32.5rem]"
         aria-hidden
       >
         <div
           ref={imageLayerRef}
           className="flex h-full w-full min-h-[inherit] items-end justify-center"
         >
-          <div className="flex h-full w-full origin-bottom -translate-y-[6.85rem] scale-[1.14] items-end justify-center sm:-translate-y-[9.1rem] sm:scale-100 md:-translate-y-[11.4rem] lg:-translate-y-[13.7rem] xl:-translate-y-16">
+          <div className="flex h-full w-full origin-bottom -translate-y-[14.43rem] scale-[1.06] items-end justify-center sm:-translate-y-[17.36rem] sm:scale-[0.92] md:-translate-y-[20.35rem] md:scale-[0.94] lg:-translate-y-[23.34rem] lg:scale-[0.96] xl:-translate-y-[8.45rem] xl:scale-[0.98]">
             <img
               src={HERO_ASSETS.graphic}
               className={cn(

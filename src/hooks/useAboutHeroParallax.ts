@@ -5,9 +5,12 @@ import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 const MOBILE_PARALLAX = 0.48
 
 const SCROLL_GRID = 0.066
+const SCROLL_IMG = 0.138
 
 const POINTER_MX_GRID = 5
 const POINTER_MY_GRID = 3.2
+const POINTER_MX_IMG = 11
+const POINTER_MY_IMG = 7.2
 
 function resetTransform(el: HTMLElement | null) {
   if (!el) return
@@ -19,6 +22,7 @@ export function useAboutHeroParallax() {
   const prefersReducedMotion = usePrefersReducedMotion()
   const sectionRef = useRef<HTMLElement | null>(null)
   const gridLayerRef = useRef<HTMLDivElement | null>(null)
+  const imageLayerRef = useRef<HTMLDivElement | null>(null)
 
   const heroVisibleRef = useRef(false)
   const isMobileRef = useRef(false)
@@ -28,9 +32,11 @@ export function useAboutHeroParallax() {
 
   useEffect(() => {
     const gridUnmount = gridLayerRef.current
+    const imgUnmount = imageLayerRef.current
 
     if (prefersReducedMotion) {
       resetTransform(gridUnmount)
+      resetTransform(imgUnmount)
       return
     }
 
@@ -49,15 +55,18 @@ export function useAboutHeroParallax() {
       rafIdRef.current = requestAnimationFrame(() => {
         rafIdRef.current = null
         const grid = gridLayerRef.current
+        const img = imageLayerRef.current
         const sec = sectionRef.current
 
-        if (!sec || !grid) {
+        if (!sec || !grid || !img) {
           resetTransform(grid)
+          resetTransform(img)
           return
         }
 
         if (!heroVisibleRef.current) {
           resetTransform(grid)
+          resetTransform(img)
           return
         }
 
@@ -70,6 +79,9 @@ export function useAboutHeroParallax() {
 
         grid.style.willChange = 'transform'
         grid.style.transform = `translate3d(${nx * POINTER_MX_GRID * dm}px, ${-scroll * SCROLL_GRID * m + ny * POINTER_MY_GRID * dm}px, 0)`
+
+        img.style.willChange = 'transform'
+        img.style.transform = `translate3d(${nx * POINTER_MX_IMG * dm}px, ${-scroll * SCROLL_IMG * m + ny * POINTER_MY_IMG * dm}px, 0)`
       })
     }
 
@@ -81,6 +93,7 @@ export function useAboutHeroParallax() {
         heroVisibleRef.current = entries.some((e) => e.isIntersecting)
         if (!heroVisibleRef.current) {
           resetTransform(gridLayerRef.current)
+          resetTransform(imageLayerRef.current)
         }
         schedule()
       },
@@ -143,8 +156,9 @@ export function useAboutHeroParallax() {
       document.removeEventListener('pointermove', onPointerMove)
       heroVisibleRef.current = false
       resetTransform(gridUnmount)
+      resetTransform(imgUnmount)
     }
   }, [prefersReducedMotion])
 
-  return { sectionRef, gridLayerRef }
+  return { sectionRef, gridLayerRef, imageLayerRef }
 }

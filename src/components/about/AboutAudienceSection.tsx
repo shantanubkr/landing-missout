@@ -187,6 +187,12 @@ function Dot({
   )
 }
 
+type AudienceLayout = {
+  padLeft: number
+  step: number
+  sectionHeight: number
+}
+
 export function AboutAudienceSection() {
   const headingId = useId()
   const reduceMotion = useReducedMotion() ?? false
@@ -195,7 +201,11 @@ export function AboutAudienceSection() {
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
 
-  const [metrics, setMetrics] = useState({ padLeft: 0, step: 360 })
+  const [layout, setLayout] = useState<AudienceLayout>({
+    padLeft: 0,
+    step: 360,
+    sectionHeight: 0,
+  })
 
   const { scrollYProgress } = useScroll({
     target: scrollSectionRef,
@@ -213,10 +223,16 @@ export function AboutAudienceSection() {
       const cw = card.getBoundingClientRect().width
       const gs = getComputedStyle(track)
       const gap = Number.parseFloat(gs.columnGap || gs.gap || '32') || 32
+      const step = cw + gap
+      const padLeft = Math.max(0, vw / 2 - cw / 2)
+      const stickyHeight = viewport.offsetHeight
+      /** Just enough vertical scroll to walk the carousel — no fixed 300vh dead zone */
+      const scrollTravel = step * 2.1 + 40
 
-      setMetrics({
-        padLeft: Math.max(0, vw / 2 - cw / 2),
-        step: cw + gap,
+      setLayout({
+        padLeft,
+        step,
+        sectionHeight: stickyHeight + scrollTravel,
       })
     }
 
@@ -230,24 +246,26 @@ export function AboutAudienceSection() {
       window.removeEventListener('resize', measure)
       ro.disconnect()
     }
-  }, [])
+  }, [reduceMotion])
 
-  const trackX = useTransform(scrollYProgress, [0, 1], [0, -2 * metrics.step])
-
-  const trackPaddingLeft = metrics.padLeft
+  const trackX = useTransform(scrollYProgress, [0, 1], [0, -2 * layout.step])
 
   return (
     <section
       ref={scrollSectionRef}
       id="about-audiences"
       className="relative bg-white"
-      style={{ height: reduceMotion ? 'auto' : '300vh' }}
+      style={
+        reduceMotion
+          ? undefined
+          : { height: layout.sectionHeight > 0 ? layout.sectionHeight : '140vh' }
+      }
       aria-labelledby={headingId}
     >
       <div
         ref={viewportRef}
         className={cn(
-          'sticky top-0 flex flex-col overflow-hidden pb-8 sm:pb-12 md:pb-16',
+          'sticky top-0 flex flex-col overflow-hidden pb-6 sm:pb-8',
           reduceMotion && 'relative',
         )}
       >
@@ -268,8 +286,8 @@ export function AboutAudienceSection() {
             ref={trackRef}
             style={{
               x: reduceMotion ? 0 : trackX,
-              paddingLeft: reduceMotion ? undefined : trackPaddingLeft,
-              paddingRight: reduceMotion ? undefined : trackPaddingLeft,
+              paddingLeft: reduceMotion ? undefined : layout.padLeft,
+              paddingRight: reduceMotion ? undefined : layout.padLeft,
             }}
             className={cn(
               'flex w-max flex-row items-center gap-8',

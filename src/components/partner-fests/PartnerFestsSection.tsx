@@ -1,97 +1,50 @@
 import { useId, useRef } from 'react'
 import { ButtonLink } from '../ui'
-import { cn } from '../../lib/cn'
-import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { usePartnerFestParallax } from '../../hooks/usePartnerFestParallax'
 import { ScrollReveal } from '../motion/ScrollReveal'
 import {
-  type PartnerFest,
-  PARTNER_FESTS,
+  type PartnerCollege,
+  PARTNER_COLLEGES,
   partnerFestLogoPath,
 } from '../../lib/partnerFestsData'
 
 const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.svg'
 
-function PartnerStripItem({ p }: { p: PartnerFest }) {
+function PartnerStripItem({ p }: { p: PartnerCollege }) {
   return (
-    <div
-      className="flex shrink-0 items-center gap-4 px-6 sm:gap-5 sm:px-8 md:px-10"
-      aria-label={`${p.festName}, ${p.college}`}
-    >
-      <div
-        className={cn(
-          'flex h-20 w-20 shrink-0 items-center justify-center sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32',
-          p.logoFrame === 'dark' && 'rounded-xl bg-[#0B0B0B] p-2 sm:rounded-2xl sm:p-2.5',
-        )}
-      >
-        <img
-          src={partnerFestLogoPath(p.logoFile)}
-          alt=""
-          className="max-h-full max-w-full object-contain"
-          width={128}
-          height={128}
-          loading="lazy"
-          decoding="async"
-          draggable={false}
-        />
-      </div>
-      <div className="min-w-0 text-left">
-        <p className="font-sans text-lg font-bold leading-tight text-[#1A1A1A] sm:text-xl md:text-2xl">
-          {p.festName}
-        </p>
-        <p className="mt-0.5 font-sans text-sm leading-snug text-[#5A5A5A] sm:text-base md:text-lg">
-          {p.college}
-        </p>
-      </div>
-    </div>
+    <img
+      src={partnerFestLogoPath(p.logoFile)}
+      alt={p.college}
+      className="h-40 w-40 shrink-0 object-contain sm:h-44 sm:w-44 md:h-48 md:w-48 lg:h-52 lg:w-52"
+      width={208}
+      height={208}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+    />
   )
 }
 
-function PartnerMarquee({ partners }: { partners: readonly PartnerFest[] }) {
-  const reducedMotion = usePrefersReducedMotion()
-
+function PartnerStrip({ partners }: { partners: readonly PartnerCollege[] }) {
   if (partners.length === 0) return null
 
-  if (reducedMotion) {
-    return (
-      <ul
-        className="m-0 flex list-none flex-wrap items-center justify-center gap-x-2 gap-y-4 px-4 py-2 sm:gap-x-4"
-        aria-label="Partner fests"
-      >
-        {partners.map((p) => (
-          <li key={p.id} className="[list-style:none]">
-            <PartnerStripItem p={p} />
-          </li>
-        ))}
-      </ul>
-    )
-  }
-
-  const loop = [...partners, ...partners]
-
   return (
-    <>
-      <ul className="sr-only">
-        {partners.map((p) => (
-          <li key={p.id}>
-            {p.festName}, {p.college}
-          </li>
-        ))}
-      </ul>
-      <div className="partner-marquee-fade relative w-full overflow-hidden">
-        <div className="partner-marquee-track flex w-max items-center py-3 sm:py-4">
-          {loop.map((p, i) => (
-            <PartnerStripItem key={`${p.id}-${i}`} p={p} />
-          ))}
-        </div>
-      </div>
-    </>
+    <ul
+      className="m-0 flex list-none flex-wrap items-center justify-center gap-x-10 gap-y-8 px-4 py-3 sm:gap-x-12 md:gap-x-16 lg:gap-x-20"
+      aria-label="Partner colleges"
+    >
+      {partners.map((p) => (
+        <li key={p.id} className="[list-style:none]">
+          <PartnerStripItem p={p} />
+        </li>
+      ))}
+    </ul>
   )
 }
 
 export function PartnerFestsSection() {
   const headingId = useId()
-  const partners = PARTNER_FESTS
+  const partners = PARTNER_COLLEGES
   const sectionRef = useRef<HTMLElement | null>(null)
   const cardsStripRef = useRef<HTMLDivElement | null>(null)
   const graphicRef = useRef<HTMLDivElement | null>(null)
@@ -121,7 +74,7 @@ export function PartnerFestsSection() {
 
       {partners.length > 0 && (
         <div ref={cardsStripRef} className="mt-8 w-full sm:mt-10" aria-label="Partner fests">
-          <PartnerMarquee partners={partners} />
+          <PartnerStrip partners={partners} />
         </div>
       )}
 
@@ -145,11 +98,11 @@ export function PartnerFestsSection() {
           </div>
           <div
             ref={ctaTextRef}
-            className="pointer-events-none absolute inset-x-0 top-0 bottom-[18%] z-10 flex flex-col items-center justify-center px-4 text-center will-change-transform sm:bottom-[16%] sm:px-6 md:bottom-[14%]"
+            className="pointer-events-none absolute inset-x-0 top-0 bottom-[32%] z-10 flex flex-col items-center justify-center px-4 text-center will-change-transform sm:bottom-[30%] sm:px-6 md:bottom-[28%]"
           >
             <ScrollReveal
               delayMs={120}
-              className="pointer-events-auto mx-auto w-full max-w-lg translate-y-1 sm:translate-y-2 md:translate-y-3"
+              className="pointer-events-auto mx-auto w-full max-w-lg -translate-y-10 sm:-translate-y-12 md:-translate-y-14"
             >
                 <p className="font-display text-balance text-xl font-bold leading-[1.08] text-white drop-shadow-sm sm:text-3xl sm:leading-tight md:text-4xl lg:text-5xl">
                   <span className="block">Want to be one</span>

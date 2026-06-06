@@ -7,3 +7,8 @@ export const HERO_ASSETS = {
   /** Pixel art clock for the launch countdown. */
   countdownClock: '/hero/Pixel/Solid/Clock.svg',
 } as const
+
+/** About hero — pink pixel band (`public/about_hero_graphic.svg`). */
+export const ABOUT_HERO_ASSETS = {
+  graphic: '/about_hero_graphic.svg',
+} as const

@@ -1,41 +1,38 @@
 /**
- * Partner fests in the "Partnered fests" section.
+ * Partner colleges in the "Missout Partners" section.
  * Add logos under public/partner_fests/logos/ and set `logoFile` to the filename.
  * See public/partner_fests/README.md.
  */
-export type PartnerFest = {
+export type PartnerCollege = {
   id: string
-  festName: string
   college: string
   /** Filename inside public/partner_fests/logos/ */
   logoFile: string
-  /**
-   * Use for logos that sit on a solid dark square (e.g. black); keeps them readable on the light card.
-   */
-  logoFrame?: 'dark'
 }
 
-export const PARTNER_FESTS: readonly PartnerFest[] = [
+/** @deprecated Use `PartnerCollege` — kept for existing imports */
+export type PartnerFest = PartnerCollege
+
+export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
   {
-    id: 'umang',
-    festName: 'Umang',
+    id: 'nmims',
     college: 'NMIMS',
-    logoFile: 'umang_logo.jpg',
-    logoFrame: 'dark',
+    logoFile: 'nm_logo.png',
   },
   {
-    id: 'evo-bits-design',
-    festName: 'Evo',
-    college: 'BITS Design',
-    logoFile: 'evo_logo.png',
+    id: 'bits-design',
+    college: 'BITS Design School',
+    logoFile: 'bitsdesign_logo.png',
   },
   {
-    id: 'rangreza-bits-design',
-    festName: 'Rangreza',
-    college: 'BITS Design',
-    logoFile: 'Rangreza_Logo.png',
+    id: 'jai-hind',
+    college: 'Jai Hind College',
+    logoFile: 'jaihind_logo.png',
   },
 ]
+
+/** @deprecated Use `PARTNER_COLLEGES` — kept for existing imports */
+export const PARTNER_FESTS = PARTNER_COLLEGES
 
 export function partnerFestLogoPath(logoFile: string): string {
   return `/partner_fests/logos/${encodeURIComponent(logoFile)}`
