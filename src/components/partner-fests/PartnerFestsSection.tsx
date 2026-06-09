@@ -98,11 +98,11 @@ export function PartnerFestsSection() {
           </div>
           <div
             ref={ctaTextRef}
-            className="pointer-events-none absolute inset-x-0 top-0 bottom-[32%] z-10 flex flex-col items-center justify-center px-4 text-center will-change-transform sm:bottom-[30%] sm:px-6 md:bottom-[28%]"
+            className="pointer-events-none absolute inset-x-0 top-0 bottom-[8%] z-10 flex flex-col items-center justify-end pb-[2%] px-4 text-center will-change-transform sm:bottom-[30%] sm:justify-center sm:pb-0 sm:px-6 md:bottom-[28%]"
           >
             <ScrollReveal
               delayMs={120}
-              className="pointer-events-auto mx-auto w-full max-w-lg -translate-y-10 sm:-translate-y-12 md:-translate-y-14"
+              className="pointer-events-auto mx-auto w-full max-w-lg translate-y-10 sm:-translate-y-12 md:-translate-y-14"
             >
                 <p className="font-display text-balance text-xl font-bold leading-[1.08] text-white drop-shadow-sm sm:text-3xl sm:leading-tight md:text-4xl lg:text-5xl">
                   <span className="block">Want to be one</span>
