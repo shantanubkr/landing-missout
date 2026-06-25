@@ -38,6 +38,7 @@ Copy `.env.example` to `.env` and fill in the values:
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `VITE_WEB3FORMS_ACCESS_KEY` | Optional | [Web3Forms](https://web3forms.com) access key. Without it the contact form falls back to opening the visitor's mail client. |
+| `VITE_WAITLIST_WEB3FORMS_ACCESS_KEY` | Required for waitlist | Web3Forms key for the **Join the Waitlist** modal. Connect it to a Google Sheet in the Web3Forms dashboard so sign-ups land there. |
 | `VITE_SITE_URL` | Optional (recommended for prod) | Canonical site URL (e.g. `https://missout.in`). Used to set `<link rel="canonical">`, `og:url`, and `og:image`. |
 
 Set both in the **Vercel dashboard → Settings → Environment Variables** before deploying.

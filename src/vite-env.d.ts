@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_SITE_URL?: string
   readonly VITE_WEB3FORMS_ACCESS_KEY?: string
+  readonly VITE_WAITLIST_WEB3FORMS_ACCESS_KEY?: string
 }
 
 interface ImportMeta {

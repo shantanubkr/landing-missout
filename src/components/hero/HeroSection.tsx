@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { HERO_ASSETS } from '../../lib/heroAssets'
 import { cn } from '../../lib/cn'
 import { useHeroParallax } from '../../hooks/useHeroParallax'
-import { ButtonLink } from '../ui'
+import { Button } from '../ui'
+import { WaitlistModal } from '../waitlist'
 import { CountdownLaunch } from './CountdownLaunch'
 import { FloatingProductPill } from './FloatingProductPill'
 
 export function HeroSection() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false)
   const {
     sectionRef,
     gridLayerRef,
@@ -34,12 +37,12 @@ export function HeroSection() {
       {/* Zone 1 — copy + CTA (always on white, never overlaps the graphic) */}
       <div className="relative z-10 w-full shrink-0 px-4 pb-2 sm:px-6 sm:pb-3 md:pb-4">
         <div className="relative mx-auto w-full max-w-7xl">
-          <div className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 md:left-0 md:flex lg:-left-1 xl:-left-3">
+          <div className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 md:left-0 md:mt-8 md:flex lg:-left-1 xl:-left-3">
             <div ref={missoutPillRef}>
               <FloatingProductPill label="Missout" className="relative" />
             </div>
           </div>
-          <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:right-0 md:flex lg:-right-1 xl:-right-3">
+          <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:right-0 md:-mt-16 md:flex lg:-right-1 xl:-right-3">
             <div ref={backstagePillRef}>
               <FloatingProductPill label="Backstage" align="right" className="relative" />
             </div>
@@ -55,19 +58,22 @@ export function HeroSection() {
             </h1>
 
             <p className="text-hero-subhead mx-auto mt-3 max-w-2xl text-balance text-[#5A5A5A] sm:mt-4">
-              Backstage for the ones running the show
+              Handle registrations, teams, and updates
+              <br />
+              No back and forth
             </p>
 
             <div className="mt-5 flex flex-col items-center sm:mt-6">
-              <ButtonLink
-                to="/#contact"
-                variant="outline"
+              <Button
+                type="button"
+                variant="primary"
                 theme="home"
                 size="lg"
+                onClick={() => setWaitlistOpen(true)}
                 className="!min-h-12 !px-10 !py-3 !text-lg !font-bold sm:!min-h-14 sm:!px-14 sm:!py-3.5 sm:!text-xl"
               >
-                Partner with us
-              </ButtonLink>
+                Join the Waitlist
+              </Button>
             </div>
 
             <div className="mt-10 flex justify-center gap-10 sm:mt-12 md:mt-10 md:hidden">
@@ -107,6 +113,8 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+
+      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </section>
   )
 }

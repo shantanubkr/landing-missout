@@ -6,6 +6,7 @@
   --font-sans: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
   --font-missout-display: 'Polymath Display', ui-serif, Georgia, serif;
   --font-missout-pixel: 'Argent Pixel CF', 'Polymath Display', ui-serif, serif;
+  --font-canopee: 'Canopee', 'Polymath Display', ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -215,6 +216,10 @@
 
   .font-pixel-hero {
     font-family: var(--font-missout-pixel);
+  }
+
+  .font-canopee {
+    font-family: var(--font-canopee);
   }
 
   /**

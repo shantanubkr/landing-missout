@@ -264,3 +264,11 @@
   font-display: swap;
   src: url('/fonts/argent_pixel/ArgentPixelCF-Regular.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'Canopee';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/canopee/Canopee.otf') format('opentype');
+}
