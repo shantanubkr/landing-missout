@@ -117,7 +117,7 @@ export function HomeProductSection() {
       ref={sectionRef}
       id="products"
       aria-labelledby="home-products-heading"
-      className="relative overflow-hidden bg-white px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 md:pb-24 md:pt-16"
+      className="relative overflow-x-clip bg-white px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 md:pb-24 md:pt-16"
     >
       <div
         aria-hidden
@@ -125,13 +125,7 @@ export function HomeProductSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div
-          className={cn(
-            'missout-glass relative overflow-hidden rounded-[28px] border-[0.6px] border-[var(--nav-stroke)]',
-            'bg-[var(--nav-surface)] px-5 py-8 shadow-[0_24px_80px_rgba(26,26,26,0.07)]',
-            'sm:px-7 sm:py-10 lg:px-10 lg:py-12',
-          )}
-        >
+        <div className="relative overflow-visible px-5 py-8 sm:px-7 sm:py-10 lg:px-10 lg:py-12">
           <img
             src={PRODUCT_CORNER_VECTOR_SRC}
             alt=""

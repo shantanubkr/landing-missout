@@ -7,8 +7,8 @@ const MS_HOUR = 3_600_000
 const MS_MIN = 60_000
 const MS_SEC = 1_000
 
-/** 20 June 2026, start of day (IST) — 10-day launch countdown. */
-const LAUNCH_END = new Date('2026-06-20T00:00:00+05:30')
+/** 10 July 2026, start of day (IST) — Stage launch countdown. */
+const LAUNCH_END = new Date('2026-07-10T00:00:00+05:30')
 
 function pad2(n: number) {
   return n.toString().padStart(2, '0')
@@ -44,7 +44,7 @@ export function CountdownLaunch({ className }: CountdownLaunchProps) {
     >
       <ClockBadge />
       <p className="font-sans text-lg font-medium leading-normal tracking-tight text-[#F92C99] sm:text-xl">
-        Launching in {left.d}d {pad2(left.h)}h {pad2(left.m)}m {pad2(left.s)}s
+        Stage goes live in {left.d}d {pad2(left.h)}h {pad2(left.m)}m {pad2(left.s)}s
       </p>
     </div>
   )

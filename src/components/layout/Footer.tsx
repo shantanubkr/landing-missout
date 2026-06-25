@@ -33,7 +33,7 @@ export function Footer() {
 
   return (
     <footer aria-label="Site footer" className="mt-auto w-full overflow-visible bg-white">
-      <div className="relative overflow-visible border-t border-[#E5E5E5]">
+      <div className="relative overflow-visible">
         <div
           className="pointer-events-none absolute left-1/2 top-[58%] z-0 aspect-[124/27] w-[min(96vw,72rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.38] sm:top-[55%]"
           style={watermarkMask}

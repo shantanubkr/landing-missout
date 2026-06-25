@@ -223,6 +223,7 @@ function KeywordCard({
   reduceMotion,
   deckSession,
   blobParallaxY,
+  cardParallaxY,
   cardIndex,
   variant = 'default',
   className,
@@ -231,6 +232,7 @@ function KeywordCard({
   reduceMotion: boolean
   deckSession: boolean
   blobParallaxY: MotionValue<number>
+  cardParallaxY?: MotionValue<number>
   cardIndex: number
   variant?: 'default' | 'compact'
   className?: string
@@ -271,7 +273,11 @@ function KeywordCard({
     <motion.li
       variants={cardItemVariants(deckSession, reduceMotion)}
       className={cn('relative min-w-0 list-none', className)}
-      style={{ listStyle: 'none' }}
+      style={
+        reduceMotion || !isCompact || !cardParallaxY
+          ? { listStyle: 'none' }
+          : { listStyle: 'none', y: cardParallaxY, willChange: 'transform' }
+      }
     >
       <motion.div
         variants={isCompact ? undefined : cardShellVariants}
@@ -284,11 +290,17 @@ function KeywordCard({
         <motion.article
           {...cardMotionProps}
           className={cn(
-            'relative overflow-hidden border-[0.6px] border-[var(--nav-stroke)]',
-            'shadow-[0_6px_28px_rgba(0,0,0,0.055)] backdrop-blur-[14px] backdrop-saturate-150',
+            'relative overflow-hidden',
+            'backdrop-blur-[14px] backdrop-saturate-150',
             isCompact
-              ? 'flex h-full min-h-0 items-start gap-3.5 rounded-2xl bg-white/70 px-4 py-3.5 text-left sm:gap-4 sm:px-5 sm:py-4'
+              ? cn(
+                  'missout-glass flex h-full min-h-0 items-start gap-3.5 rounded-2xl',
+                  'border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)]',
+                  'shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
+                  'px-4 py-3.5 text-left sm:gap-4 sm:px-5 sm:py-4',
+                )
               : cn(
+                  'border-[0.6px] border-[var(--nav-stroke)] shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
                   'rounded-xl bg-white/50 px-3 pb-3 pt-3 text-center sm:rounded-2xl md:rounded-[20px]',
                   'sm:px-4 sm:pb-4 sm:pt-3.5',
                   reduceMotion && 'min-h-0',
@@ -317,9 +329,10 @@ function KeywordCard({
           </motion.div>
         </div>
         ) : (
-          <div
+          <motion.div
             aria-hidden
-            className="pointer-events-none absolute -right-6 top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(249,44,153,0.14)_0%,transparent_70%)] blur-xl"
+            style={reduceMotion ? undefined : { y: blobParallaxY }}
+            className="pointer-events-none absolute -right-6 top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(249,44,153,0.14)_0%,transparent_70%)] blur-xl will-change-transform"
           />
         )}
 
@@ -400,9 +413,15 @@ function KeywordCardWithParallax({
   className?: string
 }) {
   /** Stronger range + per-card multiplier so movement reads clearly while scrolling */
-  const mult = 1 + parallaxIndex * 0.28
+  const mult = 1 + parallaxIndex * 0.32
+  const isCompact = variant === 'compact'
 
   const blobParallaxY = useTransform(scrollYProgress, [0, 1], [-36 * mult, 36 * mult])
+  const cardParallaxY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isCompact ? [-28 * mult, 28 * mult] : [0, 0],
+  )
 
   return (
     <KeywordCard
@@ -410,10 +429,31 @@ function KeywordCardWithParallax({
       reduceMotion={reduceMotion}
       deckSession={deckSession}
       blobParallaxY={blobParallaxY}
+      cardParallaxY={isCompact ? cardParallaxY : undefined}
       cardIndex={parallaxIndex}
       variant={variant}
       className={className}
     />
+  )
+}
+
+function BentoProductParallax({
+  scrollYProgress,
+  reduceMotion,
+  children,
+}: {
+  scrollYProgress: MotionValue<number>
+  reduceMotion: boolean
+  children: ReactNode
+}) {
+  const y = useTransform(scrollYProgress, [0, 1], [34, -34])
+
+  if (reduceMotion) return <>{children}</>
+
+  return (
+    <motion.div style={{ y }} className="w-full will-change-transform">
+      {children}
+    </motion.div>
   )
 }
 
@@ -525,9 +565,11 @@ export function ValuePropositionsPanel({
               transition={{ duration: 0.3, ease: easeOutSoft }}
               className={cn('mt-8 lg:mt-9', embedded && 'mt-7 sm:mt-8')}
             >
-              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12 lg:grid-rows-3 lg:items-stretch lg:gap-4">
-                <div className="flex min-h-0 items-center justify-center lg:col-span-7 lg:row-span-3 lg:min-h-[22rem]">
-                  {renderProduct(mode)}
+              <div className="grid grid-cols-1 gap-3 overflow-visible sm:gap-4 lg:grid-cols-12 lg:grid-rows-3 lg:items-stretch lg:gap-4">
+                <div className="flex min-h-0 items-center justify-center overflow-visible lg:col-span-7 lg:row-span-3 lg:min-h-[22rem]">
+                  <BentoProductParallax scrollYProgress={scrollYProgress} reduceMotion={reduceMotion}>
+                    {renderProduct(mode)}
+                  </BentoProductParallax>
                 </div>
                 <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-3 lg:contents">
                   {cards.map((card, index) => (
