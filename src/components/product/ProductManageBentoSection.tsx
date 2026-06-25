@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { cn } from '../../lib/cn'
-import { ButtonLink } from '../ui'
 import { BentoCard } from './BentoPrimitives'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
 
@@ -97,7 +96,7 @@ function TopTile({
 }
 
 /**
- * “Manage through Backstage.” — headline + subcopy + CTA + manage bento preview.
+ * “Manage through Backstage.” — headline + subcopy + manage bento preview.
  *
  * Gutters: `gap-[10px]` row + column. Left rail ~32.5% so whole/PBAC scale uniformly (`w-full`);
  * Bottom strip: full-width row (`aspect-[43/9]`); proportional cols `18:25`; equal rendered heights.
@@ -137,9 +136,6 @@ export function ProductManageBentoSection() {
             <span className="block">Handle registrations, teams, and updates</span>
             <span className="mt-1 block text-[#8A8A8A]">No back and forth</span>
           </p>
-          <ButtonLink to="/#contact" variant="primary" theme="product" size="md" className="mt-1 font-semibold">
-            Try now
-          </ButtonLink>
         </header>
 
         <div className="mt-12 flex flex-col gap-[10px] md:mt-14">
@@ -161,7 +157,7 @@ export function ProductManageBentoSection() {
                 <TopTile
                   slot="pbac"
                   src={MB.pbac}
-                  alt="Permission-based access control — edit and view roles"
+                  alt="Permission-based access control, edit and view roles"
                   className="shrink-0 md:items-center"
                   imgClassName={BENTO_IMG_FULL}
                 />
@@ -176,7 +172,7 @@ export function ProductManageBentoSection() {
               <TopTile
                 slot="dashboard"
                 src={MB.dashboard}
-                alt="Your very own dashboard — admin overview and widgets"
+                alt="Your very own dashboard, admin overview and widgets"
                 className="shrink-0 md:items-center"
                 imgClassName={BENTO_IMG_FULL}
               />
@@ -185,7 +181,7 @@ export function ProductManageBentoSection() {
                 <TopTile
                   slot="metrics"
                   src={MB.metrics}
-                  alt="Event metrics — attendees, events, and participants"
+                  alt="Event metrics, attendees, events, and participants"
                   className="shrink-0 md:items-center"
                   imgClassName={BENTO_IMG_FULL}
                 />
@@ -200,7 +196,7 @@ export function ProductManageBentoSection() {
               <TopTile
                 slot="manage"
                 src={MB.manage}
-                alt="Manage your event — edit details, competitions, schedule, and more"
+                alt="Manage your event, edit details, competitions, schedule, and more"
                 className="shrink-0 md:items-center"
                 imgClassName={BENTO_IMG_FULL}
               />
@@ -227,7 +223,7 @@ export function ProductManageBentoSection() {
                 <TopTile
                   slot="activity"
                   src={MB.activity}
-                  alt="Activity logs — review updates such as event details changes"
+                  alt="Activity logs, review updates such as event details changes"
                   className="min-h-0"
                   equalHeightPair
                 />
@@ -236,7 +232,7 @@ export function ProductManageBentoSection() {
                 <TopTile
                   slot="form"
                   src={MB.form}
-                  alt="Form builder — presets and fields for registration"
+                  alt="Form builder, presets and fields for registration"
                   className="min-h-0"
                   equalHeightPair
                 />

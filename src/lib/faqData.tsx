@@ -19,8 +19,9 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'What is Missout?',
     answer: (
       <>
-        A platform for college events. Students use it to find what&apos;s happening on campus. Organisers use it to
-        manage everything around their event from one dashboard.
+        Missout is the platform for college events. Students discover what&apos;s happening on campus through{' '}
+        <span className="font-medium text-[#1A1A1A]">Stage</span>. Organisers run everything from{' '}
+        <span className="font-medium text-[#1A1A1A]">Backstage</span>.
       </>
     ),
   },
@@ -29,7 +30,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'Who can use it?',
     answer: (
       <>
-        Students and event organisers on college campuses — clubs, societies, fest teams, departments, anyone running a
+        Students and event organisers on college campuses: clubs, societies, fest teams, departments, anyone running a
         campus event.
       </>
     ),
@@ -39,7 +40,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'How does it work for students?',
     answer: (
       <>
-        You open Missout, see what&apos;s happening on your campus, and register directly. No hunting through WhatsApp
+        You open Stage, see what&apos;s happening on your campus, and register directly. No hunting through WhatsApp
         groups or Instagram stories.
       </>
     ),
@@ -49,7 +50,7 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'How does it work for organisers?',
     answer: (
       <>
-        You get a dashboard where you handle everything — your team, registrations, event info, updates, media, sponsor
+        You get a dashboard where you handle everything: your team, registrations, event info, updates, media, sponsor
         details, and metrics. Instead of juggling spreadsheets, forms, and group chats, it&apos;s all in one place.
       </>
     ),
@@ -59,9 +60,10 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'Does it replace our current setup?',
     answer: (
       <>
-        Not exactly. Missout is the organiser-facing infrastructure that didn&apos;t exist before — a proper dashboard
-        to run and manage your event, plus a discovery layer so students can actually find it. Your internal execution
-        stays the same.
+        Not exactly. <span className="font-medium text-[#1A1A1A]">Backstage</span> is the organiser infrastructure
+        that didn&apos;t exist before: a proper dashboard to run and manage your event, plus{' '}
+        <span className="font-medium text-[#1A1A1A]">Stage</span> as the discovery layer so students can actually find
+        it. Your internal execution stays the same.
       </>
     ),
   },
@@ -70,9 +72,9 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     question: 'What about Google Forms and Instagram?',
     answer: (
       <>
-        Google Forms gives you a spreadsheet. Instagram gives you a post. Missout gives you a full organiser dashboard
-        — registrations, team management, updates, media, metrics — and makes your event discoverable to students who
-        weren&apos;t already in your group.
+        Google Forms gives you a spreadsheet. Instagram gives you a post. Backstage gives you a full organiser
+        dashboard with registrations, team management, updates, media, and metrics. Stage makes your event discoverable
+        to students who weren&apos;t already in your group.
       </>
     ),
   },

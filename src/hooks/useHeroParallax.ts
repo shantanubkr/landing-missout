@@ -9,7 +9,7 @@ const SCROLL_GRID = 0.066
 /** Hero background graphic — slightly stronger depth vs grid */
 const SCROLL_IMG = 0.138
 
-/** Side product pills (Missout / Backstage): modest drift + tilt vs scroll */
+/** Side product pills (Stage / Backstage): modest drift + tilt vs scroll */
 const PILLS_PARALLAX_Y = 0.048
 const PILLS_PARALLAX_X = 0.018
 /** Max |rotation| per pill (degrees), scaled by normalized scroll magnitude */
@@ -38,9 +38,9 @@ export function useHeroParallax() {
   const imageLayerRef = useRef<HTMLDivElement | null>(null)
 
   /** Parallax wrappers around `<FloatingProductPill>` (desktop + md:hidden row) */
-  const missoutPillRef = useRef<HTMLDivElement | null>(null)
+  const stagePillRef = useRef<HTMLDivElement | null>(null)
   const backstagePillRef = useRef<HTMLDivElement | null>(null)
-  const missoutPillMobileRef = useRef<HTMLDivElement | null>(null)
+  const stagePillMobileRef = useRef<HTMLDivElement | null>(null)
   const backstagePillMobileRef = useRef<HTMLDivElement | null>(null)
 
   const heroVisibleRef = useRef(false)
@@ -52,9 +52,9 @@ export function useHeroParallax() {
   useEffect(() => {
     const gridUnmount = gridLayerRef.current
     const imgUnmount = imageLayerRef.current
-    const pillMuUnmount = missoutPillRef.current
+    const pillMuUnmount = stagePillRef.current
     const pillBkUnmount = backstagePillRef.current
-    const pillMuMoUnmount = missoutPillMobileRef.current
+    const pillMuMoUnmount = stagePillMobileRef.current
     const pillBkMoUnmount = backstagePillMobileRef.current
 
     if (prefersReducedMotion) {
@@ -83,9 +83,9 @@ export function useHeroParallax() {
         rafIdRef.current = null
         const grid = gridLayerRef.current
         const img = imageLayerRef.current
-        const pillMu = missoutPillRef.current
+        const pillMu = stagePillRef.current
         const pillBk = backstagePillRef.current
-        const pillMuMo = missoutPillMobileRef.current
+        const pillMuMo = stagePillMobileRef.current
         const pillBkMo = backstagePillMobileRef.current
         const sec = sectionRef.current
 
@@ -166,9 +166,9 @@ export function useHeroParallax() {
         if (!heroVisibleRef.current) {
           resetTransform(gridLayerRef.current)
           resetTransform(imageLayerRef.current)
-          resetTransform(missoutPillRef.current)
+          resetTransform(stagePillRef.current)
           resetTransform(backstagePillRef.current)
-          resetTransform(missoutPillMobileRef.current)
+          resetTransform(stagePillMobileRef.current)
           resetTransform(backstagePillMobileRef.current)
         }
         schedule()
@@ -258,9 +258,9 @@ export function useHeroParallax() {
     sectionRef,
     gridLayerRef,
     imageLayerRef,
-    missoutPillRef,
+    stagePillRef,
     backstagePillRef,
-    missoutPillMobileRef,
+    stagePillMobileRef,
     backstagePillMobileRef,
   }
 }

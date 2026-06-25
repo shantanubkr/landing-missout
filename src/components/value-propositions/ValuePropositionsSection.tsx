@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
 import {
   AnimatePresence,
   motion,
@@ -11,7 +11,7 @@ import {
 import { cn } from '../../lib/cn'
 import { ScrollReveal } from '../motion/ScrollReveal'
 
-type AudienceMode = 'students' | 'organiser' | 'campus'
+export type AudienceMode = 'students' | 'organiser'
 
 type IconId =
   | 'discover'
@@ -20,13 +20,10 @@ type IconId =
   | 'create'
   | 'manage'
   | 'control'
-  | 'monitor'
-  | 'unify'
-  | 'scale'
 
 type KeywordCardData = {
   word: string
-  description: string
+  features: readonly string[]
   icon: IconId
 }
 
@@ -34,52 +31,58 @@ const AUDIENCE_CARDS: Record<AudienceMode, readonly KeywordCardData[]> = {
   students: [
     {
       word: 'Discover',
-      description: 'Find events that match your vibe',
+      features: [
+        'Festivals, competitions & workshops near you',
+        'Filter by college and category',
+        'Featured and upcoming on your feed',
+      ],
       icon: 'discover',
     },
     {
       word: 'Register',
-      description: 'One-tap sign up, no friction',
+      features: [
+        'One-tap signup, no Google Forms',
+        'Team and group registrations',
+        'Tickets and confirmations in-app',
+      ],
       icon: 'register',
     },
     {
       word: 'Track',
-      description: 'Never miss updates or deadlines',
+      features: [
+        'Event reminders and live updates',
+        'Registration and waitlist status',
+        'Deadlines and schedule in one place',
+      ],
       icon: 'track',
     },
   ],
   organiser: [
     {
       word: 'Create',
-      description: 'Launch events in minutes',
+      features: [
+        'Festivals, competitions, workshops and performances',
+        'Sponsors and stalls',
+      ],
       icon: 'create',
     },
     {
       word: 'Manage',
-      description: 'Handle registrations effortlessly',
+      features: [
+        'QR-based check-in',
+        'Member applications',
+        'Contingent management',
+      ],
       icon: 'manage',
     },
     {
       word: 'Control',
-      description: 'Set rules, roles, and access',
+      features: [
+        'Approval-based workflows',
+        'Roles and permissions',
+        'Private and public events',
+      ],
       icon: 'control',
-    },
-  ],
-  campus: [
-    {
-      word: 'Monitor',
-      description: 'Live dashboards across campus',
-      icon: 'monitor',
-    },
-    {
-      word: 'Unify',
-      description: 'One platform, every club',
-      icon: 'unify',
-    },
-    {
-      word: 'Scale',
-      description: 'Grow without the chaos',
-      icon: 'scale',
     },
   ],
 }
@@ -87,10 +90,9 @@ const AUDIENCE_CARDS: Record<AudienceMode, readonly KeywordCardData[]> = {
 const TOGGLE_OPTIONS: readonly { id: AudienceMode; label: string }[] = [
   { id: 'students', label: 'Students' },
   { id: 'organiser', label: 'Organiser' },
-  { id: 'campus', label: 'Campus' },
 ]
 
-const TAB_ORDER: AudienceMode[] = ['students', 'organiser', 'campus']
+const TAB_ORDER: AudienceMode[] = ['students', 'organiser']
 
 function tabSlideIndex(mode: AudienceMode): number {
   return TAB_ORDER.indexOf(mode)
@@ -222,62 +224,78 @@ function KeywordCard({
   deckSession,
   blobParallaxY,
   cardIndex,
+  variant = 'default',
+  className,
 }: {
   card: KeywordCardData
   reduceMotion: boolean
   deckSession: boolean
   blobParallaxY: MotionValue<number>
   cardIndex: number
+  variant?: 'default' | 'compact'
+  className?: string
 }) {
   const [hovered, setHovered] = useState(false)
+  const isCompact = variant === 'compact'
 
   const staggerDelay = cardIndex * 0.15
   const descriptionDelay = staggerDelay + 0.12
 
   const cardMotionProps = reduceMotion
     ? {}
-    : {
-        initial: { height: 80, opacity: 0.6 },
-        whileInView: {
-          height: 'auto',
-          opacity: 1,
+    : isCompact
+      ? {
+          initial: { opacity: 0, x: 12 },
+          animate: { opacity: 1, x: 0 },
           transition: {
             delay: staggerDelay,
-            duration: 0.5,
+            duration: 0.35,
             ease: easeOutSoft,
           },
-        },
-        viewport: CARD_VIEWPORT,
-      }
+        }
+      : {
+          initial: { height: 80, opacity: 0.6 },
+          whileInView: {
+            height: 'auto',
+            opacity: 1,
+            transition: {
+              delay: staggerDelay,
+              duration: 0.5,
+              ease: easeOutSoft,
+            },
+          },
+          viewport: CARD_VIEWPORT,
+        }
 
   return (
     <motion.li
       variants={cardItemVariants(deckSession, reduceMotion)}
-      className="relative min-w-0 list-none"
+      className={cn('relative min-w-0 list-none', className)}
       style={{ listStyle: 'none' }}
     >
       <motion.div
-        variants={cardShellVariants}
-        initial="rest"
-        animate={hovered ? 'hover' : 'rest'}
+        variants={isCompact ? undefined : cardShellVariants}
+        initial={isCompact ? undefined : 'rest'}
+        animate={isCompact ? undefined : hovered ? 'hover' : 'rest'}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        className="rounded-xl sm:rounded-2xl md:rounded-[20px]"
+        className={isCompact ? 'h-full' : 'rounded-xl sm:rounded-2xl md:rounded-[20px]'}
       >
         <motion.article
           {...cardMotionProps}
           className={cn(
-            'relative overflow-hidden rounded-xl border-[0.6px] border-[var(--nav-stroke)]',
-            'bg-white/50 px-3 pb-3 pt-3 text-center shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
-            'backdrop-blur-[14px] backdrop-saturate-150 sm:rounded-2xl md:rounded-[20px]',
-            'sm:px-4 sm:pb-4 sm:pt-3.5',
-            reduceMotion && 'min-h-0',
+            'relative overflow-hidden border-[0.6px] border-[var(--nav-stroke)]',
+            'shadow-[0_6px_28px_rgba(0,0,0,0.055)] backdrop-blur-[14px] backdrop-saturate-150',
+            isCompact
+              ? 'flex h-full min-h-0 items-start gap-3.5 rounded-2xl bg-white/70 px-4 py-3.5 text-left sm:gap-4 sm:px-5 sm:py-4'
+              : cn(
+                  'rounded-xl bg-white/50 px-3 pb-3 pt-3 text-center sm:rounded-2xl md:rounded-[20px]',
+                  'sm:px-4 sm:pb-4 sm:pt-3.5',
+                  reduceMotion && 'min-h-0',
+                ),
           )}
         >
-        {/*
-          Centering lives on a non-motion wrapper so Framer's translateY (scroll parallax + hover scale)
-          never overrides Tailwind translateX(-50%).
-        */}
+        {!isCompact ? (
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-[48%] z-0 -translate-x-1/2 -translate-y-1/2"
@@ -298,31 +316,65 @@ function KeywordCard({
             />
           </motion.div>
         </div>
+        ) : (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-6 top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(249,44,153,0.14)_0%,transparent_70%)] blur-xl"
+          />
+        )}
 
-        <div className="relative z-[1] flex flex-col items-center gap-1.5 sm:gap-2">
-          <ValueCardIcon id={card.icon} />
-          <p className="font-display text-lg font-bold tracking-tight text-[#1A1A1A] sm:text-xl md:text-2xl">
-            {card.word}
-          </p>
-          {reduceMotion ? (
-            <p className="max-w-[16rem] px-0.5 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:max-w-none sm:text-xs md:text-[13px]">
-              {card.description}
-            </p>
-          ) : (
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={CARD_VIEWPORT}
-              transition={{
-                delay: descriptionDelay,
-                duration: 0.4,
-                ease: easeOutSoft,
-              }}
-              className="max-w-[16rem] px-0.5 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:max-w-none sm:text-xs md:text-[13px]"
-            >
-              {card.description}
-            </motion.p>
+        <div
+          className={cn(
+            'relative z-[1]',
+            isCompact
+              ? 'flex min-w-0 flex-1 items-start gap-3.5 sm:gap-4'
+              : 'flex flex-col items-center gap-1.5 sm:gap-2',
           )}
+        >
+          <ValueCardIcon
+            id={card.icon}
+            className={isCompact ? 'mt-0.5 h-8 w-8 shrink-0 sm:h-9 sm:w-9' : undefined}
+          />
+          <div className={isCompact ? 'min-w-0 flex-1 text-left' : undefined}>
+            <p
+              className={cn(
+                'font-display font-bold tracking-tight text-[#1A1A1A]',
+                isCompact ? 'text-base sm:text-lg' : 'text-lg sm:text-xl md:text-2xl',
+              )}
+            >
+              {card.word}
+            </p>
+            {isCompact ? (
+              <ul className="mt-1.5 space-y-1 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:text-xs">
+                {card.features.map((feature) => (
+                  <li key={feature} className="flex gap-2">
+                    <span className="shrink-0 text-[#F92C99]" aria-hidden>
+                      ·
+                    </span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : reduceMotion ? (
+              <p className="max-w-[16rem] px-0.5 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:max-w-none sm:text-xs md:text-[13px]">
+                {card.features.join(' · ')}
+              </p>
+            ) : (
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={CARD_VIEWPORT}
+                transition={{
+                  delay: descriptionDelay,
+                  duration: 0.4,
+                  ease: easeOutSoft,
+                }}
+                className="max-w-[16rem] px-0.5 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:max-w-none sm:text-xs md:text-[13px]"
+              >
+                {card.features.join(' · ')}
+              </motion.p>
+            )}
+          </div>
         </div>
       </motion.article>
       </motion.div>
@@ -336,12 +388,16 @@ function KeywordCardWithParallax({
   deckSession,
   scrollYProgress,
   parallaxIndex,
+  variant = 'default',
+  className,
 }: {
   card: KeywordCardData
   reduceMotion: boolean
   deckSession: boolean
   scrollYProgress: MotionValue<number>
   parallaxIndex: number
+  variant?: 'default' | 'compact'
+  className?: string
 }) {
   /** Stronger range + per-card multiplier so movement reads clearly while scrolling */
   const mult = 1 + parallaxIndex * 0.28
@@ -355,20 +411,36 @@ function KeywordCardWithParallax({
       deckSession={deckSession}
       blobParallaxY={blobParallaxY}
       cardIndex={parallaxIndex}
+      variant={variant}
+      className={className}
     />
   )
 }
 
-export function ValuePropositionsSection() {
+type ValuePropositionsPanelProps = {
+  showEyebrow?: boolean
+  embedded?: boolean
+  layout?: 'default' | 'bento'
+  scrollTargetRef: RefObject<HTMLElement | null>
+  className?: string
+  renderProduct?: (mode: AudienceMode) => ReactNode
+}
+
+export function ValuePropositionsPanel({
+  showEyebrow = true,
+  embedded = false,
+  layout = 'default',
+  scrollTargetRef,
+  className,
+  renderProduct,
+}: ValuePropositionsPanelProps) {
   const [mode, setMode] = useState<AudienceMode>('students')
   /** After first tab change, deck uses horizontal slide; before that, first Students grid uses viewport stagger. */
   const [deckSession, setDeckSession] = useState(false)
   const reduceMotion = useReducedMotion() ?? false
 
-  const sectionRef = useRef<HTMLElement>(null)
-
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: scrollTargetRef,
     /** Narrower band so progress moves more while the section crosses the viewport */
     offset: ['start 0.92', 'end 0.08'],
   })
@@ -390,20 +462,20 @@ export function ValuePropositionsSection() {
   }
 
   return (
-    <section
-      ref={sectionRef}
-      id="value"
-      aria-label="What are we solving?"
-      className="bg-white px-2 pt-16 pb-7 sm:px-6 sm:pt-20 sm:pb-9 md:pt-24 md:pb-11"
-    >
-      <div className="mx-auto max-w-6xl text-center">
-        <ScrollReveal>
+    <div id="value" className={cn('mx-auto max-w-6xl text-center', className)}>
+      <ScrollReveal>
+        {showEyebrow ? (
           <p className="font-sans text-base font-medium tracking-normal text-[#F92C99] sm:text-lg md:text-xl">
             What are we solving?
           </p>
+        ) : null}
 
-          <div className="mt-6 sm:mt-7" role="tablist" aria-label="Audience">
-            <div className="missout-glass relative inline-grid max-w-full grid-cols-3 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] p-1">
+          <div
+            className={cn(showEyebrow ? 'mt-6 sm:mt-7' : 'mt-0')}
+            role="tablist"
+            aria-label="Audience"
+          >
+            <div className="missout-glass relative inline-grid max-w-full grid-cols-2 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] p-1">
               <motion.div
                 aria-hidden
                 custom={slideI}
@@ -411,7 +483,7 @@ export function ValuePropositionsSection() {
                 animate="slide"
                 initial={false}
                 style={{
-                  width: 'calc((100% - 0.5rem) / 3)',
+                  width: 'calc((100% - 0.5rem) / 2)',
                 }}
                 className={cn(
                   'pointer-events-none absolute inset-y-1 left-1 z-0 rounded-full',
@@ -420,7 +492,7 @@ export function ValuePropositionsSection() {
                 )}
               />
 
-              {TOGGLE_OPTIONS.map((opt, col) => (
+              {TOGGLE_OPTIONS.map((opt) => (
                 <button
                   key={opt.id}
                   type="button"
@@ -428,11 +500,9 @@ export function ValuePropositionsSection() {
                   aria-selected={mode === opt.id}
                   onClick={() => selectTab(opt.id)}
                   className={cn(
-                    'relative z-10 min-w-0 rounded-full px-2 py-2 text-[11px] font-medium sm:min-w-[5.25rem] sm:px-4 sm:py-2.5 sm:text-sm md:min-w-[6.5rem]',
+                    'relative z-10 min-w-0 rounded-full px-3 py-2 text-[11px] font-medium sm:min-w-[5.5rem] sm:px-5 sm:py-2.5 sm:text-sm md:min-w-[7rem]',
                     'transition-colors duration-200 motion-reduce:transition-none',
                     'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F92C99]',
-                    col === 1 && 'col-start-2',
-                    col === 2 && 'col-start-3',
                     mode === opt.id ? 'text-white' : 'text-[#1A1A1A] hover:text-[#F92C99]',
                   )}
                 >
@@ -443,32 +513,104 @@ export function ValuePropositionsSection() {
           </div>
         </ScrollReveal>
 
-        <div className="relative mt-10 sm:mt-12 md:mt-14">
+        {layout === 'bento' && renderProduct ? (
           <AnimatePresence mode="wait" initial={false}>
-            <motion.ul
+            <motion.div
               key={mode}
               role="tabpanel"
-              aria-label={`${TOGGLE_OPTIONS.find((o) => o.id === mode)?.label ?? ''} keywords`}
-              variants={listVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3 sm:gap-2 md:gap-4 lg:gap-5"
+              aria-label={`${TOGGLE_OPTIONS.find((o) => o.id === mode)?.label ?? ''} offer`}
+              initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.3, ease: easeOutSoft }}
+              className={cn('mt-8 lg:mt-9', embedded && 'mt-7 sm:mt-8')}
             >
-              {cards.map((card, index) => (
-                <KeywordCardWithParallax
-                  key={`${mode}-${card.word}`}
-                  card={card}
-                  reduceMotion={reduceMotion}
-                  deckSession={deckSession}
-                  scrollYProgress={scrollYProgress}
-                  parallaxIndex={index}
-                />
-              ))}
-            </motion.ul>
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12 lg:grid-rows-3 lg:items-stretch lg:gap-4">
+                <div className="flex min-h-0 items-center justify-center lg:col-span-7 lg:row-span-3 lg:min-h-[22rem]">
+                  {renderProduct(mode)}
+                </div>
+                <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:gap-3 lg:contents">
+                  {cards.map((card, index) => (
+                    <KeywordCardWithParallax
+                      key={`${mode}-${card.word}`}
+                      card={card}
+                      reduceMotion={reduceMotion}
+                      deckSession={deckSession}
+                      scrollYProgress={scrollYProgress}
+                      parallaxIndex={index}
+                      variant="compact"
+                      className={cn(
+                        'lg:col-span-5',
+                        index === 0 && 'lg:row-start-1',
+                        index === 1 && 'lg:row-start-2',
+                        index === 2 && 'lg:row-start-3',
+                      )}
+                    />
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </AnimatePresence>
-        </div>
-      </div>
+        ) : (
+          <>
+            {renderProduct ? (
+              <div className={cn(embedded ? 'mt-8 sm:mt-9' : 'mt-10 sm:mt-12')}>
+                <AnimatePresence mode="wait" initial={false}>
+                  {renderProduct(mode)}
+                </AnimatePresence>
+              </div>
+            ) : null}
+
+            <div
+              className={cn(
+                'relative',
+                embedded
+                  ? renderProduct
+                    ? 'mt-6 sm:mt-7'
+                    : 'mt-8 sm:mt-9'
+                  : 'mt-10 sm:mt-12 md:mt-14',
+              )}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.ul
+                  key={mode}
+                  role="tabpanel"
+                  aria-label={`${TOGGLE_OPTIONS.find((o) => o.id === mode)?.label ?? ''} keywords`}
+                  variants={listVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-3 sm:gap-2 md:gap-4 lg:gap-5"
+                >
+                  {cards.map((card, index) => (
+                    <KeywordCardWithParallax
+                      key={`${mode}-${card.word}`}
+                      card={card}
+                      reduceMotion={reduceMotion}
+                      deckSession={deckSession}
+                      scrollYProgress={scrollYProgress}
+                      parallaxIndex={index}
+                    />
+                  ))}
+                </motion.ul>
+              </AnimatePresence>
+            </div>
+          </>
+        )}
+    </div>
+  )
+}
+
+export function ValuePropositionsSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  return (
+    <section
+      ref={sectionRef}
+      aria-label="What are we solving?"
+      className="bg-white px-2 pt-16 pb-7 sm:px-6 sm:pt-20 sm:pb-9 md:pt-24 md:pb-11"
+    >
+      <ValuePropositionsPanel showEyebrow scrollTargetRef={sectionRef} />
     </section>
   )
 }

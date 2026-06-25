@@ -24,9 +24,10 @@ export function AboutMissionSection() {
 
           <div className="mt-8 space-y-6 sm:mt-10">
             <p className="font-sans text-base leading-relaxed text-[#5A5A5A] sm:text-lg">
-              Missout is a college event discovery and participation platform built for students and the
-              people who organise for them. We sit between fragmented WhatsApp groups, scattered PDFs,
-              and word-of-mouth — and replace all of it with one clean, unified system.
+              Missout is the company behind Stage and Backstage, built for students and the people who organise for
+              them. Stage is where students discover and participate; Backstage is where organisers run the show. We sit
+              between fragmented WhatsApp groups, scattered PDFs, and word-of-mouth, and replace all of it with one
+              clean, unified system.
             </p>
 
             <blockquote className="border-l-[3px] border-[#F92C99]/40 py-1 pl-5 font-display text-xl font-semibold leading-snug tracking-tight text-[#1A1A1A] sm:text-2xl">

@@ -14,7 +14,7 @@ export function ProductPage() {
   usePageMeta({
     title: 'Product',
     description:
-      'See how Missout ties discovery and operations together—so teams can publish, manage registrations, and keep attendees in the loop.',
+      'See how Stage and Backstage work together. Discovery for students, operations for organisers, all under Missout.',
   })
 
   useLayoutEffect(() => {

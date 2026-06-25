@@ -8,7 +8,9 @@ export const HERO_ASSETS = {
   countdownClock: '/hero/Pixel/Solid/Clock.svg',
 } as const
 
-/** About hero — pink pixel band (`public/about_hero_graphic.svg`). */
+/** About hero decorative pixel graphic (`public/about_hero.svg`). */
 export const ABOUT_HERO_ASSETS = {
-  graphic: '/about_hero_graphic.svg',
+  graphic: '/about_hero.svg',
+  /** Intrinsic size from `about_hero.svg` viewBox (update if the asset changes). */
+  graphicSize: { w: 1512, h: 520 },
 } as const

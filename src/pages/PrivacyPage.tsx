@@ -1,6 +1,6 @@
 import { usePageMeta } from '../hooks/usePageMeta'
 
-const LAST_UPDATED = 'May 19, 2026 (updated)'
+const LAST_UPDATED = 'June 26, 2026'
 
 interface SectionProps {
   title: string
@@ -43,7 +43,8 @@ export function PrivacyPage() {
       {/* Body */}
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="mb-10 font-sans text-sm leading-relaxed text-[#5A5A5A] sm:text-base">
-          Welcome to Missout ("we", "us", or "our"). We operate{' '}
+          Welcome to Missout ("we", "us", or "our"), a brand operated by{' '}
+          <span className="font-medium text-[#1A1A1A]">Intrct Technologies</span>. We operate{' '}
           <span className="font-medium text-[#1A1A1A]">findus.missout.in</span> and related
           services that help college students discover campus events and help organisers manage them.
           This Privacy Policy explains what information we collect, how we use it, and the choices
@@ -73,24 +74,20 @@ export function PrivacyPage() {
           <p>
             <span className="font-medium text-[#1A1A1A]">Cookies & local storage.</span> We use
             first-party cookies and browser storage to keep you signed in and to remember your
-            preferences. We do not run third-party advertising cookies.
+            preferences. We do not use cookies for third-party targeted advertising.
           </p>
         </Section>
 
         <Section title="2. How We Use Your Information">
           <p>We use the information we collect to:</p>
           <ul className="ml-5 list-disc space-y-2">
-            <li>Provide, maintain, and improve the Missout platform and Backstage event-management tools.</li>
+            <li>Provide, maintain, and improve the Missout platform, Stage discovery tools, and Backstage event-management tools.</li>
             <li>Personalise your event discovery feed based on your college and interests.</li>
             <li>Send transactional emails such as registration confirmations and event reminders.</li>
             <li>Respond to your support requests or enquiries.</li>
             <li>Detect and prevent fraud, abuse, or security incidents.</li>
             <li>Comply with applicable laws and regulations.</li>
           </ul>
-          <p>
-            We do <span className="font-medium text-[#1A1A1A]">not</span> sell your personal
-            information to third parties.
-          </p>
         </Section>
 
         <Section title="3. Sharing of Information">
@@ -129,18 +126,19 @@ export function PrivacyPage() {
 
         <Section title="5. Security">
           <p>
-            We implement industry-standard technical and organisational measures — including
-            encryption in transit (TLS) and at rest, access controls, and regular security reviews —
-            to protect your information. However, no internet transmission is 100 % secure; please
-            use a strong, unique password and keep it confidential.
+            We implement reasonable technical and organisational measures, including encryption in
+            transit (TLS) and access controls, to protect your information. However, no internet
+            transmission is 100 % secure; please use a strong, unique password and keep it
+            confidential.
           </p>
         </Section>
 
         <Section title="6. Children's Privacy">
           <p>
-            Missout is intended for college students (typically 17 +). We do not knowingly collect
-            personal information from children under 13. If you believe a child under 13 has
-            provided us with personal data, please contact us and we will promptly delete it.
+            Missout is intended for users aged 16 and older. We do not verify age at registration.
+            We do not knowingly collect personal information from anyone under 16. If you believe
+            someone under 16 has provided us with personal data, please contact us and we will
+            promptly delete it.
           </p>
         </Section>
 
@@ -158,32 +156,23 @@ export function PrivacyPage() {
 
         <Section title="8. Deleting Your Account & Data">
           <p>
-            You have the right to request the deletion of your Missout profile and all associated
-            platform-level data at any time. To submit a deletion request, write to us at:
+            You can delete your Missout account at any time from your account settings in the
+            platform. Once confirmed, your profile, event registrations, and any personally
+            identifiable information will be permanently removed from our active systems.
           </p>
-          <div className="my-2 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-5 py-4">
-            <p>
-              Email:{' '}
-              <a
-                href="mailto:hello@missout.in"
-                className="font-medium text-[#F92C99] underline underline-offset-2 hover:opacity-80 transition-opacity"
-              >
-                hello@missout.in
-              </a>
-            </p>
-            <p className="mt-1 text-xs text-[#8A8A8A] sm:text-sm">
-              Subject: Account Deletion Request — please include the email address linked to your account.
-            </p>
-          </div>
           <p>
-            We will acknowledge your request and action it within{' '}
-            <span className="font-medium text-[#1A1A1A]">48 hours</span>. Once processed, your
-            profile, event registrations, and any personally identifiable information will be
-            permanently removed from our active systems.
+            If you cannot complete deletion in the app, contact us at{' '}
+            <a
+              href="mailto:info@missout.in"
+              className="font-medium text-[#F92C99] underline underline-offset-2 hover:opacity-80 transition-opacity"
+            >
+              info@missout.in
+            </a>{' '}
+            and we will help you.
           </p>
           <p>
             <span className="font-medium text-[#1A1A1A]">What we retain.</span> Notwithstanding
-            the above, we will retain certain records as required by applicable Indian law — including
+            the above, we will retain certain records as required by applicable Indian law, including
             audit logs, transaction records, and data necessary for financial compliance, fraud
             prevention, or ongoing legal proceedings. This data is kept only for as long as
             mandated by law and is not used for any other purpose.
@@ -196,14 +185,15 @@ export function PrivacyPage() {
             reach out to us:
           </p>
           <div className="mt-2 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-5 py-4">
-            <p className="font-medium text-[#1A1A1A]">Missout</p>
-            <p>
+            <p className="font-medium text-[#1A1A1A]">Intrct Technologies</p>
+            <p className="text-sm text-[#8A8A8A]">Operating the Missout brand</p>
+            <p className="mt-2">
               Email:{' '}
               <a
-                href="mailto:hello@missout.in"
+                href="mailto:info@missout.in"
                 className="font-medium text-[#F92C99] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
-                hello@missout.in
+                info@missout.in
               </a>
             </p>
             <p>Website: findus.missout.in</p>

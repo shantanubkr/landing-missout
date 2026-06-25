@@ -24,7 +24,7 @@ export async function submitWaitlist(payload: WaitlistPayload): Promise<void> {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         access_key: ACCESS_KEY,
-        subject: `Missout waitlist — ${name}`,
+        subject: `Missout waitlist: ${name}`,
         from_name: 'Missout Waitlist',
         replyto: email,
         name,

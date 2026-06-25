@@ -1,1 +1,1 @@
-export { ValuePropositionsSection } from './ValuePropositionsSection'
+export { ValuePropositionsSection, ValuePropositionsPanel, type AudienceMode } from './ValuePropositionsSection'

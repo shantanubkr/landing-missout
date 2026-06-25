@@ -40,7 +40,7 @@ export function TeamMemberCard({
           aria-hidden
         >
           <span className="font-display text-4xl font-bold text-[#1A1A1A]/25 sm:text-5xl">
-            {member.name.replace(/\s/g, '').charAt(0) || '—'}
+            {member.name.replace(/\s/g, '').charAt(0) || '-'}
           </span>
         </div>
       )
@@ -90,7 +90,7 @@ export function TeamMemberCard({
         aria-hidden
       >
         <span className="font-display text-4xl font-bold text-[#1A1A1A]/25 sm:text-5xl">
-          {member.name.replace(/\s/g, '').charAt(0) || '—'}
+          {member.name.replace(/\s/g, '').charAt(0) || '-'}
         </span>
       </div>,
     )

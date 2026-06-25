@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { cn } from '../../lib/cn'
 import { useFaqOutlineDecorMotion } from '../../hooks/useFaqOutlineDecorMotion'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
-import { ButtonLink } from '../ui'
 import { BentoImageTile, BENTO_IMG_FULL } from './BentoImageTile'
 
 const OUTLINE_STAR = '/brand/missout_outline_star.svg'
@@ -36,10 +35,10 @@ const taglineHeroCard =
   'min-h-0 md:flex md:h-full md:min-h-0 md:flex-1 md:flex-col [&_img]:min-h-0 [&_img]:shrink-0 [&_img]:md:h-full [&_img]:md:max-h-full [&_img]:md:w-full [&_img]:md:object-contain [&_img]:md:object-center'
 
 /**
- * Discover Events — eyebrow + headline + subcopy + CTA + bento (`/product/discover-bento/`).
+ * Discover Events — eyebrow + headline + subcopy + bento (`/product/discover-bento/`).
  *
  * Desktop hero: **`grid-cols-3`** + **`GAP`** for even horizontal gutters (no flex basis rounding).
- * **`items-stretch`** row height — **missout | tagline | discover** share top; **locate | tagline | powered** share bottom.
+ * **`items-stretch`** row height — **stage | tagline | discover** share top; **locate | tagline | powered** share bottom.
  * Side rails use **`justify-between`** + **`GAP`** between the two tiles (mirrored left/right; avoids extra gaps around a spacer).
  * Parallax: layered `useScrollProgressDrift` on header, hero columns (middle strongest), bottom row (`peakPx` aligned with manage bento).
  * Secondary row: ticketing | updates | logo — equal height, widths ∝ intrinsic ratios.
@@ -127,22 +126,19 @@ export function ProductDiscoverBentoSection() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-[min(100%,80.5rem)] flex-col px-4 sm:px-6 lg:px-8">
           <header ref={headerDriftRef} className="flex flex-col items-center gap-4 text-center md:gap-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#006AFE] sm:text-xs">
+            <p className="font-sans text-base font-medium tracking-normal text-[#006AFE] sm:text-lg md:text-xl">
               What are we solving?
             </p>
             <h2
               id="discover-events-heading"
               className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-[#1A1A1A]"
             >
-              Discover Events through Missout
+              Discover Events through Stage
             </h2>
             <p className="max-w-xl font-body text-base leading-relaxed text-[#6B6B6B] md:text-[17px]">
               <span className="block">Handle registrations, teams, and updates</span>
               <span className="mt-1 block text-[#8A8A8A]">No back and forth</span>
             </p>
-            <ButtonLink to="/#contact" variant="primary" theme="product" size="md" className="mt-1 font-semibold">
-              Try now
-            </ButtonLink>
           </header>
 
           <div className={cn('mt-12 flex flex-col md:mt-14', GAP)}>
@@ -160,7 +156,7 @@ export function ProductDiscoverBentoSection() {
                   folder="discover-bento"
                   slot="missout"
                   src={DB.missout}
-                  alt="Missout"
+                  alt="Stage"
                   className="w-full min-w-0 shrink-0"
                   variant={TILE_FLUSH}
                 />
@@ -181,7 +177,7 @@ export function ProductDiscoverBentoSection() {
                   folder="discover-bento"
                   slot="tagline"
                   src={DB.tagline}
-                  alt="Your campus life outside the campus — app preview"
+                  alt="Your campus life outside the campus, app preview"
                   className={taglineHeroCard}
                   imgClassName={BENTO_IMG_FULL}
                   variant={TILE_FLUSH}

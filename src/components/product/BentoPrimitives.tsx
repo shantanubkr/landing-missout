@@ -13,7 +13,7 @@ export function BentoSlotPlaceholder({
     <div className="flex min-h-[120px] flex-1 flex-col items-center justify-center gap-2 bg-[#F5F5F5] px-4 py-8 md:min-h-[140px]">
       <span className="font-body text-xs font-medium text-[#9A9A9A]">Screenshot placeholder</span>
       <span className="font-body text-[10px] uppercase tracking-[0.14em] text-[#C5C5C5]">
-        Slot {slot} — add image to{' '}
+        Slot {slot}, add image to{' '}
         <code className="rounded bg-black/[0.06] px-1 py-0.5 text-[9px] text-[#666]">
           public/product/{folder}/
         </code>

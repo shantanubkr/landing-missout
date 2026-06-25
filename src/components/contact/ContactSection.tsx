@@ -85,11 +85,11 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
       `Name: ${payload.name}`,
       `College / Organiser: ${payload.collegeOrOrganiser}`,
       `Email: ${payload.email}`,
-      `Phone: ${payload.phone || '—'}`,
+      `Phone: ${payload.phone || 'N/A'}`,
       `Partnership type: ${payload.partnershipType}`,
       '',
       'How would you like to collaborate?',
-      payload.collaboration || '—',
+      payload.collaboration || 'N/A',
     ].join('\n')
 
     setStatus('submitting')
@@ -101,7 +101,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: web3Key,
-            subject: `Missout contact — ${payload.partnershipType}`,
+            subject: `Missout contact: ${payload.partnershipType}`,
             name: payload.name,
             email: payload.email,
             phone: payload.phone,
@@ -132,7 +132,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
 
     try {
       const mailto = encodeMailto(
-        `Missout contact — ${payload.partnershipType}`,
+        `Missout contact: ${payload.partnershipType}`,
         messageBody,
       )
       window.location.href = mailto
@@ -166,7 +166,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
             Get in touch
           </h2>
           <p className="font-sans mx-auto mt-3 max-w-2xl text-base text-[#5A5A5A] sm:mt-4 sm:text-lg">
-            Tell us about your campus or company — we&apos;ll get back to you.
+            Tell us about your campus or company. We&apos;ll get back to you.
           </p>
         </div>
 
@@ -177,8 +177,8 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
               role="status"
             >
               {web3Key
-                ? 'Thanks — we received your message and will follow up shortly.'
-                : 'Thanks — your email app should open with your message ready to send. If nothing opens, reach us via the social links in the footer.'}
+                ? 'Thanks. We received your message and will follow up shortly.'
+                : 'Thanks. Your email app should open with your message ready to send. If nothing opens, reach us via the social links in the footer.'}
             </div>
           )}
           {(status === 'error' || errorMessage) && (

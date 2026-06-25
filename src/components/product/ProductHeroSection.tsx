@@ -1,18 +1,16 @@
 import type { RefObject } from 'react'
 import { useProductHeroParallax } from '../../hooks/useProductHeroParallax'
+import {
+  PRODUCT_HERO_BACKSTAGE_IMG,
+  PRODUCT_HERO_STAGE_IMG,
+  ProductGlassShell,
+} from './ProductGlassShell'
 
 const PRODUCT_ROBOT_ICON = '/product/Robot.svg'
 const PRODUCT_BG_GRAPHIC = '/product/product_bg.svg'
-/** Card screenshots — `public/product/missout.png`, `public/product/backstage.png` */
-const PRODUCT_HERO_DISCOVER_IMG = '/product/missout.png'
-const PRODUCT_HERO_MANAGE_IMG = '/product/backstage.png'
 
 /** Matches `viewBox` / root `<svg width height>` in `public/product/product_bg.svg` (update if the asset changes). */
 const PRODUCT_BG_SIZE = { w: 1246, h: 1033 } as const
-
-/** Design proportions: outer glass frame and inner image slot (≈108% vs prior sizing). */
-const PRODUCT_GLASS_OUTER = { w: 736, h: 578 } as const
-const PRODUCT_GLASS_INNER = { w: 712, h: 496 } as const
 
 function ProductEyebrowRobot() {
   return (
@@ -31,52 +29,22 @@ function ProductEyebrowRobot() {
   )
 }
 
-/** Shared glass shell + inner image (`missout-glass`, `--nav-surface`). */
-function ProductGlassShell({ src, alt }: { src: string; alt: string }) {
-  const o = PRODUCT_GLASS_OUTER
-  const i = PRODUCT_GLASS_INNER
-  const innerWidthPct = (i.w / o.w) * 100
-  return (
-    <div className="w-full">
-      <div
-        className="missout-glass flex w-full flex-col justify-end overflow-hidden rounded-[20px] border-[0.6px] border-solid border-[var(--nav-stroke)] bg-[var(--nav-surface)] pb-2 shadow-[0_16px_48px_rgba(26,26,26,0.08)] md:rounded-[22px] md:pb-2.5"
-        style={{ aspectRatio: `${o.w} / ${o.h}` }}
-      >
-        <div
-          className="relative mx-auto min-h-0 w-full shrink-0 overflow-hidden rounded-[14px] ring-1 ring-white/[0.10] md:rounded-[16px]"
-          style={{
-            width: `${innerWidthPct}%`,
-            aspectRatio: `${i.w} / ${i.h}`,
-          }}
-        >
-          <img
-            src={src}
-            alt={alt}
-            decoding="async"
-            loading="eager"
-            draggable={false}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ProductGlassDiscoverCard() {
+function ProductGlassStageCard() {
   return (
     <ProductGlassShell
-      src={PRODUCT_HERO_DISCOVER_IMG}
-      alt="Missout — discover events"
+      src={PRODUCT_HERO_STAGE_IMG}
+      alt="Discover through Stage"
+      loading="eager"
     />
   )
 }
 
-function ProductGlassManageCard() {
+function ProductGlassBackstageCard() {
   return (
     <ProductGlassShell
-      src={PRODUCT_HERO_MANAGE_IMG}
-      alt="Backstage — manage events"
+      src={PRODUCT_HERO_BACKSTAGE_IMG}
+      alt="Manage through Backstage"
+      loading="eager"
     />
   )
 }
@@ -125,17 +93,17 @@ function ProductHeroVisual({
       <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[4%] z-[2] max-md:bottom-[8%] max-md:top-[10%] md:bottom-[6%] md:top-[10%] lg:top-[12%] xl:top-[14%]">
         <div className="relative mx-auto h-full w-full max-md:max-w-full max-w-[26rem] md:max-w-[min(100%,64rem)] lg:max-w-[min(100%,68rem)]">
           {/*
-            Mobile (< md): same row — Missout left, Backstage right — keeps pixel wings visible in the gap.
+            Mobile (< md): same row — Stage left, Backstage right — keeps pixel wings visible in the gap.
             md+: diagonal layout unchanged.
           */}
           <div className="pointer-events-auto absolute left-1/2 top-[1%] z-[3] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-8 max-md:left-0 max-md:right-auto max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-10 md:left-0 md:top-0 md:w-[47%] md:max-w-none md:-translate-x-4 md:-translate-y-11 lg:w-[46%] lg:-translate-x-6 lg:-translate-y-[3.35rem] xl:w-[45%] xl:-translate-x-8 xl:-translate-y-[3.85rem] 2xl:-translate-x-12 2xl:-translate-y-[3.95rem]">
             <div ref={discoverCardRef} className="will-change-transform">
-              <ProductGlassDiscoverCard />
+              <ProductGlassStageCard />
             </div>
           </div>
           <div className="pointer-events-auto absolute bottom-[1%] left-1/2 z-[4] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-11 max-md:bottom-auto max-md:left-auto max-md:right-0 max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-[2.875rem] md:bottom-[28%] md:right-0 md:top-auto md:w-[47%] md:max-w-none md:translate-x-4 md:-translate-y-[4.125rem] lg:w-[46%] lg:translate-x-6 lg:-translate-y-[4.625rem] xl:w-[45%] xl:translate-x-8 xl:-translate-y-[5.35rem] 2xl:translate-x-12 2xl:-translate-y-[5.65rem]">
             <div ref={manageCardRef} className="will-change-transform">
-              <ProductGlassManageCard />
+              <ProductGlassBackstageCard />
             </div>
           </div>
         </div>
@@ -163,9 +131,9 @@ export function ProductHeroSection() {
         <div className="flex flex-col items-center gap-6 text-center sm:gap-7">
           <div className="flex flex-col items-center gap-3 text-center">
             <ProductEyebrowRobot />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#006AFE] sm:text-xs">
+            <p className="font-sans text-base font-medium tracking-normal text-[#006AFE] sm:text-lg md:text-xl">
               What are we solving?
-            </span>
+            </p>
           </div>
 
           <h1 className="font-display text-[clamp(2rem,6vw,3.25rem)] font-bold leading-[1.08] tracking-[-0.02em] text-[#1A1A1A]">
@@ -173,7 +141,7 @@ export function ProductHeroSection() {
           </h1>
 
           <p className="max-w-xl text-hero-subhead text-[#5A5A5A]">
-            Handle registrations, teams, and updates — without the back-and-forth.
+            Handle registrations, teams, and updates, without the back-and-forth.
           </p>
         </div>
       </div>

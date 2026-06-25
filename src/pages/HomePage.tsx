@@ -2,11 +2,10 @@ import { useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { HeroSection } from '../components/hero'
+import { HomeProductSection } from '../components/product'
 import { PartnerFestsSection } from '../components/partner-fests'
 import { ContactSection } from '../components/contact'
 import { FaqSection } from '../components/faq'
-import { PeopleInvolvedSection } from '../components/people-involved'
-import { ValuePropositionsSection } from '../components/value-propositions'
 
 /** Re-enable when partner fests are ready to show on the homepage. */
 const SHOW_PARTNER_FESTS_SECTION = true
@@ -17,7 +16,7 @@ export function HomePage() {
   usePageMeta({
     title: 'Home',
     description:
-      'Discover and manage campus events in one place. Missout helps students and organisers stay aligned—so nobody misses what matters.',
+      'Discover and manage campus events in one place. Missout helps students and organisers stay aligned, so nobody misses what matters.',
   })
 
   useLayoutEffect(() => {
@@ -31,10 +30,9 @@ export function HomePage() {
     <div>
       <HeroSection />
 
-      <ValuePropositionsSection />
+      <HomeProductSection />
 
       {SHOW_PARTNER_FESTS_SECTION ? <PartnerFestsSection /> : null}
-      <PeopleInvolvedSection />
       <FaqSection />
       <ContactSection />
     </div>

@@ -1,3 +1,4 @@
 export { ProductHeroSection } from './ProductHeroSection'
+export { HomeProductSection } from './HomeProductSection'
 export { ProductManageBentoSection } from './ProductManageBentoSection'
 export { ProductDiscoverBentoSection } from './ProductDiscoverBentoSection'

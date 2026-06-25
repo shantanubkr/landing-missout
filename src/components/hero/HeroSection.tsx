@@ -13,9 +13,9 @@ export function HeroSection() {
     sectionRef,
     gridLayerRef,
     imageLayerRef,
-    missoutPillRef,
+    stagePillRef,
     backstagePillRef,
-    missoutPillMobileRef,
+    stagePillMobileRef,
     backstagePillMobileRef,
   } = useHeroParallax()
 
@@ -38,8 +38,8 @@ export function HeroSection() {
       <div className="relative z-10 w-full shrink-0 px-4 pb-2 sm:px-6 sm:pb-3 md:pb-4">
         <div className="relative mx-auto w-full max-w-7xl">
           <div className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 md:left-0 md:mt-8 md:flex lg:-left-1 xl:-left-3">
-            <div ref={missoutPillRef}>
-              <FloatingProductPill label="Missout" className="relative" />
+            <div ref={stagePillRef}>
+              <FloatingProductPill label="Stage" className="relative" />
             </div>
           </div>
           <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:right-0 md:-mt-16 md:flex lg:-right-1 xl:-right-3">
@@ -77,8 +77,8 @@ export function HeroSection() {
             </div>
 
             <div className="mt-10 flex justify-center gap-10 sm:mt-12 md:mt-10 md:hidden">
-              <div ref={missoutPillMobileRef}>
-                <FloatingProductPill label="Missout" className="relative" />
+              <div ref={stagePillMobileRef}>
+                <FloatingProductPill label="Stage" className="relative" />
               </div>
               <div ref={backstagePillMobileRef}>
                 <FloatingProductPill label="Backstage" align="right" className="relative" />

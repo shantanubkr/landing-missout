@@ -7,8 +7,8 @@ const MS_HOUR = 3_600_000
 const MS_MIN = 60_000
 const MS_SEC = 1_000
 
-/** 21 June 2026, start of day (IST) — ~15 days out. */
-const LAUNCH_END = new Date('2026-06-21T00:00:00+05:30')
+/** 20 June 2026, start of day (IST) — 10-day launch countdown. */
+const LAUNCH_END = new Date('2026-06-20T00:00:00+05:30')
 
 function pad2(n: number) {
   return n.toString().padStart(2, '0')
@@ -35,20 +35,6 @@ export function CountdownLaunch({ className }: CountdownLaunchProps) {
     const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
-
-  if (left.done) {
-    return (
-      <div
-        className={cn('flex flex-col items-center gap-1.5 text-center sm:gap-2', className)}
-        aria-live="polite"
-      >
-        <ClockBadge />
-        <p className="font-sans text-lg font-medium leading-normal tracking-tight text-[#F92C99] sm:text-xl">
-          We’re live
-        </p>
-      </div>
-    )
-  }
 
   return (
     <div

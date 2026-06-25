@@ -21,7 +21,7 @@ export function AboutHeroSection() {
         />
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-[clamp(10rem,22vh,14rem)] sm:px-6">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pb-[clamp(11rem,30vh,16rem)] sm:px-6">
         <div className="mx-auto w-full max-w-4xl text-center sm:max-w-5xl">
           <p className="font-sans text-sm font-medium tracking-wide text-[#F92C99] sm:text-base">
             About us
@@ -38,27 +38,25 @@ export function AboutHeroSection() {
         </div>
       </div>
 
-      {/* Pink band — pinned to section bottom, centered with a slight right nudge */}
+      {/* Decorative pixel graphic — parallax via `imageLayerRef` */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex h-[clamp(12rem,28vh,22rem)] items-end justify-center overflow-visible px-4 sm:h-[clamp(13rem,30vh,24rem)] sm:px-6 md:h-[clamp(14rem,32vh,26rem)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex translate-y-8 items-end justify-center overflow-visible px-4 pb-0 sm:translate-y-12 sm:px-6 md:translate-y-16"
         aria-hidden
       >
-        <div className="translate-x-[1.5%] sm:translate-x-[2%] md:translate-x-[2.5%]">
-          <div
-            ref={imageLayerRef}
-            className="mx-auto flex h-[clamp(12rem,28vh,22rem)] w-[min(92vw,64rem)] origin-bottom scale-[1.14] items-end justify-center sm:h-[clamp(13rem,30vh,24rem)] sm:scale-[1.2] md:scale-[1.26]"
-          >
-            <img
-              src={ABOUT_HERO_ASSETS.graphic}
-              alt=""
-              className="block h-full w-full min-w-0 max-w-none object-contain object-bottom"
-              width={1240}
-              height={209}
-              loading="eager"
-              decoding="async"
-              draggable={false}
-            />
-          </div>
+        <div
+          ref={imageLayerRef}
+          className="mx-auto flex w-full max-w-[min(100%,94rem)] origin-bottom items-end justify-center will-change-transform"
+        >
+          <img
+            src={ABOUT_HERO_ASSETS.graphic}
+            alt=""
+            className="block h-auto w-full min-w-0 object-contain object-bottom"
+            width={ABOUT_HERO_ASSETS.graphicSize.w}
+            height={ABOUT_HERO_ASSETS.graphicSize.h}
+            loading="eager"
+            decoding="async"
+            draggable={false}
+          />
         </div>
       </div>
     </section>

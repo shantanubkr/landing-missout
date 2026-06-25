@@ -238,7 +238,7 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
                   You&apos;re on the list!
                 </h3>
                 <p className="mt-2 max-w-sm font-sans text-base text-[#5A5A5A]" role="status">
-                  You’re in — we’ll email you the moment Missout launches.
+                  You&apos;re in. We&apos;ll email you the moment Missout launches.
                 </p>
                 <button
                   type="button"
