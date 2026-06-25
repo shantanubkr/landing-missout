@@ -1,8 +1,8 @@
 import { cn } from '../../lib/cn'
 
 /** Card screenshots in `public/product/`. */
-export const PRODUCT_HERO_STAGE_IMG = '/product/Stage.png'
-export const PRODUCT_HERO_BACKSTAGE_IMG = '/product/backstage.png'
+export const PRODUCT_HERO_STAGE_IMG = '/product/Stage.webp'
+export const PRODUCT_HERO_BACKSTAGE_IMG = '/product/backstage.webp'
 
 /** Pixel star used in waitlist modal — reused as soft corner decor. */
 export const PRODUCT_CORNER_VECTOR_SRC = '/waitlist/side_vector.svg'

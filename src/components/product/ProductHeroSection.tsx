@@ -7,9 +7,9 @@ import {
 } from './ProductGlassShell'
 
 const PRODUCT_ROBOT_ICON = '/product/Robot.svg'
-const PRODUCT_BG_GRAPHIC = '/product/product_bg.svg'
+const PRODUCT_BG_GRAPHIC = '/product/product_bg.webp'
 
-/** Matches `viewBox` / root `<svg width height>` in `public/product/product_bg.svg` (update if the asset changes). */
+/** Matches intrinsic size of `public/product/product_bg.webp` (update if the asset changes). */
 const PRODUCT_BG_SIZE = { w: 1246, h: 1033 } as const
 
 function ProductEyebrowRobot() {

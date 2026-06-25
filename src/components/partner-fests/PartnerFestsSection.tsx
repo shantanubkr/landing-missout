@@ -8,7 +8,7 @@ import {
   partnerFestLogoPath,
 } from '../../lib/partnerFestsData'
 
-const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.svg'
+const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.webp'
 
 function PartnerStripItem({ p }: { p: PartnerCollege }) {
   return (

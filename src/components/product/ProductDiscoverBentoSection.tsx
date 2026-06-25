@@ -8,14 +8,14 @@ const OUTLINE_STAR = '/brand/missout_outline_star.svg'
 
 /** Discover bento assets (`public/product/discover-bento/`). */
 const DB = {
-  missout: '/product/discover-bento/1_missout.png',
-  locate: '/product/discover-bento/2_locate.png',
-  ticketing: '/product/discover-bento/3_ticketing.png',
-  tagline: '/product/discover-bento/4_tagline.png',
-  updates: '/product/discover-bento/5_updates.png',
-  discover: '/product/discover-bento/6_discover.png',
-  powered: '/product/discover-bento/7_powered.png',
-  logo: '/product/discover-bento/8_logo.png',
+  missout: '/product/discover-bento/1_missout.webp',
+  locate: '/product/discover-bento/2_locate.webp',
+  ticketing: '/product/discover-bento/3_ticketing.webp',
+  tagline: '/product/discover-bento/4_tagline.webp',
+  updates: '/product/discover-bento/5_updates.webp',
+  discover: '/product/discover-bento/6_discover.webp',
+  powered: '/product/discover-bento/7_powered.webp',
+  logo: '/product/discover-bento/8_logo.webp',
 } as const
 
 /** Discover PNG tiles: flush chrome — asset pixels define edges. */

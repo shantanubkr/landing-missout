@@ -17,17 +17,17 @@ export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
   {
     id: 'nmims',
     college: 'NMIMS',
-    logoFile: 'nm_logo.png',
+    logoFile: 'nm_logo.webp',
   },
   {
     id: 'bits-design',
     college: 'BITS Design School',
-    logoFile: 'bitsdesign_logo.png',
+    logoFile: 'bitsdesign_logo.webp',
   },
   {
     id: 'jai-hind',
     college: 'Jai Hind College',
-    logoFile: 'jaihind_logo.png',
+    logoFile: 'jaihind_logo.webp',
   },
 ]
 
