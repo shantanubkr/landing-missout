@@ -6,6 +6,7 @@ export type WaitlistPayload = {
   name: string
   collegeName: string
   email: string
+  role: 'student' | 'organiser'
 }
 
 export async function submitWaitlist(payload: WaitlistPayload): Promise<void> {
@@ -30,6 +31,7 @@ export async function submitWaitlist(payload: WaitlistPayload): Promise<void> {
         name,
         college_name: collegeName,
         email,
+        role: payload.role,
       }),
     })
   } catch {

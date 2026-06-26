@@ -54,6 +54,7 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
   const [name, setName] = useState('')
   const [collegeName, setCollegeName] = useState('')
   const [email, setEmail] = useState('')
+  const [role, setRole] = useState<'student' | 'organiser' | ''>('')
   const [company, setCompany] = useState('')
 
   const [status, setStatus] = useState<Status>('idle')
@@ -65,6 +66,7 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
     setName('')
     setCollegeName('')
     setEmail('')
+    setRole('')
     setCompany('')
     setStatus('idle')
     setErrorMessage(null)
@@ -131,13 +133,19 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
       firstFieldRef.current?.form?.querySelector<HTMLInputElement>('input[type="email"]')?.focus()
       return
     }
+    if (!role) {
+      setStatus('error')
+      setErrorMessage('Please tell us if you’re a student or organiser.')
+      return
+    }
 
     setStatus('submitting')
     try {
-      await submitWaitlist({ name, collegeName, email })
+      await submitWaitlist({ name, collegeName, email, role })
       setName('')
       setCollegeName('')
       setEmail('')
+      setRole('')
       setStatus('success')
     } catch (err) {
       setStatus('error')
@@ -315,6 +323,38 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
                     placeholder="you@college.edu"
                     className={cn('mt-2', inputClass)}
                   />
+                </div>
+
+                <div>
+                  <span className={labelClass}>
+                    Are you a student or college organiser? <span className="text-[#F92C99]">*</span>
+                  </span>
+                  <div className="mt-2 grid grid-cols-2 gap-3">
+                    {(
+                      [
+                        ['student', 'Student'],
+                        ['organiser', 'College Organiser'],
+                      ] as const
+                    ).map(([value, label]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setRole(value)}
+                        aria-pressed={role === value}
+                        disabled={submitting}
+                        className={cn(
+                          'min-h-12 rounded-xl border px-4 py-3 font-sans text-base font-medium transition-colors duration-200',
+                          role === value
+                            ? 'border-[#F92C99] bg-[#F92C99]/10 text-[#1A1A1A]'
+                            : 'border-[#C5C5C5] bg-white text-[#1A1A1A] hover:border-[#F92C99]/50',
+                          'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F92C99]',
+                          'motion-reduce:transition-none disabled:opacity-60',
+                        )}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div aria-hidden className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden">
