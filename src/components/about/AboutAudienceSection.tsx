@@ -114,8 +114,7 @@ function PinnedAudienceCard({
       <div
         className={cn(
           'relative z-[1] flex min-h-[16rem] flex-col items-center gap-3 rounded-[20px] border-[0.6px] border-[var(--nav-stroke)]',
-          'bg-white/55 px-5 pb-5 pt-4 text-center shadow-[0_12px_48px_rgba(0,0,0,0.07)]',
-          'backdrop-blur-[16px] backdrop-saturate-150 sm:min-h-[17rem] sm:gap-4 sm:px-6 sm:pb-6 sm:pt-5',
+          'bg-white px-5 pb-5 pt-4 text-center shadow-[0_12px_48px_rgba(0,0,0,0.07)] sm:min-h-[17rem] sm:gap-4 sm:px-6 sm:pb-6 sm:pt-5',
         )}
       >
         <span className="inline-flex rounded-full bg-[#F92C99]/12 px-3 py-1 font-sans text-[11px] font-semibold uppercase tracking-wide text-[#F92C99] sm:text-xs">

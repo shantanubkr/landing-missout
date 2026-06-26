@@ -119,11 +119,6 @@ export function HomeProductSection() {
       aria-labelledby="home-products-heading"
       className="relative overflow-x-clip bg-white px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 md:pb-24 md:pt-16"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(249,44,153,0.09)_0%,transparent_58%)]"
-      />
-
       <div className="relative mx-auto max-w-6xl">
         <div className="relative overflow-visible px-5 py-8 sm:px-7 sm:py-10 lg:px-10 lg:py-12">
           <img

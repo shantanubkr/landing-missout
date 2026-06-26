@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
+import { useMemo, useState, type ReactNode, type RefObject } from 'react'
 import {
   AnimatePresence,
   motion,
@@ -10,6 +10,7 @@ import {
 } from 'framer-motion'
 import { cn } from '../../lib/cn'
 import { ScrollReveal } from '../motion/ScrollReveal'
+import { useMobileParallaxScale } from '../../hooks/useMobileParallaxScale'
 
 export type AudienceMode = 'students' | 'organiser'
 
@@ -291,17 +292,16 @@ function KeywordCard({
           {...cardMotionProps}
           className={cn(
             'relative overflow-hidden',
-            'backdrop-blur-[14px] backdrop-saturate-150',
             isCompact
               ? cn(
-                  'missout-glass flex h-full min-h-0 items-start gap-3.5 rounded-2xl',
-                  'border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)]',
+                  'flex h-full min-h-0 items-start gap-3.5 rounded-[20px]',
+                  'border-[0.6px] border-[var(--nav-stroke)] bg-white',
                   'shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
                   'px-4 py-3.5 text-left sm:gap-4 sm:px-5 sm:py-4',
                 )
               : cn(
                   'border-[0.6px] border-[var(--nav-stroke)] shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
-                  'rounded-xl bg-white/50 px-3 pb-3 pt-3 text-center sm:rounded-2xl md:rounded-[20px]',
+                  'rounded-xl bg-white px-3 pb-3 pt-3 text-center sm:rounded-2xl md:rounded-[20px]',
                   'sm:px-4 sm:pb-4 sm:pt-3.5',
                   reduceMotion && 'min-h-0',
                 ),
@@ -358,7 +358,7 @@ function KeywordCard({
               {card.word}
             </p>
             {isCompact ? (
-              <ul className="mt-1.5 space-y-1 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:text-xs">
+              <ul className="mt-1.5 space-y-1.5 font-sans text-xs leading-snug text-[#5A5A5A] sm:text-sm">
                 {card.features.map((feature) => (
                   <li key={feature} className="flex gap-2">
                     <span className="shrink-0 text-[#F92C99]" aria-hidden>
@@ -415,12 +415,16 @@ function KeywordCardWithParallax({
   /** Stronger range + per-card multiplier so movement reads clearly while scrolling */
   const mult = 1 + parallaxIndex * 0.32
   const isCompact = variant === 'compact'
+  const mobileScale = useMobileParallaxScale()
 
-  const blobParallaxY = useTransform(scrollYProgress, [0, 1], [-36 * mult, 36 * mult])
+  const blobParallaxY = useTransform(scrollYProgress, [0, 1], [
+    -36 * mult * mobileScale,
+    36 * mult * mobileScale,
+  ])
   const cardParallaxY = useTransform(
     scrollYProgress,
     [0, 1],
-    isCompact ? [-28 * mult, 28 * mult] : [0, 0],
+    isCompact ? [-28 * mult * mobileScale, 28 * mult * mobileScale] : [0, 0],
   )
 
   return (
@@ -446,7 +450,9 @@ function BentoProductParallax({
   reduceMotion: boolean
   children: ReactNode
 }) {
-  const y = useTransform(scrollYProgress, [0, 1], [34, -34])
+  const mobileScale = useMobileParallaxScale()
+  const peak = 34 * mobileScale
+  const y = useTransform(scrollYProgress, [0, 1], [peak, -peak])
 
   if (reduceMotion) return <>{children}</>
 
@@ -515,7 +521,7 @@ export function ValuePropositionsPanel({
             role="tablist"
             aria-label="Audience"
           >
-            <div className="missout-glass relative inline-grid max-w-full grid-cols-2 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] p-1">
+            <div className="relative inline-grid max-w-full grid-cols-2 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-white p-1">
               <motion.div
                 aria-hidden
                 custom={slideI}
@@ -640,19 +646,5 @@ export function ValuePropositionsPanel({
           </>
         )}
     </div>
-  )
-}
-
-export function ValuePropositionsSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  return (
-    <section
-      ref={sectionRef}
-      aria-label="What are we solving?"
-      className="bg-white px-2 pt-16 pb-7 sm:px-6 sm:pt-20 sm:pb-9 md:pt-24 md:pb-11"
-    >
-      <ValuePropositionsPanel showEyebrow scrollTargetRef={sectionRef} />
-    </section>
   )
 }

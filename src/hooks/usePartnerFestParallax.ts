@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import type { RefObject } from 'react'
+import { MOBILE_PARALLAX_SCALE } from './useMobileParallaxScale'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 /** Pink stripe — drifts with scroll. */
@@ -56,6 +57,13 @@ export function usePartnerFestParallax(
       return undefined
     }
 
+    const mqPhone = window.matchMedia('(max-width: 767px)')
+    const isPhoneRef = { current: mqPhone.matches }
+    const syncPhone = () => {
+      isPhoneRef.current = mqPhone.matches
+    }
+    mqPhone.addEventListener('change', syncPhone)
+
     let raf = 0
 
     const flush = () => {
@@ -70,10 +78,11 @@ export function usePartnerFestParallax(
       const progress = clampProgress((vh / 2 - midY) / Math.max(range * 0.34, 1))
 
       const hideParallax = rect.bottom < -120 || rect.top > vh + 160
+      const scale = isPhoneRef.current ? MOBILE_PARALLAX_SCALE : 1
 
-      applyParallaxY(graphicRef.current, progress, GRAPHIC_PARALLAX_Y_MAX, hideParallax)
-      applyParallaxY(textRef.current, progress, TEXT_PARALLAX_Y_MAX, hideParallax)
-      applyParallaxY(cardsStripRef?.current ?? null, progress, CARDS_PARALLAX_Y_MAX, hideParallax)
+      applyParallaxY(graphicRef.current, progress, GRAPHIC_PARALLAX_Y_MAX * scale, hideParallax)
+      applyParallaxY(textRef.current, progress, TEXT_PARALLAX_Y_MAX * scale, hideParallax)
+      applyParallaxY(cardsStripRef?.current ?? null, progress, CARDS_PARALLAX_Y_MAX * scale, hideParallax)
     }
 
     const schedule = () => {
@@ -86,6 +95,7 @@ export function usePartnerFestParallax(
     window.addEventListener('resize', schedule, { passive: true })
 
     return () => {
+      mqPhone.removeEventListener('change', syncPhone)
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
       cancelAnimationFrame(raf)

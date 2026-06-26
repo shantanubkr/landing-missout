@@ -14,6 +14,118 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const labelClass = 'block font-sans text-sm font-medium text-[#1A1A1A]'
 
+function WaitlistRoleToggle({
+  fieldId,
+  role,
+  onChange,
+  disabled,
+  reduceMotion,
+}: {
+  fieldId: string
+  role: 'student' | 'organiser' | ''
+  onChange: (next: 'student' | 'organiser') => void
+  disabled: boolean
+  reduceMotion: boolean
+}) {
+  const options = [
+    { value: 'student' as const, label: 'Student', hint: 'Discover on Stage' },
+    { value: 'organiser' as const, label: 'Organiser', hint: 'Manage on Backstage' },
+  ]
+
+  const hasSelection = Boolean(role)
+  const slideIndex = role === 'organiser' ? 1 : 0
+
+  return (
+    <fieldset className="min-w-0 border-0 p-0">
+      <legend className={labelClass}>
+        Who are you? <span className="text-[#F92C99]">*</span>
+      </legend>
+      <p className="mt-1 font-sans text-xs leading-snug text-[#5A5A5A] sm:text-sm">
+        {hasSelection
+          ? 'Pick the role that fits you on campus.'
+          : 'Choose Student or Organiser to continue.'}
+      </p>
+
+      <div
+        className={cn(
+          'relative mt-3 grid w-full grid-cols-2 rounded-full p-1 transition-[background-color,border-color,box-shadow,gap] duration-300',
+          hasSelection
+            ? 'gap-0 border-[0.6px] border-[var(--nav-stroke)] bg-white'
+            : 'gap-1.5 border border-[#F92C99]/18 bg-[#FFF8FC] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]',
+        )}
+        role="radiogroup"
+        aria-label="Who are you?"
+      >
+        {hasSelection ? (
+          <motion.div
+            aria-hidden
+            layout={!reduceMotion}
+            initial={false}
+            animate={{ x: `${slideIndex * 100}%` }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { type: 'spring', stiffness: 380, damping: 32 }
+            }
+            style={{ width: 'calc((100% - 0.5rem) / 2)' }}
+            className={cn(
+              'pointer-events-none absolute inset-y-1 left-1 z-0 rounded-full',
+              'bg-gradient-to-r from-[#F92C99] via-[#FF5CB8] to-[#E11E85]',
+              'shadow-[0_4px_20px_rgba(249,44,153,0.35)]',
+            )}
+          />
+        ) : null}
+
+        {options.map((opt) => {
+          const selected = role === opt.value
+          const inputId = `${fieldId}-role-${opt.value}`
+
+          return (
+            <label
+              key={opt.value}
+              htmlFor={inputId}
+              className={cn(
+                'relative z-10 flex min-h-[3.25rem] cursor-pointer flex-col items-center justify-center gap-0.5 rounded-full px-2 py-2.5 text-center',
+                'transition-[color,background-color,box-shadow,transform] duration-200 motion-reduce:transition-none',
+                'has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#F92C99]',
+                !hasSelection &&
+                  'bg-white shadow-[0_1px_3px_rgba(26,26,26,0.06)] ring-1 ring-[#ECECEC] hover:-translate-y-px hover:bg-[#FCE8F2]/55 hover:ring-[#F92C99]/25 hover:shadow-[0_4px_14px_rgba(249,44,153,0.12)]',
+                hasSelection && selected && 'text-white',
+                hasSelection && !selected && 'text-[#1A1A1A] hover:text-[#F92C99]',
+                disabled && 'cursor-not-allowed opacity-60',
+              )}
+            >
+              <input
+                id={inputId}
+                type="radio"
+                name={`${fieldId}-role`}
+                value={opt.value}
+                checked={selected}
+                disabled={disabled}
+                onChange={() => onChange(opt.value)}
+                className="sr-only"
+              />
+              <span className="font-sans text-sm font-semibold leading-none sm:text-base">
+                {opt.label}
+              </span>
+              <span
+                className={cn(
+                  'font-sans text-[10px] leading-tight sm:text-[11px]',
+                  hasSelection && selected && 'text-white/85',
+                  hasSelection && !selected && 'text-[#9A9A9A]',
+                  !hasSelection && 'text-[#9A9A9A]',
+                )}
+              >
+                {opt.hint}
+              </span>
+            </label>
+          )
+        })}
+      </div>
+    </fieldset>
+  )
+}
+
 const inputClass =
   'w-full rounded-xl border border-[#C5C5C5] bg-white px-4 py-3 font-sans text-base text-[#1A1A1A] ' +
   'outline-none transition-[border-color,box-shadow] duration-200 ' +
@@ -325,37 +437,13 @@ export function WaitlistModal({ open, onClose }: WaitlistModalProps) {
                   />
                 </div>
 
-                <div>
-                  <span className={labelClass}>
-                    Are you a student or college organiser? <span className="text-[#F92C99]">*</span>
-                  </span>
-                  <div className="mt-2 grid grid-cols-2 gap-3">
-                    {(
-                      [
-                        ['student', 'Student'],
-                        ['organiser', 'College Organiser'],
-                      ] as const
-                    ).map(([value, label]) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => setRole(value)}
-                        aria-pressed={role === value}
-                        disabled={submitting}
-                        className={cn(
-                          'min-h-12 rounded-xl border px-4 py-3 font-sans text-base font-medium transition-colors duration-200',
-                          role === value
-                            ? 'border-[#F92C99] bg-[#F92C99]/10 text-[#1A1A1A]'
-                            : 'border-[#C5C5C5] bg-white text-[#1A1A1A] hover:border-[#F92C99]/50',
-                          'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F92C99]',
-                          'motion-reduce:transition-none disabled:opacity-60',
-                        )}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                <WaitlistRoleToggle
+                  fieldId={fieldId}
+                  role={role}
+                  onChange={setRole}
+                  disabled={submitting}
+                  reduceMotion={prefersReducedMotion}
+                />
 
                 <div aria-hidden className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden">
                   <label htmlFor={`${fieldId}-company`}>Company</label>

@@ -15,9 +15,7 @@
     --color-brand-blue: #006afe;
     --color-ink: #1a1a1a;
     --color-canvas: #ffffff;
-    /* Glass: Figma fill #BEBEBE @ 11%, stroke #C5C5C5 @ 0.6px; blur layers content behind the surface */
     --nav-surface: rgba(190, 190, 190, 0.11);
-    --nav-surface-elevated: rgba(255, 255, 255, 0.82);
     --nav-stroke: #c5c5c5;
     --nav-backdrop-blur: 12px;
   }

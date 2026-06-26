@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import type { RefObject } from 'react'
+import { MOBILE_PARALLAX_SCALE } from './useMobileParallaxScale'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 function clampProgress(n: number) {
@@ -26,6 +27,13 @@ export function useScrollProgressDrift<E extends HTMLElement = HTMLElement>(
       return undefined
     }
 
+    const mqPhone = window.matchMedia('(max-width: 767px)')
+    const isPhoneRef = { current: mqPhone.matches }
+    const syncPhone = () => {
+      isPhoneRef.current = mqPhone.matches
+    }
+    mqPhone.addEventListener('change', syncPhone)
+
     let raf = 0
 
     const flush = () => {
@@ -46,7 +54,8 @@ export function useScrollProgressDrift<E extends HTMLElement = HTMLElement>(
         return
       }
 
-      const ty = progress * peakPx
+      const scale = isPhoneRef.current ? MOBILE_PARALLAX_SCALE : 1
+      const ty = progress * peakPx * scale
       target.style.willChange = 'transform'
       target.style.transform = `translate3d(0, ${ty}px, 0)`
     }
@@ -61,6 +70,7 @@ export function useScrollProgressDrift<E extends HTMLElement = HTMLElement>(
     window.addEventListener('resize', schedule, { passive: true })
 
     return () => {
+      mqPhone.removeEventListener('change', syncPhone)
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
       cancelAnimationFrame(raf)

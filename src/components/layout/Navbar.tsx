@@ -4,7 +4,7 @@ import { ButtonLink, type ButtonTheme } from '../ui'
 import { cn } from '../../lib/cn'
 import { Logo } from './Logo'
 
-/** Past this Y offset, the navbar uses the Figma “glass” pill. */
+/** Past this Y offset, the navbar collapses into a bordered pill. */
 const GLASS_AT_SCROLL_PX = 8
 
 export function Navbar() {
@@ -34,13 +34,10 @@ export function Navbar() {
             'pointer-events-auto box-border w-full',
             'mx-auto grid grid-cols-[1fr_minmax(0,auto)_1fr] items-center',
             isScrolled
-              ? 'max-w-3xl gap-x-1.5 px-3 py-2 sm:gap-x-2.5 sm:px-4 sm:py-2.5'
-              : 'max-w-7xl gap-x-4 px-0 py-2.5 sm:gap-x-8 md:gap-x-10 lg:gap-x-12',
+              ? 'missout-glass max-w-3xl gap-x-1.5 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] px-3 py-2 sm:gap-x-2.5 sm:px-4 sm:py-2.5'
+              : 'max-w-7xl gap-x-4 rounded-none border-0 border-transparent bg-transparent px-0 py-2.5 sm:gap-x-8 md:gap-x-10 lg:gap-x-12',
             'motion-reduce:transition-none',
             'transition-[max-width,background-color,border-color,border-radius,backdrop-filter,-webkit-backdrop-filter,gap,column-gap,row-gap,padding] duration-500 ease-out',
-            isScrolled
-              ? 'missout-glass rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)]'
-              : 'rounded-none border-0 border-transparent bg-transparent',
           )}
         >
           <div className="min-w-0 justify-self-start">
