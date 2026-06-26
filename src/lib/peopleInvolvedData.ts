@@ -1,6 +1,6 @@
 /**
  * Team cards — full art PNGs in `public/people/` (name/role/logo baked into the asset).
- * Set `portraitFile` to the filename (e.g. `Shantanu.webp`).
+ * Set `portraitFile` to the filename (e.g. `Shantanu.png`).
  */
 export type PeopleInvolvedMember = {
   id: string
@@ -14,9 +14,9 @@ export const TEAM_CARD_PX_WIDTH = 504
 export const TEAM_CARD_PX_HEIGHT = 630
 
 export const PEOPLE_INVOLVED: readonly PeopleInvolvedMember[] = [
-  { id: 'shantanu', name: 'Shantanu Borkar', portraitFile: 'Shantanu.webp' },
-  { id: 'aryan', name: 'Aryan Puri', portraitFile: 'Aryan.webp' },
-  { id: 'samarth', name: 'Samarth Saluja', portraitFile: 'Samarth.webp' },
+  { id: 'shantanu', name: 'Shantanu Borkar', portraitFile: 'Shantanu.png' },
+  { id: 'aryan', name: 'Aryan Puri', portraitFile: 'Aryan.png' },
+  { id: 'samarth', name: 'Samarth Saluja', portraitFile: 'Samarth.png' },
 ]
 
 export function peoplePortraitPath(file: string): string {

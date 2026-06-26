@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "optimize-images": "node scripts/optimize-images.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

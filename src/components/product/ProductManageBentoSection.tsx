@@ -11,14 +11,14 @@ import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
 
 /** Manage bento assets (`public/product/manage-bento/`). */
 const MB = {
-  whole: '/product/manage-bento/1_Your_whole.webp',
-  pbac: '/product/manage-bento/2_PBAC.webp',
-  dashboard: '/product/manage-bento/3_Your_dashboard.webp',
-  metrics: '/product/manage-bento/4_metrics.webp',
-  manage: '/product/manage-bento/8_manage_event.webp',
-  backstage: '/product/manage-bento/7_backstage_title.webp',
-  activity: '/product/manage-bento/5_activity_logs.webp',
-  form: '/product/manage-bento/6_form_builder.webp',
+  whole: '/product/manage-bento/1_Your_whole.png',
+  pbac: '/product/manage-bento/2_PBAC.png',
+  dashboard: '/product/manage-bento/3_Your_dashboard.png',
+  metrics: '/product/manage-bento/4_metrics.png',
+  manage: '/product/manage-bento/8_manage_event.png',
+  backstage: '/product/manage-bento/7_backstage_title.png',
+  activity: '/product/manage-bento/5_activity_logs.png',
+  form: '/product/manage-bento/6_form_builder.png',
 } as const
 
 /** Full column/track width — avoids empty side bands that read as extra horizontal space. */
