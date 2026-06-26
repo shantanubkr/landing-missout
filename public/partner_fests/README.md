@@ -23,7 +23,7 @@ A generic placeholder is provided: `logos/placeholder-fest.svg` (used until you 
 
 | File | Use |
 | --- | --- |
-| `background_graphic.webp` | Full-bleed pink **CTA background** (pixel / grain); used in `PartnerFestsSection` via `<img>`. Replace the file to refresh the look. |
+| `background_graphic.svg` | Full-bleed pink **CTA background** (pixel / grain); used in `PartnerFestsSection` via `<img>`. Replace the file to refresh the look. |
 
 ## Optional extras
 
@@ -37,4 +37,4 @@ After adding files, run `npm run build` to confirm paths resolve in production.
 
 - [ ] One logo per fest in `logos/`
 - [ ] Each row in `partnerFestsData` updated: `id`, `festName`, `college`, `logoFile`
-- [ ] `background_graphic.webp` for the pink CTA (required for the designed CTA band)
+- [ ] `background_graphic.svg` for the pink CTA (required for the designed CTA band)
