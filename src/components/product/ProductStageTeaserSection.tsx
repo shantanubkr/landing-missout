@@ -22,10 +22,6 @@ export function ProductStageTeaserSection() {
           >
             Discover Events through Stage
           </h2>
-          <p className="max-w-xl font-body text-base leading-relaxed text-[#6B6B6B] md:text-[17px]">
-            <span className="block">Handle registrations, teams, and updates</span>
-            <span className="mt-1 block text-[#8A8A8A]">No back and forth</span>
-          </p>
         </header>
 
         <div className="mt-10 sm:mt-12 md:mt-14">

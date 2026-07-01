@@ -120,9 +120,6 @@ function GiftWrapper({
         <p className="font-display text-xl font-bold tracking-tight text-white drop-shadow-sm sm:text-2xl">
           Stage
         </p>
-        <p className="mt-1 font-sans text-sm font-medium text-white/90 sm:text-base">
-          Something special is inside
-        </p>
         <span
           className={cn(
             'mt-4 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/15 px-4 py-2 font-sans text-xs font-semibold text-white backdrop-blur-sm sm:text-sm',
@@ -146,8 +143,6 @@ function RevealedContent({
   theme: 'home' | 'product'
   onJoinWaitlist: () => void
 }) {
-  const isProduct = theme === 'product'
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -161,17 +156,9 @@ function RevealedContent({
       <StackedTeaserImages compact={compact} />
 
       <div className={cn('min-w-0 flex-1 text-center', compact ? 'sm:text-left' : 'md:text-left')}>
-        <p
-          className={cn(
-            'font-sans text-xs font-semibold uppercase tracking-[0.14em]',
-            isProduct ? 'text-[#006AFE]' : 'text-[#F92C99]',
-          )}
-        >
-          Coming soon
-        </p>
         <h3
           className={cn(
-            'font-display mt-2 text-balance font-bold tracking-tight text-[#1A1A1A]',
+            'font-display text-balance font-bold tracking-tight text-[#1A1A1A]',
             compact ? 'text-lg sm:text-xl' : 'text-2xl sm:text-3xl',
           )}
         >
