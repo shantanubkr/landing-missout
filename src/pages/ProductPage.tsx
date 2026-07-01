@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { ContactSection } from '../components/contact'
 import {
-  ProductDiscoverBentoSection,
   ProductHeroSection,
   ProductManageBentoSection,
+  ProductStageTeaserSection,
 } from '../components/product'
 
 export function ProductPage() {
@@ -27,8 +27,8 @@ export function ProductPage() {
   return (
     <div>
       <ProductHeroSection />
+      <ProductStageTeaserSection />
       <ProductManageBentoSection />
-      <ProductDiscoverBentoSection />
       <ContactSection accent="product" />
     </div>
   )

@@ -39,7 +39,11 @@ export function HeroSection() {
         <div className="relative mx-auto w-full max-w-7xl">
           <div className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 md:left-0 md:mt-8 md:flex lg:-left-1 xl:-left-3">
             <div ref={stagePillRef}>
-              <FloatingProductPill label="Stage" className="relative" />
+              <FloatingProductPill
+                label="Stage"
+                className="relative"
+                onClick={() => setWaitlistOpen(true)}
+              />
             </div>
           </div>
           <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:right-0 md:-mt-16 md:flex lg:-right-1 xl:-right-3">
@@ -78,7 +82,11 @@ export function HeroSection() {
 
             <div className="mt-10 flex justify-center gap-10 sm:mt-12 md:mt-10 md:hidden">
               <div ref={stagePillMobileRef}>
-                <FloatingProductPill label="Stage" className="relative" />
+                <FloatingProductPill
+                label="Stage"
+                className="relative"
+                onClick={() => setWaitlistOpen(true)}
+              />
               </div>
               <div ref={backstagePillMobileRef}>
                 <FloatingProductPill label="Backstage" align="right" className="relative" />
@@ -90,7 +98,7 @@ export function HeroSection() {
 
       {/* Zone 2 — hero graphic fills remaining viewport height, shifted up toward copy */}
       <div
-        className="pointer-events-none relative z-[1] -mt-[9.5rem] flex min-h-[min(22vh,380px)] w-full flex-1 flex-col justify-end max-sm:overflow-visible sm:-mt-[20.35rem] sm:min-h-[min(21vh,420px)] md:-mt-[23.34rem] md:min-h-0 lg:-mt-[29.25rem] xl:-mt-[32.5rem]"
+        className="pointer-events-none relative z-[1] -mb-20 -mt-[9.5rem] flex min-h-[min(22vh,380px)] w-full flex-1 flex-col justify-end max-sm:overflow-visible sm:-mb-28 sm:-mt-[20.35rem] sm:min-h-[min(21vh,420px)] md:-mb-36 md:-mt-[23.34rem] md:min-h-0 lg:-mb-40 lg:-mt-[29.25rem] xl:-mb-28 xl:-mt-[32.5rem]"
         aria-hidden
       >
         <div

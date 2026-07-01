@@ -55,7 +55,7 @@ export function PartnerFestsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-x-clip bg-white pb-14 pt-8 sm:pb-16 sm:pt-10 md:pb-20 md:pt-12"
+      className="relative overflow-x-clip bg-white pb-12 pt-4 sm:pb-14 sm:pt-6 md:pb-16 md:pt-8"
       aria-labelledby={headingId}
     >
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
@@ -78,7 +78,7 @@ export function PartnerFestsSection() {
         </div>
       )}
 
-      <div className="relative mx-auto mt-14 w-full max-w-[min(100%,92rem)] translate-y-8 overflow-visible px-0 pb-6 pt-12 sm:mt-16 sm:translate-y-10 sm:px-3 sm:pb-8 sm:pt-12 md:mt-20 md:translate-y-12 md:px-4 md:pb-10 md:pt-14 lg:mt-24 lg:max-w-[58rem] lg:translate-y-14 lg:px-4 lg:pb-12 lg:pt-16 xl:max-w-[64rem]">
+      <div className="relative mx-auto mt-10 w-full max-w-[min(100%,92rem)] translate-y-8 overflow-visible px-0 pb-6 pt-8 sm:mt-12 sm:translate-y-10 sm:px-3 sm:pb-8 sm:pt-10 md:mt-14 md:translate-y-12 md:px-4 md:pb-10 md:pt-12 lg:mt-16 lg:max-w-[58rem] lg:translate-y-14 lg:px-4 lg:pb-12 lg:pt-14 xl:max-w-[64rem]">
         <div className="relative mx-auto w-full overflow-visible">
           <div className="-translate-y-3 translate-x-3 sm:-translate-y-4 sm:translate-x-4 md:-translate-y-5 md:translate-x-5 lg:-translate-y-6 lg:translate-x-7">
             <div ref={graphicRef} className="relative w-full will-change-transform">

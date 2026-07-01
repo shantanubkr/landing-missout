@@ -90,7 +90,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="bg-white pt-10 pb-16 sm:pt-12 sm:pb-20 md:pt-14 md:pb-24"
+      className="bg-white pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20"
       aria-labelledby={`${baseId}-heading`}
     >
       {/*

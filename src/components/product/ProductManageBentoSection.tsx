@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { cn } from '../../lib/cn'
 import { BentoCard } from './BentoPrimitives'
+import { OrganiserOfferIntro } from './OrganiserOfferIntro'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
 
 /*
@@ -132,10 +133,7 @@ export function ProductManageBentoSection() {
           >
             Manage through Backstage.
           </h2>
-          <p className="max-w-xl font-body text-base leading-relaxed text-[#6B6B6B] md:text-[17px]">
-            <span className="block">Handle registrations, teams, and updates</span>
-            <span className="mt-1 block text-[#8A8A8A]">No back and forth</span>
-          </p>
+          <OrganiserOfferIntro theme="product" className="mt-1" />
         </header>
 
         <div className="mt-12 flex flex-col gap-[10px] md:mt-14">

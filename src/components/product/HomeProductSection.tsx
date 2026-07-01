@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { getSiteUrl } from '../../lib/siteUrl'
 import { cn } from '../../lib/cn'
 import { ScrollReveal } from '../motion/ScrollReveal'
 import {
@@ -10,20 +9,13 @@ import {
 import {
   PRODUCT_CORNER_VECTOR_SRC,
   PRODUCT_HERO_BACKSTAGE_IMG,
-  PRODUCT_HERO_STAGE_IMG,
   ProductGlassShell,
   type ProductCornerDecor,
 } from './ProductGlassShell'
-
-const STAGE_HREF = getSiteUrl() ?? 'https://missout.in'
+import { StageRevealTeaser } from './StageRevealTeaser'
 
 const cardLinkClass =
   'group block h-full no-underline outline-none focus-visible:rounded-[22px] focus-visible:ring-2 focus-visible:ring-[#F92C99] focus-visible:ring-offset-4'
-
-const STAGE_CORNER_DECOR: readonly ProductCornerDecor[] = [
-  { corner: 'left-[2%] top-[4%]' },
-  { corner: 'bottom-[16%] right-[2%]', flip: true },
-]
 
 const BACKSTAGE_CORNER_DECOR: readonly ProductCornerDecor[] = [
   { corner: 'right-[2%] top-[4%]', flip: true },
@@ -35,7 +27,6 @@ const PINK_SHELL_GLOW =
 
 function ProductPreviewCard({
   title,
-  label,
   href,
   external,
   imageSrc,
@@ -44,7 +35,6 @@ function ProductPreviewCard({
   className,
 }: {
   title: string
-  label: string
   href: string
   external?: boolean
   imageSrc: string
@@ -55,7 +45,7 @@ function ProductPreviewCard({
   const shell = (
     <div
       className={cn(
-        'relative h-full overflow-visible motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out',
+        'relative w-full overflow-visible motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out',
         'group-hover:scale-[1.012] group-focus-visible:scale-[1.012] motion-reduce:transition-none motion-reduce:group-hover:scale-100',
         className,
       )}
@@ -63,7 +53,6 @@ function ProductPreviewCard({
       <ProductGlassShell
         src={imageSrc}
         alt={imageAlt}
-        label={label}
         cornerDecor={cornerDecor}
         shellGlowShadow={PINK_SHELL_GLOW}
       />
@@ -94,16 +83,18 @@ function ProductPreviewCard({
 function ProductShowcase({ mode }: { mode: AudienceMode }) {
   const isStage = mode === 'students'
 
+  if (isStage) {
+    return <StageRevealTeaser theme="home" />
+  }
+
   return (
     <div className="w-full max-w-lg lg:max-w-none">
       <ProductPreviewCard
-        title={isStage ? 'Discover through Stage' : 'Manage through Backstage'}
-        label={isStage ? 'Stage' : 'Backstage'}
-        href={isStage ? STAGE_HREF : '/product#manage-backstage'}
-        external={isStage}
-        imageSrc={isStage ? PRODUCT_HERO_STAGE_IMG : PRODUCT_HERO_BACKSTAGE_IMG}
-        imageAlt={isStage ? 'Discover through Stage' : 'Manage through Backstage'}
-        cornerDecor={isStage ? STAGE_CORNER_DECOR : BACKSTAGE_CORNER_DECOR}
+        title="Manage through Backstage"
+        href="/product#manage-backstage"
+        imageSrc={PRODUCT_HERO_BACKSTAGE_IMG}
+        imageAlt="Manage through Backstage"
+        cornerDecor={BACKSTAGE_CORNER_DECOR}
       />
     </div>
   )
@@ -117,10 +108,10 @@ export function HomeProductSection() {
       ref={sectionRef}
       id="products"
       aria-labelledby="home-products-heading"
-      className="relative overflow-x-clip bg-white px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 md:pb-24 md:pt-16"
+      className="relative overflow-x-clip bg-white px-4 pb-12 pt-2 sm:px-6 sm:pb-16 sm:pt-4 md:pb-20 md:pt-6"
     >
       <div className="relative mx-auto max-w-6xl">
-        <div className="relative overflow-visible px-5 py-8 sm:px-7 sm:py-10 lg:px-10 lg:py-12">
+        <div className="relative overflow-visible px-5 py-6 sm:px-7 sm:py-8 lg:px-10 lg:py-10">
           <img
             src={PRODUCT_CORNER_VECTOR_SRC}
             alt=""
@@ -160,6 +151,7 @@ export function HomeProductSection() {
               showEyebrow={false}
               scrollTargetRef={sectionRef}
               className="mt-6 max-w-none sm:mt-7"
+              productOnlyModes={['students']}
               renderProduct={(mode) => <ProductShowcase mode={mode} />}
             />
           </div>

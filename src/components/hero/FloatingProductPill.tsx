@@ -9,6 +9,8 @@ type FloatingProductPillProps = {
   className?: string
   /** Slight vertical offset (right tile sits a bit higher in the comp) */
   align?: 'left' | 'right'
+  /** When set on Stage, opens waitlist instead of linking out */
+  onClick?: () => void
 }
 
 function NowLiveBadge() {
@@ -45,11 +47,14 @@ export function FloatingProductPill({
   label,
   className,
   align = 'left',
+  onClick,
 }: FloatingProductPillProps) {
   const isBackstage = label === 'Backstage'
   const ariaLabel = isBackstage
     ? 'Backstage: manage your event, now live'
-    : 'Stage: open missout.in'
+    : onClick
+      ? 'Stage: join the waitlist'
+      : 'Stage: open missout.in'
 
   const content = (
     <>
@@ -89,6 +94,24 @@ export function FloatingProductPill({
       >
         {content}
       </Link>
+    )
+  }
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={cn(
+          pillLinkClassName,
+          'cursor-pointer border-0 bg-transparent p-0',
+          align === 'right' && 'md:-translate-y-2',
+          className,
+        )}
+        aria-label={ariaLabel}
+      >
+        {content}
+      </button>
     )
   }
 

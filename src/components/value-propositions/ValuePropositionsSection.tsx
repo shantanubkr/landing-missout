@@ -11,6 +11,7 @@ import {
 import { cn } from '../../lib/cn'
 import { ScrollReveal } from '../motion/ScrollReveal'
 import { useMobileParallaxScale } from '../../hooks/useMobileParallaxScale'
+import { OrganiserOfferIntro } from '../product/OrganiserOfferIntro'
 
 export type AudienceMode = 'students' | 'organiser'
 
@@ -294,10 +295,10 @@ function KeywordCard({
             'relative overflow-hidden',
             isCompact
               ? cn(
-                  'flex h-full min-h-0 items-start gap-3.5 rounded-[20px]',
+                  'flex h-full min-h-0 flex-col rounded-[20px]',
                   'border-[0.6px] border-[var(--nav-stroke)] bg-white',
-                  'shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
-                  'px-4 py-3.5 text-left sm:gap-4 sm:px-5 sm:py-4',
+                  'shadow-[0_8px_32px_rgba(26,26,26,0.06)]',
+                  'px-4 py-4 text-left sm:px-5 sm:py-[1.125rem]',
                 )
               : cn(
                   'border-[0.6px] border-[var(--nav-stroke)] shadow-[0_6px_28px_rgba(0,0,0,0.055)]',
@@ -340,35 +341,42 @@ function KeywordCard({
           className={cn(
             'relative z-[1]',
             isCompact
-              ? 'flex min-w-0 flex-1 items-start gap-3.5 sm:gap-4'
+              ? 'flex min-w-0 flex-1 flex-col gap-3'
               : 'flex flex-col items-center gap-1.5 sm:gap-2',
           )}
         >
-          <ValueCardIcon
-            id={card.icon}
-            className={isCompact ? 'mt-0.5 h-8 w-8 shrink-0 sm:h-9 sm:w-9' : undefined}
-          />
-          <div className={isCompact ? 'min-w-0 flex-1 text-left' : undefined}>
-            <p
-              className={cn(
-                'font-display font-bold tracking-tight text-[#1A1A1A]',
-                isCompact ? 'text-base sm:text-lg' : 'text-lg sm:text-xl md:text-2xl',
-              )}
-            >
-              {card.word}
-            </p>
-            {isCompact ? (
-              <ul className="mt-1.5 space-y-1.5 font-sans text-xs leading-snug text-[#5A5A5A] sm:text-sm">
-                {card.features.map((feature) => (
-                  <li key={feature} className="flex gap-2">
-                    <span className="shrink-0 text-[#F92C99]" aria-hidden>
-                      ·
-                    </span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : reduceMotion ? (
+          {isCompact ? (
+            <div className="flex min-w-0 items-center gap-3">
+              <ValueCardIcon id={card.icon} className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
+              <p className="font-display text-base font-bold tracking-tight text-[#1A1A1A] sm:text-lg">
+                {card.word}
+              </p>
+            </div>
+          ) : (
+            <>
+              <ValueCardIcon id={card.icon} />
+              <div>
+                <p className="font-display text-lg font-bold tracking-tight text-[#1A1A1A] sm:text-xl md:text-2xl">
+                  {card.word}
+                </p>
+              </div>
+            </>
+          )}
+          {isCompact ? (
+            <ul className="m-0 space-y-2 p-0 pl-0.5 font-sans text-[13px] leading-[1.5] text-[#3A3A3A] sm:text-sm sm:leading-[1.55]">
+              {card.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-2.5">
+                  <span
+                    className="mt-[0.55em] h-[5px] w-[5px] shrink-0 rounded-full bg-[#F92C99] ring-2 ring-[#F92C99]/15 sm:h-1.5 sm:w-1.5"
+                    aria-hidden
+                  />
+                  <span className="text-pretty">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div>
+            {reduceMotion ? (
               <p className="max-w-[16rem] px-0.5 font-sans text-[11px] leading-snug text-[#5A5A5A] sm:max-w-none sm:text-xs md:text-[13px]">
                 {card.features.join(' · ')}
               </p>
@@ -387,7 +395,8 @@ function KeywordCard({
                 {card.features.join(' · ')}
               </motion.p>
             )}
-          </div>
+            </div>
+          )}
         </div>
       </motion.article>
       </motion.div>
@@ -470,6 +479,8 @@ type ValuePropositionsPanelProps = {
   scrollTargetRef: RefObject<HTMLElement | null>
   className?: string
   renderProduct?: (mode: AudienceMode) => ReactNode
+  /** Hide keyword cards and show only `renderProduct` at full width (e.g. Stage gift teaser). */
+  productOnlyModes?: readonly AudienceMode[]
 }
 
 export function ValuePropositionsPanel({
@@ -479,6 +490,7 @@ export function ValuePropositionsPanel({
   scrollTargetRef,
   className,
   renderProduct,
+  productOnlyModes = [],
 }: ValuePropositionsPanelProps) {
   const [mode, setMode] = useState<AudienceMode>('students')
   /** After first tab change, deck uses horizontal slide; before that, first Students grid uses viewport stagger. */
@@ -493,6 +505,7 @@ export function ValuePropositionsPanel({
 
   const cards = AUDIENCE_CARDS[mode]
   const slideI = tabSlideIndex(mode)
+  const productOnly = productOnlyModes.includes(mode)
 
   const listVariants = useMemo(
     () =>
@@ -571,8 +584,16 @@ export function ValuePropositionsPanel({
               transition={{ duration: 0.3, ease: easeOutSoft }}
               className={cn('mt-8 lg:mt-9', embedded && 'mt-7 sm:mt-8')}
             >
+              {mode === 'organiser' ? (
+                <OrganiserOfferIntro className="mb-6 sm:mb-7" theme="home" />
+              ) : null}
+              {productOnly ? (
+                <BentoProductParallax scrollYProgress={scrollYProgress} reduceMotion={reduceMotion}>
+                  <div className="mx-auto w-full max-w-3xl lg:max-w-4xl">{renderProduct(mode)}</div>
+                </BentoProductParallax>
+              ) : (
               <div className="grid grid-cols-1 gap-3 overflow-visible sm:gap-4 lg:grid-cols-12 lg:grid-rows-3 lg:items-stretch lg:gap-4">
-                <div className="flex min-h-0 items-center justify-center overflow-visible lg:col-span-7 lg:row-span-3 lg:min-h-[22rem]">
+                <div className="flex min-h-0 items-start justify-center overflow-visible lg:col-span-7 lg:row-span-3">
                   <BentoProductParallax scrollYProgress={scrollYProgress} reduceMotion={reduceMotion}>
                     {renderProduct(mode)}
                   </BentoProductParallax>
@@ -597,6 +618,7 @@ export function ValuePropositionsPanel({
                   ))}
                 </ul>
               </div>
+              )}
             </motion.div>
           </AnimatePresence>
         ) : (
@@ -609,6 +631,7 @@ export function ValuePropositionsPanel({
               </div>
             ) : null}
 
+            {!productOnly ? (
             <div
               className={cn(
                 'relative',
@@ -643,6 +666,7 @@ export function ValuePropositionsPanel({
                 </motion.ul>
               </AnimatePresence>
             </div>
+            ) : null}
           </>
         )}
     </div>

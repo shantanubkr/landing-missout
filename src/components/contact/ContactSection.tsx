@@ -153,7 +153,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
     <section
       ref={sectionRef}
       id="contact"
-      className="scroll-mt-20 bg-white px-4 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-12 md:pt-24 md:pb-14"
+      className="scroll-mt-20 bg-white px-4 pt-10 pb-10 sm:px-6 sm:pt-14 sm:pb-12 md:pt-16 md:pb-14"
       aria-labelledby={headingId}
     >
       <div ref={driftRef} className="mx-auto max-w-2xl will-change-transform">
