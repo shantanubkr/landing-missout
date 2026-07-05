@@ -1,6 +1,6 @@
 import { useId, useRef, useState } from 'react'
 import { Button } from '../ui/Button'
-import { CONTACT_INBOX_EMAIL } from '../../lib/contact'
+import { CONTACT_INBOX_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_HREF } from '../../lib/contact'
 import { cn } from '../../lib/cn'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
 
@@ -23,6 +23,107 @@ export type ContactSectionProps = {
 }
 
 const labelClass = 'block font-sans text-sm font-medium text-[#1A1A1A]'
+
+function PhoneIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M6.6 3.8h2.2l1.1 2.6a1.5 1.5 0 0 1-.4 1.6l-1.4 1.4a12.5 12.5 0 0 0 5.3 5.3l1.4-1.4a1.5 1.5 0 0 1 1.6-.4l2.6 1.1v2.2a1.5 1.5 0 0 1-1.4 1.5C10.2 18.2 5.8 13.8 5.1 5.2a1.5 1.5 0 0 1 1.5-1.4Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function MailIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 7.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17V9a1.5 1.5 0 0 1 1.5-1.5Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m3.5 8.5 8.1 5.4a1.5 1.5 0 0 0 1.6 0l8.3-5.4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+function DirectContactLinks({ accent }: { accent: 'home' | 'product' }) {
+  const isProduct = accent === 'product'
+  const iconWrap = isProduct ? 'bg-[#006AFE]/10 text-[#006AFE]' : 'bg-[#F92C99]/10 text-[#F92C99]'
+  const cardHover = isProduct
+    ? 'hover:border-[#006AFE]/30 hover:bg-[#006AFE]/[0.04] hover:shadow-[0_10px_28px_rgba(0,106,254,0.1)]'
+    : 'hover:border-[#F92C99]/30 hover:bg-[#F92C99]/[0.04] hover:shadow-[0_10px_28px_rgba(249,44,153,0.1)]'
+  const focusRing = isProduct ? 'focus-visible:outline-[#006AFE]' : 'focus-visible:outline-[#F92C99]'
+
+  const linkClass = cn(
+    'group flex flex-1 items-center gap-3.5 rounded-2xl border-[0.6px] border-[var(--nav-stroke)] bg-white px-4 py-3.5 text-left no-underline',
+    'shadow-[0_6px_22px_rgba(26,26,26,0.05)]',
+    'transition-[border-color,background-color,box-shadow,transform] duration-200 motion-reduce:transition-none',
+    'hover:-translate-y-0.5 motion-reduce:hover:translate-y-0',
+    'active:scale-[0.98] motion-reduce:active:scale-100',
+    cardHover,
+    'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+    focusRing,
+  )
+
+  return (
+    <div className="mx-auto mt-6 max-w-xl sm:mt-8">
+      <p className="font-sans text-center text-xs font-semibold uppercase tracking-[0.14em] text-[#9A9A9A]">
+        Or reach out directly
+      </p>
+      <div className="mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <a href={CONTACT_PHONE_HREF} className={linkClass}>
+          <span
+            className={cn(
+              'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105 motion-reduce:group-hover:scale-100',
+              iconWrap,
+            )}
+          >
+            <PhoneIcon />
+          </span>
+          <span className="min-w-0">
+            <span className="block font-sans text-xs font-medium text-[#8A8A8A]">Call us</span>
+            <span className="mt-0.5 block font-sans text-sm font-semibold tracking-tight text-[#1A1A1A] tabular-nums sm:text-[15px]">
+              {CONTACT_PHONE_DISPLAY}
+            </span>
+          </span>
+        </a>
+        <a href={`mailto:${CONTACT_INBOX_EMAIL}`} className={linkClass}>
+          <span
+            className={cn(
+              'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105 motion-reduce:group-hover:scale-100',
+              iconWrap,
+            )}
+          >
+            <MailIcon />
+          </span>
+          <span className="min-w-0">
+            <span className="block font-sans text-xs font-medium text-[#8A8A8A]">Email us</span>
+            <span
+              className={cn(
+                'mt-0.5 block truncate font-sans text-sm font-semibold tracking-tight sm:text-[15px]',
+                isProduct ? 'text-[#006AFE]' : 'text-[#F92C99]',
+              )}
+            >
+              {CONTACT_INBOX_EMAIL}
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  )
+}
 
 function encodeMailto(subject: string, body: string) {
   const s = encodeURIComponent(subject)
@@ -168,6 +269,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
           <p className="font-sans mx-auto mt-3 max-w-2xl text-base text-[#5A5A5A] sm:mt-4 sm:text-lg">
             Tell us about your campus or company. We&apos;ll get back to you.
           </p>
+          <DirectContactLinks accent={accent} />
         </div>
 
         <div className="mt-10 min-w-0 lg:mt-14">

@@ -1,8 +1,7 @@
 import { useId, useRef } from 'react'
-import { PEOPLE_INVOLVED } from '../../lib/peopleInvolvedData'
 import { useFaqOutlineDecorMotion } from '../../hooks/useFaqOutlineDecorMotion'
 import { ScrollReveal } from '../motion/ScrollReveal'
-import { TeamMemberCard } from '../people-involved/TeamMemberCard'
+import { PeopleTeamCarousel } from '../people-involved/PeopleTeamCarousel'
 
 const OUTLINE_STAR = '/brand/missout_outline_star.svg'
 
@@ -80,13 +79,11 @@ export function AboutTeamSection() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={90}>
-            <ul className="m-0 mt-10 grid list-none grid-cols-1 gap-4 p-0 sm:mt-12 sm:grid-cols-2 sm:gap-5 md:mt-14 lg:grid-cols-3">
-              {PEOPLE_INVOLVED.map((member) => (
-                <li key={member.id} className="min-w-0">
-                  <TeamMemberCard member={member} />
-                </li>
-              ))}
-            </ul>
+            <PeopleTeamCarousel
+              className="mt-10 sm:mt-12 md:mt-14"
+              ariaLabel="Team"
+              initialIndex={0}
+            />
           </ScrollReveal>
         </div>
       </div>
