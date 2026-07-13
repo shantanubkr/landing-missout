@@ -29,6 +29,21 @@ export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
     college: 'Jai Hind College',
     logoFile: 'jaihind_logo.webp',
   },
+  {
+    id: 'shiv-nadar',
+    college: 'Shiv Nadar University',
+    logoFile: 'shiv.webp',
+  },
+  {
+    id: 'bitsom',
+    college: 'BITSoM',
+    logoFile: 'bitsomlogo.webp',
+  },
+  {
+    id: 'thakur',
+    college: 'Thakur College of Science & Commerce',
+    logoFile: 'thakur_logo.png',
+  },
 ]
 
 /** @deprecated Use `PARTNER_COLLEGES` — kept for existing imports */

@@ -10,35 +10,46 @@ import {
 
 const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.png'
 
+const LOGO_SLOT =
+  'flex h-32 w-44 shrink-0 items-center justify-center sm:h-36 sm:w-52 md:h-40 md:w-56'
+
 function PartnerStripItem({ p }: { p: PartnerCollege }) {
   return (
-    <img
-      src={partnerFestLogoPath(p.logoFile)}
-      alt={p.college}
-      className="h-40 w-40 shrink-0 object-contain sm:h-44 sm:w-44 md:h-48 md:w-48 lg:h-52 lg:w-52"
-      width={208}
-      height={208}
-      loading="lazy"
-      decoding="async"
-      draggable={false}
-    />
+    <div className={LOGO_SLOT}>
+      <img
+        src={partnerFestLogoPath(p.logoFile)}
+        alt={p.college}
+        className="max-h-full max-w-full object-contain"
+        width={224}
+        height={160}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+      />
+    </div>
   )
 }
 
 function PartnerStrip({ partners }: { partners: readonly PartnerCollege[] }) {
   if (partners.length === 0) return null
 
+  /** Duplicate for seamless -50% marquee loop */
+  const loop = [...partners, ...partners]
+
   return (
-    <ul
-      className="m-0 flex list-none flex-wrap items-center justify-center gap-x-10 gap-y-8 px-4 py-3 sm:gap-x-12 md:gap-x-16 lg:gap-x-20"
-      aria-label="Partner colleges"
-    >
-      {partners.map((p) => (
-        <li key={p.id} className="[list-style:none]">
-          <PartnerStripItem p={p} />
-        </li>
-      ))}
-    </ul>
+    <div className="partner-marquee-fade w-full overflow-hidden" aria-label="Partner colleges">
+      <ul className="partner-marquee-track m-0 flex w-max list-none items-center gap-5 py-3 sm:gap-6 md:gap-7">
+        {loop.map((p, i) => (
+          <li
+            key={`${p.id}-${i}`}
+            className="[list-style:none]"
+            aria-hidden={i >= partners.length}
+          >
+            <PartnerStripItem p={p} />
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
