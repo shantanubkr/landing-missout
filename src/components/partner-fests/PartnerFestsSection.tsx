@@ -11,7 +11,7 @@ import {
 const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.png'
 
 const LOGO_SLOT =
-  'flex h-32 w-44 shrink-0 items-center justify-center sm:h-36 sm:w-52 md:h-40 md:w-56'
+  'flex h-32 w-36 shrink-0 items-center justify-center sm:h-36 sm:w-40 md:h-40 md:w-44'
 
 function PartnerStripItem({ p }: { p: PartnerCollege }) {
   return (
@@ -38,7 +38,7 @@ function PartnerStrip({ partners }: { partners: readonly PartnerCollege[] }) {
 
   return (
     <div className="partner-marquee-fade w-full overflow-hidden" aria-label="Partner colleges">
-      <ul className="partner-marquee-track m-0 flex w-max list-none items-center gap-5 py-3 sm:gap-6 md:gap-7">
+      <ul className="partner-marquee-track m-0 flex w-max list-none items-center gap-2 py-3 sm:gap-2.5 md:gap-3">
         {loop.map((p, i) => (
           <li
             key={`${p.id}-${i}`}

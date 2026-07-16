@@ -38,7 +38,9 @@ function StackedTeaserImages({ compact }: { compact?: boolean }) {
     <div
       className={cn(
         'relative mx-auto w-full shrink-0',
-        compact ? 'h-[10.5rem] max-w-[11rem] sm:h-[12rem] sm:max-w-[13rem]' : 'h-[14rem] max-w-[15rem] sm:h-[17rem] sm:max-w-[18rem]',
+        compact
+          ? 'h-[8.5rem] max-w-[9rem] sm:h-[9.5rem] sm:max-w-[10rem]'
+          : 'h-[14rem] max-w-[15rem] sm:h-[17rem] sm:max-w-[18rem]',
       )}
       aria-hidden
     >
@@ -92,7 +94,7 @@ function GiftWrapper({
         'group relative w-full cursor-pointer overflow-hidden rounded-[22px] border-[0.6px] border-[var(--nav-stroke)] text-left outline-none',
         'focus-visible:ring-2 focus-visible:ring-offset-2',
         accentClass === 'product' ? 'focus-visible:ring-[#006AFE]' : 'focus-visible:ring-[#F92C99]',
-        compact ? 'min-h-[12.5rem] sm:min-h-[14rem]' : 'min-h-[16rem] sm:min-h-[18rem] md:min-h-[20rem]',
+        compact ? 'min-h-[10.5rem] sm:min-h-[12rem]' : 'min-h-[16rem] sm:min-h-[18rem] md:min-h-[20rem]',
       )}
       aria-label="Unwrap Stage surprise"
     >
@@ -149,27 +151,30 @@ function RevealedContent({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
       className={cn(
-        'flex w-full flex-col items-center gap-6 rounded-[22px] border-[0.6px] border-[var(--nav-stroke)] bg-white px-4 py-6 shadow-[0_16px_48px_rgba(26,26,26,0.08)] sm:px-6 sm:py-7',
-        compact ? 'sm:flex-row sm:items-center sm:gap-5' : 'md:flex-row md:items-center md:gap-10 md:px-8 md:py-8',
+        'flex w-full flex-col items-center rounded-[22px] border-[0.6px] border-[var(--nav-stroke)] bg-white text-center shadow-[0_16px_48px_rgba(26,26,26,0.08)]',
+        /* Always stacked: images → copy → CTA (avoids crushed copy in narrow hero slots). */
+        compact
+          ? 'gap-3.5 px-3.5 py-4 sm:gap-4 sm:px-4 sm:py-5'
+          : 'gap-5 px-5 py-6 sm:gap-6 sm:px-8 sm:py-8',
       )}
     >
       <StackedTeaserImages compact={compact} />
 
-      <div className={cn('min-w-0 flex-1 text-center', compact ? 'sm:text-left' : 'md:text-left')}>
+      <div className="min-w-0 w-full">
         <h3
           className={cn(
             'font-display text-balance font-bold tracking-tight text-[#1A1A1A]',
-            compact ? 'text-lg sm:text-xl' : 'text-2xl sm:text-3xl',
+            compact ? 'text-[0.95rem] leading-snug sm:text-base' : 'text-2xl sm:text-3xl',
           )}
         >
           Join the waitlist, your student life is about to get a lot more interesting
         </h3>
-        <div className={cn('mt-5 flex justify-center', compact ? 'sm:justify-start' : 'md:justify-start')}>
+        <div className={cn('mt-3.5 flex justify-center sm:mt-4', !compact && 'sm:mt-5')}>
           <Button
             type="button"
             variant="primary"
             theme={theme}
-            size={compact ? 'md' : 'lg'}
+            size={compact ? 'sm' : 'lg'}
             onClick={onJoinWaitlist}
             className={compact ? undefined : '!px-8'}
           >

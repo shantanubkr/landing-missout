@@ -42,7 +42,7 @@ export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
   {
     id: 'thakur',
     college: 'Thakur College of Science & Commerce',
-    logoFile: 'thakur_logo.png',
+    logoFile: 'thakur_college_logo.png',
   },
 ]
 
