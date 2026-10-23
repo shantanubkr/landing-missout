@@ -1,5 +1,5 @@
 /**
- * Team cards — full art PNGs in `public/people/` (name/role/logo baked into the asset).
+ * Team cards - full art PNGs in `public/people/` (name/role/logo baked into the asset).
  * Set `portraitFile` to the filename (e.g. `Shantanu.png`).
  */
 export type PeopleInvolvedMember = {

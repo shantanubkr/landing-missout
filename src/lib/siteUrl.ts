@@ -41,7 +41,7 @@ export function applySiteMetaBaseUrl(siteUrl: string) {
     el.setAttribute('content', content)
   }
 
-  const ogImage = `${origin}/brand/missout_horizontal.svg`
+  const ogImage = `${origin}/brand/missout_wordmark.svg`
   setMetaProperty('og:url', canonicalHref)
   setMetaProperty('og:image', ogImage)
   setMetaName('twitter:image', ogImage)

@@ -1,17 +1,17 @@
 import type { CSSProperties } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '../../lib/cn'
+import { MISSOUT_WORDMARK, MISSOUT_WORDMARK_ASPECT } from '../../lib/brandAssets'
+import { BrandWordmark } from '../brand/BrandWordmark'
 import { SocialIcons } from '../ui/SocialIcons'
-
-const LOGO_HORIZONTAL = '/brand/missout_horizontal.svg'
 
 const watermarkMask: CSSProperties = {
   backgroundColor: '#ECECEC',
-  WebkitMaskImage: `url(${LOGO_HORIZONTAL})`,
+  WebkitMaskImage: `url(${MISSOUT_WORDMARK.src})`,
   WebkitMaskSize: 'contain',
   WebkitMaskRepeat: 'no-repeat',
   WebkitMaskPosition: 'center',
-  maskImage: `url(${LOGO_HORIZONTAL})`,
+  maskImage: `url(${MISSOUT_WORDMARK.src})`,
   maskSize: 'contain',
   maskRepeat: 'no-repeat',
   maskPosition: 'center',
@@ -28,15 +28,18 @@ export function Footer() {
   const { pathname } = useLocation()
   const socialTheme =
     pathname === '/product' || pathname.startsWith('/product/') ? 'product' : 'home'
-  const onPageWithContact = pathname === '/about' || pathname === '/product'
+  const onPageWithContact =
+    pathname === '/about' ||
+    pathname === '/product' ||
+    pathname.startsWith('/product/')
   const contactHref = onPageWithContact ? '#contact' : '/#contact'
 
   return (
     <footer aria-label="Site footer" className="mt-auto w-full overflow-visible bg-white">
       <div className="relative overflow-visible">
         <div
-          className="pointer-events-none absolute left-1/2 top-[58%] z-0 aspect-[124/27] w-[min(96vw,72rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.38] sm:top-[55%]"
-          style={watermarkMask}
+          className="pointer-events-none absolute left-1/2 top-[58%] z-0 w-[min(96vw,72rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.38] sm:top-[55%]"
+          style={{ ...watermarkMask, aspectRatio: MISSOUT_WORDMARK_ASPECT }}
           aria-hidden
         />
 
@@ -56,15 +59,7 @@ export function Footer() {
               className="inline-flex outline-none focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F92C99]"
               aria-label="Missout home"
             >
-              <img
-                src={LOGO_HORIZONTAL}
-                alt=""
-                width={124}
-                height={27}
-                className="h-7 w-auto select-none sm:h-8"
-                decoding="async"
-                draggable={false}
-              />
+              <BrandWordmark size="md" />
             </Link>
             <p className="font-sans text-sm text-[#B0B0B0]">Don&apos;t Missout</p>
           </div>

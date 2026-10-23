@@ -7,7 +7,7 @@ const MS_HOUR = 3_600_000
 const MS_MIN = 60_000
 const MS_SEC = 1_000
 
-/** 1 August 2026, start of day (IST) — Stage launch countdown. */
+/** 1 August 2026, start of day (IST) - Stage launch countdown. */
 const LAUNCH_END = new Date('2026-08-01T00:00:00+05:30')
 
 function pad2(n: number) {

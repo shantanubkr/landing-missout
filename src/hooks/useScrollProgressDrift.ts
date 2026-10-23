@@ -8,7 +8,7 @@ function clampProgress(n: number) {
 }
 
 /**
- * Subtle vertical drift vs scroll while `scopeRef` is near the viewport — same
+ * Subtle vertical drift vs scroll while `scopeRef` is near the viewport - same
  * progress model as partner-fest CTA / FAQ outline decor.
  */
 export function useScrollProgressDrift<E extends HTMLElement = HTMLElement>(

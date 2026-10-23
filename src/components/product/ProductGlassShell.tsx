@@ -1,17 +1,17 @@
 import { cn } from '../../lib/cn'
+import type { ProductShot } from '../../lib/productAssets'
+import { LEGACY_HERO_FALLBACKS } from '../../lib/productAssets'
+import { FuProductShot } from '../findus/FuProductShot'
 
-/** Card screenshots in `public/product/`. */
-export const PRODUCT_HERO_STAGE_IMG = '/product/Stage.webp'
-export const PRODUCT_HERO_BACKSTAGE_IMG = '/product/backstage.webp'
+/** Card screenshots — resolved from unified asset registry. */
+export const PRODUCT_HERO_STAGE_IMG = LEGACY_HERO_FALLBACKS.stage
+export const PRODUCT_HERO_BACKSTAGE_IMG = LEGACY_HERO_FALLBACKS.backstage
 
-/** Intrinsic pixel size of `Stage.webp` / `backstage.webp` (keep in sync with assets). */
+/** Intrinsic pixel size of hero screenshots (keep in sync with assets). */
 export const PRODUCT_CARD_IMG_SIZE = { w: 1991, h: 1385 } as const
 
-/** Pixel star used in waitlist modal — reused as soft corner decor. */
+/** Pixel star used in waitlist modal - reused as soft corner decor. */
 export const PRODUCT_CORNER_VECTOR_SRC = '/waitlist/side_vector.svg'
-
-/** Design proportions: outer frame and inner image slot. */
-const PRODUCT_GLASS_OUTER = PRODUCT_CARD_IMG_SIZE
 
 export type ProductCornerDecor = {
   corner: string
@@ -19,7 +19,7 @@ export type ProductCornerDecor = {
 }
 
 type ProductGlassShellProps = {
-  src: string
+  src: ProductShot
   alt: string
   loading?: 'eager' | 'lazy'
   cornerDecor?: readonly ProductCornerDecor[]
@@ -29,12 +29,7 @@ type ProductGlassShellProps = {
 const cornerDecorBase =
   'pointer-events-none absolute z-0 h-[3.75rem] w-auto select-none opacity-[0.42] blur-[8px] sm:h-[4.25rem] sm:blur-[10px]'
 
-/** Outer shell radius; inner clip uses inset padding so curves stay parallel. */
-const SHELL_RADIUS = 'rounded-[20px] md:rounded-[22px]'
-const SHELL_INSET = 'p-2 md:p-2.5'
-const IMAGE_RADIUS = 'rounded-[12px] md:rounded-[14px]'
-
-/** Shared product preview frame — white fill, stroke border, inner screenshot. */
+/** Shared product preview — FuMediaFrame + optional corner decor. */
 export function ProductGlassShell({
   src,
   alt,
@@ -42,41 +37,25 @@ export function ProductGlassShell({
   cornerDecor,
   shellGlowShadow,
 }: ProductGlassShellProps) {
-  const o = PRODUCT_GLASS_OUTER
-
   return (
-    <div className="w-full">
-      <div
-        className={cn(
-          'relative border-[0.6px] border-solid border-[var(--nav-stroke)] bg-white',
-          SHELL_RADIUS,
-          SHELL_INSET,
-          shellGlowShadow,
-        )}
-      >
-        {cornerDecor?.map((decor, index) => (
-          <img
-            key={index}
-            src={PRODUCT_CORNER_VECTOR_SRC}
-            alt=""
-            aria-hidden
-            draggable={false}
-            className={cn(cornerDecorBase, decor.corner, decor.flip && '-scale-x-100')}
-          />
-        ))}
-        <div className={cn('relative z-[1]', IMAGE_RADIUS)}>
-          <img
-            src={src}
-            alt={alt}
-            width={o.w}
-            height={o.h}
-            decoding="async"
-            loading={loading}
-            draggable={false}
-            className="block h-auto w-full rounded-[12px] md:rounded-[14px]"
-          />
-        </div>
-      </div>
+    <div className="relative w-full">
+      {cornerDecor?.map((decor, index) => (
+        <img
+          key={index}
+          src={PRODUCT_CORNER_VECTOR_SRC}
+          alt=""
+          aria-hidden
+          draggable={false}
+          className={cn(cornerDecorBase, decor.corner, decor.flip && '-scale-x-100')}
+        />
+      ))}
+      <FuProductShot
+        shot={src}
+        alt={alt}
+        loading={loading}
+        presentation="framed"
+        className={cn('relative z-[1]', shellGlowShadow)}
+      />
     </div>
   )
 }

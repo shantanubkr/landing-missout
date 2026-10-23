@@ -1,15 +1,26 @@
-# Product page assets (`/product/*`)
+# Product screenshots (`public/product/`)
 
-## Already here
+All paths are registered in **`src/lib/productAssets.ts`** — import from there in code; do not hardcode URLs in components.
 
-- **`bg_grid.svg`** — Duplicate of `/hero/bg_grid.svg`; product hero uses class `.product-hero-bg-grid` → `/product/bg_grid.svg`.
-- **`Robot.svg`** — Eyebrow robot icon next to “What are we solving?” (`ProductEyebrowRobot` in `ProductHeroSection`).
-- **`manage-bento/`** — Feature screenshots for the Manage / bento block (`ProductManageBentoSection`); see `manage-bento/README.md`.
-- **`discover-bento/`** — Feature screenshots for Discover Events (`ProductDiscoverBentoSection`); see `discover-bento/README.md`.
+## Layout
 
-## What would help next
+| Folder | Role | Used on |
+|--------|------|---------|
+| **`backstage/`** | Backstage hero shots (`*_light` / `*_dark`) | Home, legacy product shell |
+| **`stage/`** | Stage hero shots | Stage page, legacy product shell |
+| **`features/`** | New per-feature light/dark PNGs | `/features/*` pages |
+| **`discover-bento/`** | Legacy attendee / Stage bento tiles (`1_`–`8_`) | Stage, money/ticketing, old discover section |
+| **`manage-bento/`** | Legacy ops / Backstage bento tiles | Registrations, team access, metrics, old manage section |
+| **`onboarding/`** (at `public/onboarding/`) | Backstage onboarding steps 1-4 | Home, Contact |
 
-1. **Final hero graphics** — If you add visuals again: exports from Figma, backdrop art, or screenshots wired from here.
-2. **Exact copy** — Eyebrow, headline, and subhead if they differ from what ships in `ProductHeroSection`.
+## Naming
 
-Optional: navbar link to **About Us** if that route exists and should appear on product like in the design.
+- **Feature shots:** `{topic}_light.png` + `{topic}_dark.png` in `features/`
+- **Legacy bento:** numbered slots — see each folder’s README
+- **Heroes:** `{product}_hero_{light|dark}.png` in `backstage/` or `stage/`
+
+## Adding assets
+
+1. Drop files in the folder above (or at repo root with the same basename — run `npm run sync-product-assets` to copy into `public/product/`).
+2. Wire them in `src/lib/productAssets.ts` (or extend an existing `themed()` / bento map) with **actual pixel dimensions** from the PNG.
+3. Run `npm run build` to verify paths resolve.

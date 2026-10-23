@@ -10,18 +10,19 @@ import {
 
 const PARTNER_CTA_GRAPHIC = '/partner_fests/background_graphic.png'
 
-const LOGO_SLOT =
-  'flex h-32 w-36 shrink-0 items-center justify-center sm:h-36 sm:w-40 md:h-40 md:w-44'
+const LOGO_TILE =
+  'inline-flex shrink-0 items-center justify-center rounded-[var(--fu-radius-sm)] bg-white p-3 sm:p-4'
+
+const LOGO_IMAGE =
+  'block max-h-32 max-w-[10rem] object-contain object-center sm:max-h-36 sm:max-w-[11rem] md:max-h-40 md:max-w-[12rem]'
 
 function PartnerStripItem({ p }: { p: PartnerCollege }) {
   return (
-    <div className={LOGO_SLOT}>
+    <div className={LOGO_TILE}>
       <img
         src={partnerFestLogoPath(p.logoFile)}
         alt={p.college}
-        className="max-h-full max-w-full object-contain"
-        width={224}
-        height={160}
+        className={LOGO_IMAGE}
         loading="lazy"
         decoding="async"
         draggable={false}
@@ -72,13 +73,13 @@ export function PartnerFestsSection() {
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <ScrollReveal>
           <p className="font-sans text-base font-medium tracking-normal text-[#F92C99] sm:text-lg md:text-xl">
-            Who we are working with?
+            Proof
           </p>
           <h2
             id={headingId}
             className="font-display mt-4 text-3xl font-bold tracking-tight text-[#1A1A1A] sm:mt-5 sm:text-4xl md:text-5xl"
           >
-            Missout Partners
+            Teams already on Missout
           </h2>
         </ScrollReveal>
       </div>
@@ -120,7 +121,7 @@ export function PartnerFestsSection() {
                   <span className="block">of them?</span>
                 </p>
                 <p className="mt-1.5 font-sans text-sm font-semibold leading-snug text-white sm:mt-2 sm:text-base md:text-lg">
-                  Handle registrations, teams, and updates.
+                  Demo, pitch, or partnership - we&apos;ll get back to you.
                 </p>
                 <div className="mt-2 flex justify-center sm:mt-2.5">
                   <ButtonLink
@@ -130,7 +131,7 @@ export function PartnerFestsSection() {
                     size="sm"
                     className="!bg-white !px-5 !py-2 !text-sm !font-semibold !text-[#F92C99] !shadow-none hover:!bg-white/90 hover:!text-[#E11E85] active:!text-[#C91872]"
                   >
-                    Partner with us
+                    Request a demo
                   </ButtonLink>
                 </div>
               </ScrollReveal>

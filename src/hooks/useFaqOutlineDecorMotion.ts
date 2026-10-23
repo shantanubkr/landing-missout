@@ -3,7 +3,7 @@ import type { RefObject } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 /**
- * Vertical drift (px peak) vs scroll progress — outer wrapper leaves inner img
+ * Vertical drift (px peak) vs scroll progress - outer wrapper leaves inner img
  * positioning ( Tailwind −58% etc. ) intact.
  */
 const PARALLAX_Y_PX = 88

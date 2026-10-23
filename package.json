@@ -7,9 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-icons": "node scripts/generate-icons.mjs",
+    "sync-product-assets": "node scripts/sync-product-assets.mjs"
   },
   "dependencies": {
+    "@bible-strong/avatar-react": "^0.1.0",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

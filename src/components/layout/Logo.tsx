@@ -1,17 +1,15 @@
 import { Link } from 'react-router-dom'
 import { cn } from '../../lib/cn'
-
-/** Full wordmark (124×27) — `public/brand/missout_horizontal.svg` */
-const LOGO_HORIZONTAL_SRC = '/brand/missout_horizontal.svg'
+import { BrandWordmark } from '../brand/BrandWordmark'
 
 type LogoLinkProps = {
   className?: string
-  /** Focus ring — match marketing (`home`) vs product route accent. */
+  /** Focus ring - match marketing (`home`) vs product route accent. */
   focusAccent?: 'home' | 'product'
 }
 
 /**
- * Wordmark in the nav — uses the horizontal SVG from `/public/brand`.
+ * Wordmark in the nav - uses the wordmark SVG from `/public/brand`.
  * Other brand assets: `missout_star.svg`, `missout_outline_star.svg`.
  */
 export function Logo({ className, focusAccent = 'home' }: LogoLinkProps) {
@@ -31,16 +29,7 @@ export function Logo({ className, focusAccent = 'home' }: LogoLinkProps) {
       )}
       aria-label="Missout home"
     >
-      {/* Logo height 5% under previous h-5 (1.25rem) / md:h-6 (1.5rem) */}
-      <img
-        src={LOGO_HORIZONTAL_SRC}
-        alt=""
-        width={124}
-        height={27}
-        className="h-[1.1875rem] w-auto select-none md:h-[1.425rem]"
-        decoding="async"
-        draggable={false}
-      />
+      <BrandWordmark size="sm" />
     </Link>
   )
 }

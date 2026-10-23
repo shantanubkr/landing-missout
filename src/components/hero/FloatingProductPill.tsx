@@ -41,7 +41,7 @@ const pillLinkClassName = cn(
 )
 
 /**
- * Thin pink ring + square icon, pastel pill with brand-pink bold label — product page link.
+ * Thin pink ring + square icon, pastel pill with brand-pink bold label - product page link.
  */
 export function FloatingProductPill({
   label,

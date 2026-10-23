@@ -10,7 +10,7 @@ export type PartnerCollege = {
   logoFile: string
 }
 
-/** @deprecated Use `PartnerCollege` — kept for existing imports */
+/** @deprecated Use `PartnerCollege` - kept for existing imports */
 export type PartnerFest = PartnerCollege
 
 export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
@@ -30,11 +30,6 @@ export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
     logoFile: 'jaihind_logo.webp',
   },
   {
-    id: 'shiv-nadar',
-    college: 'Shiv Nadar University',
-    logoFile: 'shiv.webp',
-  },
-  {
     id: 'bitsom',
     college: 'BITSoM',
     logoFile: 'bitsomlogo.webp',
@@ -46,9 +41,17 @@ export const PARTNER_COLLEGES: readonly PartnerCollege[] = [
   },
 ]
 
-/** @deprecated Use `PARTNER_COLLEGES` — kept for existing imports */
+/** @deprecated Use `PARTNER_COLLEGES` - kept for existing imports */
 export const PARTNER_FESTS = PARTNER_COLLEGES
 
 export function partnerFestLogoPath(logoFile: string): string {
   return `/partner_fests/logos/${encodeURIComponent(logoFile)}`
+}
+
+/** Logo strip items for `FuLogoStrip` on Home / Partners. */
+export function partnerLogoStripItems() {
+  return PARTNER_COLLEGES.map((partner) => ({
+    name: partner.college,
+    src: partnerFestLogoPath(partner.logoFile),
+  }))
 }

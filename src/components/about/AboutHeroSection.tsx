@@ -38,7 +38,7 @@ export function AboutHeroSection() {
         </div>
       </div>
 
-      {/* Decorative pixel graphic — parallax via `imageLayerRef` */}
+      {/* Decorative pixel graphic - parallax via `imageLayerRef` */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex translate-y-8 items-end justify-center overflow-visible px-4 pb-0 sm:translate-y-12 sm:px-6 md:translate-y-16"
         aria-hidden

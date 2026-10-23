@@ -1,4 +1,5 @@
 import { useId, useRef, useState } from 'react'
+import { MissoutIcon } from '../icons'
 import { Button } from '../ui/Button'
 import { CONTACT_INBOX_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_HREF } from '../../lib/contact'
 import { cn } from '../../lib/cn'
@@ -15,7 +16,7 @@ const inputBase =
   'placeholder:text-[#1A1A1A]/40 ' +
   'motion-reduce:transition-none disabled:opacity-60'
 
-type Partnership = 'college' | 'company' | 'other'
+type Partnership = 'organiser' | 'community' | 'company' | 'other'
 
 export type ContactSectionProps = {
   /** Marketing uses brand pink; product route uses blue. */
@@ -23,40 +24,6 @@ export type ContactSectionProps = {
 }
 
 const labelClass = 'block font-sans text-sm font-medium text-[#1A1A1A]'
-
-function PhoneIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M6.6 3.8h2.2l1.1 2.6a1.5 1.5 0 0 1-.4 1.6l-1.4 1.4a12.5 12.5 0 0 0 5.3 5.3l1.4-1.4a1.5 1.5 0 0 1 1.6-.4l2.6 1.1v2.2a1.5 1.5 0 0 1-1.4 1.5C10.2 18.2 5.8 13.8 5.1 5.2a1.5 1.5 0 0 1 1.5-1.4Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function MailIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 7.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 17V9a1.5 1.5 0 0 1 1.5-1.5Z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <path
-        d="m3.5 8.5 8.1 5.4a1.5 1.5 0 0 0 1.6 0l8.3-5.4"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 function DirectContactLinks({ accent }: { accent: 'home' | 'product' }) {
   const isProduct = accent === 'product'
@@ -90,7 +57,7 @@ function DirectContactLinks({ accent }: { accent: 'home' | 'product' }) {
               iconWrap,
             )}
           >
-            <PhoneIcon />
+            <MissoutIcon name="phoneRingingLow" size={18} className="text-current" />
           </span>
           <span className="min-w-0">
             <span className="block font-sans text-xs font-medium text-[#8A8A8A]">Call us</span>
@@ -106,7 +73,7 @@ function DirectContactLinks({ accent }: { accent: 'home' | 'product' }) {
               iconWrap,
             )}
           >
-            <MailIcon />
+            <MissoutIcon name="envelope" size={18} className="text-current" />
           </span>
           <span className="min-w-0">
             <span className="block font-sans text-xs font-medium text-[#8A8A8A]">Email us</span>
@@ -259,15 +226,16 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
     >
       <div ref={driftRef} className="mx-auto max-w-2xl will-change-transform">
         <div className="text-center">
-          <p className={eyebrowClass}>Contact us</p>
+          <p className={eyebrowClass}>Request a demo</p>
           <h2
             id={headingId}
             className="font-display mt-3 text-3xl font-bold tracking-tight text-[#1A1A1A] sm:mt-4 sm:text-4xl md:text-5xl"
           >
-            Get in touch
+            Demo, pitch, or partnership
           </h2>
           <p className="font-sans mx-auto mt-3 max-w-2xl text-base text-[#5A5A5A] sm:mt-4 sm:text-lg">
-            Tell us about your campus or company. We&apos;ll get back to you.
+            Ready to create on your own? Head to missout.in. Reach out here for a demo,
+            pitch, or partnership.
           </p>
           <DirectContactLinks accent={accent} />
         </div>
@@ -316,7 +284,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
 
               <div>
                 <label htmlFor={`${formId}-college`} className={labelClass}>
-                  College / Organiser name <span className={starClass}>*</span>
+                  Organisation / organiser name <span className={starClass}>*</span>
                 </label>
                 <input
                   id={`${formId}-college`}
@@ -369,16 +337,17 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
 
               <fieldset className="min-w-0">
                 <legend className={labelClass}>
-                  Partnership type <span className={starClass}>*</span>
+                  What are you reaching out about? <span className={starClass}>*</span>
                 </legend>
                 <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                   {(
                     [
-                      { value: 'college', label: 'College' },
+                      { value: 'organiser', label: 'Organiser / demo' },
+                      { value: 'community', label: 'Community' },
                       { value: 'company', label: 'Company' },
                       { value: 'other', label: 'Other' },
                     ] as const
-                  ).map((opt) => (
+                  ).map((opt, i) => (
                     <label
                       key={opt.value}
                       className={cn(
@@ -391,7 +360,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
                         type="radio"
                         name="partnershipType"
                         value={opt.value}
-                        required={opt.value === 'college'}
+                        required={i === 0}
                         checked={partnershipType === opt.value}
                         onChange={() => setPartnershipType(opt.value)}
                         disabled={status === 'submitting'}
@@ -405,7 +374,7 @@ export function ContactSection({ accent = 'home' }: ContactSectionProps) {
 
               <div>
                 <label htmlFor={`${formId}-collaboration`} className={labelClass}>
-                  How would you like to collaborate? <span className={starClass}>*</span>
+                  Tell us more <span className={starClass}>*</span>
                 </label>
                 <textarea
                   id={`${formId}-collaboration`}

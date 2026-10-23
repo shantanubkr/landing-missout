@@ -110,7 +110,7 @@ const indicatorVariants: Variants = {
   }),
 }
 
-/** Viewport list — per-card motion uses whileInView inside KeywordCard */
+/** Viewport list - per-card motion uses whileInView inside KeywordCard */
 function viewportListVariants(reduceMotion: boolean): Variants {
   return {
     initial: {},
@@ -125,7 +125,7 @@ function viewportListVariants(reduceMotion: boolean): Variants {
   }
 }
 
-/** After intro — horizontal deck swap (no child stagger; cards handle their own entrance) */
+/** After intro - horizontal deck swap (no child stagger; cards handle their own entrance) */
 function slideListVariants(reduceMotion: boolean): Variants {
   return {
     initial: reduceMotion ? { opacity: 0 } : { opacity: 0, x: 56 },
@@ -194,7 +194,7 @@ const glowBlobVariants: Variants = {
 
 /** Card art lives in `public/value_propositions/{id}.svg` (discover, register, … scale). */
 function ValueCardIcon({ id, className }: { id: IconId; className?: string }) {
-  /** Pixel SVGs ship with white fills — mask them so `bg` becomes the glyph color (#F92C99 matches headline accents). */
+  /** Pixel SVGs ship with white fills - mask them so `bg` becomes the glyph color (#F92C99 matches headline accents). */
   const maskUrl = `url("/value_propositions/${id}.svg")`
   return (
     <span
@@ -427,7 +427,7 @@ function KeywordCardWithParallax({
   const mobileScale = useMobileParallaxScale()
 
   const blobParallaxY = useTransform(scrollYProgress, [0, 1], [
-    -36 * mult * mobileScale,
+ -36 * mult * mobileScale,
     36 * mult * mobileScale,
   ])
   const cardParallaxY = useTransform(

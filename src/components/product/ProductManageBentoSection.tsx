@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { cn } from '../../lib/cn'
+import { MANAGE_BENTO as MB } from '../../lib/productAssets'
 import { BentoCard } from './BentoPrimitives'
 import { OrganiserOfferIntro } from './OrganiserOfferIntro'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
@@ -10,24 +11,12 @@ import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
  * Cursor rule: `.cursor/rules/manage-bento-section.mdc`
  */
 
-/** Manage bento assets (`public/product/manage-bento/`). */
-const MB = {
-  whole: '/product/manage-bento/1_Your_whole.png',
-  pbac: '/product/manage-bento/2_PBAC.png',
-  dashboard: '/product/manage-bento/3_Your_dashboard.png',
-  metrics: '/product/manage-bento/4_metrics.png',
-  manage: '/product/manage-bento/8_manage_event.png',
-  backstage: '/product/manage-bento/7_backstage_title.png',
-  activity: '/product/manage-bento/5_activity_logs.png',
-  form: '/product/manage-bento/6_form_builder.png',
-} as const
-
-/** Full column/track width — avoids empty side bands that read as extra horizontal space. */
+/** Full column/track width - avoids empty side bands that read as extra horizontal space. */
 const BENTO_IMG_FULL = 'mx-auto w-full'
 
 /**
  * Bottom pair: full track width (aligned with tiles above). Width fractions match intrinsic
- * w÷h — activity 1024/512 → 2, form 1000/360 → 25/9 → `18:25`. Row aspect ≈ (2+25/9):1 → `43/9`.
+ * w÷h - activity 1024/512 → 2, form 1000/360 → 25/9 → `18:25`. Row aspect ≈ (2+25/9):1 → `43/9`.
  */
 const BOTTOM_PAIR_ROW_ASPECT = 'md:aspect-[43/9]'
 
@@ -76,7 +65,7 @@ function TopTile({
       folder="manage-bento"
       variant="flush"
       className={cn(
-        /* Do not set [&_img]:w-full here — it overrides per-tile img widths (e.g. dashboard scale). */
+        /* Do not set [&_img]:w-full here - it overrides per-tile img widths (e.g. dashboard scale). */
         'w-full min-w-0 p-0',
         className,
       )}
@@ -97,7 +86,7 @@ function TopTile({
 }
 
 /**
- * “Manage through Backstage.” — headline + subcopy + manage bento preview.
+ * “Manage through Backstage.” - headline + subcopy + manage bento preview.
  *
  * Gutters: `gap-[10px]` row + column. Left rail ~32.5% so whole/PBAC scale uniformly (`w-full`);
  * Bottom strip: full-width row (`aspect-[43/9]`); proportional cols `18:25`; equal rendered heights.

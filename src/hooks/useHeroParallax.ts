@@ -6,7 +6,7 @@ const MOBILE_PARALLAX = 0.48
 
 /** Scroll-derived depth (fraction of `window.scrollY`, negative = lags upward). */
 const SCROLL_GRID = 0.066
-/** Hero background graphic — slightly stronger depth vs grid */
+/** Hero background graphic - slightly stronger depth vs grid */
 const SCROLL_IMG = 0.138
 
 /** Side product pills (Stage / Backstage): modest drift + tilt vs scroll */
@@ -119,7 +119,7 @@ export function useHeroParallax() {
 
         const gxG = nx * POINTER_MX_GRID * dm
         const gyG =
-          -scroll * SCROLL_GRID * m + ny * POINTER_MY_GRID * dm
+ -scroll * SCROLL_GRID * m + ny * POINTER_MY_GRID * dm
 
         grid.style.willChange = 'transform'
         grid.style.transform = `translate3d(${gxG}px, ${gyG}px, 0)`
@@ -224,11 +224,11 @@ export function useHeroParallax() {
 
       pointerNormRef.current = {
         x: Math.max(
-          -1,
+ -1,
           Math.min(1, (e.clientX - (r.left + r.width / 2)) / halfW),
         ),
         y: Math.max(
-          -1,
+ -1,
           Math.min(1, (e.clientY - (r.top + r.height / 2)) / halfH),
         ),
       }

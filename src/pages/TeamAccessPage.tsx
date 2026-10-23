@@ -1,5 +1,6 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { BackstageFeaturePage } from '../components/findus/BackstageFeaturePage'
+import { TEAM_ACCESS_PAGE } from '../lib/backstageFeaturePages'
 
 export function TeamAccessPage() {
-  return <PlaceholderPage title="Team & Access" />
+  return <BackstageFeaturePage content={TEAM_ACCESS_PAGE} />
 }

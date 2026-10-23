@@ -6,7 +6,7 @@ import {
   peoplePortraitPath,
 } from '../../lib/peopleInvolvedData'
 
-/** Full art PNG — name, role, frame, and shadow are baked into the asset; render as-is. */
+/** Full art PNG - name, role, frame, and shadow are baked into the asset; render as-is. */
 export function TeamMemberCard({
   member,
   className,

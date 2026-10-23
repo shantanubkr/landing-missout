@@ -1,4 +1,4 @@
-/* Self-hosted: public/fonts/ — OTF, font-display: swap */
+/* Self-hosted: public/fonts/ - OTF, font-display: swap */
 
 /* ----- Polymath Text ----- */
 @font-face {
@@ -256,7 +256,7 @@
   src: url('/fonts/polymath_display/PolymathDispDemo-SuperIt.otf') format('opentype');
 }
 
-/* Hero / “people involved” — Argent Pixel CF */
+/* Hero / “people involved” - Argent Pixel CF */
 @font-face {
   font-family: 'Argent Pixel CF';
   font-style: normal;

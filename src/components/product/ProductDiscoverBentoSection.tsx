@@ -2,26 +2,15 @@ import { useRef } from 'react'
 import { cn } from '../../lib/cn'
 import { useFaqOutlineDecorMotion } from '../../hooks/useFaqOutlineDecorMotion'
 import { useScrollProgressDrift } from '../../hooks/useScrollProgressDrift'
+import { DISCOVER_BENTO as DB } from '../../lib/productAssets'
 import { BentoImageTile, BENTO_IMG_FULL } from './BentoImageTile'
 
 const OUTLINE_STAR = '/brand/missout_outline_star.svg'
 
-/** Discover bento assets (`public/product/discover-bento/`). */
-const DB = {
-  missout: '/product/discover-bento/1_missout.png',
-  locate: '/product/discover-bento/2_locate.png',
-  ticketing: '/product/discover-bento/3_ticketing.png',
-  tagline: '/product/discover-bento/4_tagline.png',
-  updates: '/product/discover-bento/5_updates.png',
-  discover: '/product/discover-bento/6_discover.png',
-  powered: '/product/discover-bento/7_powered.png',
-  logo: '/product/discover-bento/8_logo.png',
-} as const
-
-/** Discover PNG tiles: flush chrome — asset pixels define edges. */
+/** Discover PNG tiles: flush chrome - asset pixels define edges. */
 const TILE_FLUSH = 'flush' as const
 
-/** Same gutter as manage bento — every stack/grid in this section. */
+/** Same gutter as manage bento - every stack/grid in this section. */
 const GAP = 'gap-[10px]'
 
 /**
@@ -35,13 +24,13 @@ const taglineHeroCard =
   'min-h-0 md:flex md:h-full md:min-h-0 md:flex-1 md:flex-col [&_img]:min-h-0 [&_img]:shrink-0 [&_img]:md:h-full [&_img]:md:max-h-full [&_img]:md:w-full [&_img]:md:object-contain [&_img]:md:object-center'
 
 /**
- * Discover Events — eyebrow + headline + subcopy + bento (`/product/discover-bento/`).
+ * Discover Events - eyebrow + headline + subcopy + bento (`/product/discover-bento/`).
  *
  * Desktop hero: **`grid-cols-3`** + **`GAP`** for even horizontal gutters (no flex basis rounding).
- * **`items-stretch`** row height — **stage | tagline | discover** share top; **locate | tagline | powered** share bottom.
+ * **`items-stretch`** row height - **stage | tagline | discover** share top; **locate | tagline | powered** share bottom.
  * Side rails use **`justify-between`** + **`GAP`** between the two tiles (mirrored left/right; avoids extra gaps around a spacer).
  * Parallax: layered `useScrollProgressDrift` on header, hero columns (middle strongest), bottom row (`peakPx` aligned with manage bento).
- * Secondary row: ticketing | updates | logo — equal height, widths ∝ intrinsic ratios.
+ * Secondary row: ticketing | updates | logo - equal height, widths ∝ intrinsic ratios.
  */
 export function ProductDiscoverBentoSection() {
   const discoverWideScopeRef = useRef<HTMLDivElement | null>(null)
@@ -144,7 +133,7 @@ export function ProductDiscoverBentoSection() {
           <div className={cn('mt-12 flex flex-col md:mt-14', GAP)}>
             {/* Hero: CSS grid = symmetric column gutters; stretch = shared top/bottom baselines */}
             <div className={cn('grid min-w-0 grid-cols-1 md:grid-cols-3 md:items-stretch', GAP)}>
-              {/* Left rail: locate = `flex-1` + fill + `object-contain` (no scale — avoids overflow clip). */}
+              {/* Left rail: locate = `flex-1` + fill + `object-contain` (no scale - avoids overflow clip). */}
               <div
                 ref={colLeftRef}
                 className={cn(

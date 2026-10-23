@@ -196,7 +196,7 @@ type PeopleTeamCarouselProps = {
   className?: string
   /** Carousel region label for screen readers. */
   ariaLabel?: string
-  /** Starting card index — default 0 (Shantanu). */
+  /** Starting card index - default 0 (Shantanu). */
   initialIndex?: number
 }
 

@@ -20,7 +20,7 @@
     />
     <meta
       property="og:image"
-      content="https://missout.in/brand/missout_horizontal.svg"
+      content="https://missout.in/brand/missout_wordmark.svg"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Missout | Campus events, without the FOMO" />
@@ -32,9 +32,22 @@
       name="twitter:imageAlt"
       content="Missout wordmark"
     />
-    <meta name="twitter:image" content="https://missout.in/brand/missout_horizontal.svg" />
+    <meta name="twitter:image" content="https://missout.in/brand/missout_wordmark.svg" />
   </head>
   <body>
+    <script>
+      ;(() => {
+        const stored = localStorage.getItem('missout-color-theme')
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+        document.documentElement.classList.toggle('dark', theme === 'dark')
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

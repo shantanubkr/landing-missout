@@ -1,5 +1,6 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { BackstageFeaturePage } from '../components/findus/BackstageFeaturePage'
+import { EVENTS_PAGE } from '../lib/backstageFeaturePages'
 
 export function EventsPage() {
-  return <PlaceholderPage title="Events" />
+  return <BackstageFeaturePage content={EVENTS_PAGE} />
 }

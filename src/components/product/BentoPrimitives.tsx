@@ -33,7 +33,7 @@ export function BentoCard({
   folder: 'manage-bento' | 'discover-bento'
   className?: string
   children?: ReactNode
-  /** `default` — white fill + border + shadow. `flush` — image-only (no border/shadow). */
+  /** `default` - white fill + border + shadow. `flush` - image-only (no border/shadow). */
   variant?: 'default' | 'flush'
 }) {
   return (

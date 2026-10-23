@@ -1,7 +1,8 @@
 import { Link, useMatch } from 'react-router-dom'
 import { useScrolledPast } from '../../hooks/useScrolledPast'
-import { ButtonLink, type ButtonTheme } from '../ui'
+import { ButtonAnchor, ButtonLink, type ButtonTheme } from '../ui'
 import { cn } from '../../lib/cn'
+import { PRODUCT_CREATE_HREF } from '../../lib/productUrls'
 import { Logo } from './Logo'
 
 /** Past this Y offset, the navbar collapses into a bordered pill. */
@@ -9,13 +10,12 @@ const GLASS_AT_SCROLL_PX = 8
 
 export function Navbar() {
   const isScrolled = useScrolledPast(GLASS_AT_SCROLL_PX)
-  const isProductPage = Boolean(useMatch({ path: '/product', end: true }))
+  const productMatch = useMatch({ path: '/product/*', end: false })
+  const productExact = useMatch({ path: '/product', end: true })
+  const isProductPage = Boolean(productMatch || productExact)
   const isAboutPage = Boolean(useMatch({ path: '/about', end: true }))
   const ctaTheme: ButtonTheme = isProductPage ? 'product' : 'home'
-
-  // When already on /about or /product, scroll to the on-page #contact section
-  // rather than navigating away to the home page.
-  const contactHref = isAboutPage || isProductPage ? '#contact' : '/#contact'
+  const demoHref = isAboutPage || isProductPage ? '#contact' : '/#contact'
 
   const navLinkClass = cn(
     'font-sans text-sm font-medium leading-normal text-[#1A1A1A] no-underline md:text-base',
@@ -34,7 +34,7 @@ export function Navbar() {
             'pointer-events-auto box-border w-full',
             'mx-auto grid grid-cols-[1fr_minmax(0,auto)_1fr] items-center',
             isScrolled
-              ? 'missout-glass max-w-3xl gap-x-1.5 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] px-3 py-2 sm:gap-x-2.5 sm:px-4 sm:py-2.5'
+              ? 'missout-glass max-w-4xl gap-x-1.5 rounded-full border-[0.6px] border-[var(--nav-stroke)] bg-[var(--nav-surface)] px-3 py-2 sm:gap-x-2.5 sm:px-4 sm:py-2.5'
               : 'max-w-7xl gap-x-4 rounded-none border-0 border-transparent bg-transparent px-0 py-2.5 sm:gap-x-8 md:gap-x-10 lg:gap-x-12',
             'motion-reduce:transition-none',
             'transition-[max-width,background-color,border-color,border-radius,backdrop-filter,-webkit-backdrop-filter,gap,column-gap,row-gap,padding] duration-500 ease-out',
@@ -47,33 +47,42 @@ export function Navbar() {
           <nav
             className={cn(
               'flex items-center justify-center',
-              isScrolled
-                ? 'gap-5 sm:gap-7'
-                : 'gap-10 sm:gap-11 md:gap-14',
+              isScrolled ? 'gap-4 sm:gap-6' : 'gap-8 sm:gap-10 md:gap-12',
               'transition-[gap] duration-500 ease-out motion-reduce:transition-none',
             )}
             aria-label="Main"
           >
-            <Link to="/product" className={navLinkClass}>
-              Products
+            <Link to="/product/backstage" className={navLinkClass}>
+              Backstage
+            </Link>
+            <Link to="/product/stage" className={cn(navLinkClass, 'hidden sm:inline')}>
+              Stage
             </Link>
             <Link to="/about" className={navLinkClass}>
               About
             </Link>
           </nav>
 
-          <div className="min-w-0 justify-self-end">
+          <div className="flex min-w-0 items-center justify-end gap-2 sm:gap-3">
             <ButtonLink
-              to={contactHref}
+              to={demoHref}
+              variant="outline"
+              theme={ctaTheme}
+              size="sm"
+              className="hidden shrink-0 !font-semibold sm:inline-flex"
+            >
+              Request a demo
+            </ButtonLink>
+            <ButtonAnchor
+              href={PRODUCT_CREATE_HREF}
               variant="primary"
               theme={ctaTheme}
               size="sm"
               className="shrink-0 !font-semibold max-sm:!px-3 max-sm:!text-xs"
-              aria-label="Contact us"
             >
-              <span className="hidden sm:inline">Contact Us</span>
-              <span className="sm:hidden">Contact</span>
-            </ButtonLink>
+              <span className="hidden sm:inline">Let&apos;s create</span>
+              <span className="sm:hidden">Create</span>
+            </ButtonAnchor>
           </div>
         </div>
       </div>

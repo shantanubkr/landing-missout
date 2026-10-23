@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { cn } from '../../lib/cn'
+import type { ProductShot } from '../../lib/productAssets'
 import { ScrollReveal } from '../motion/ScrollReveal'
 import {
   ValuePropositionsPanel,
@@ -37,7 +38,7 @@ function ProductPreviewCard({
   title: string
   href: string
   external?: boolean
-  imageSrc: string
+  imageSrc: ProductShot
   imageAlt: string
   cornerDecor: readonly ProductCornerDecor[]
   className?: string

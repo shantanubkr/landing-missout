@@ -56,7 +56,7 @@ function ProductHeroVisual({
   return (
     <div className="relative mx-auto w-full">
       {/*
-        Background graphic only — isolated clip + rounding. Cards live outside this subtree.
+        Background graphic only - isolated clip + rounding. Cards live outside this subtree.
       */}
       <div className="pointer-events-none w-full overflow-hidden rounded-[15px]">
         <figure className="w-full" aria-hidden>
@@ -83,7 +83,7 @@ function ProductHeroVisual({
         </figure>
       </div>
 
-      {/* Cards: sibling overlay — Stage gift teaser left, Backstage right */}
+      {/* Cards: sibling overlay - Stage gift teaser left, Backstage right */}
       <div className="pointer-events-none absolute inset-x-0 bottom-[6%] top-[4%] z-[2] max-md:bottom-[8%] max-md:top-[10%] md:bottom-[6%] md:top-[10%] lg:top-[12%] xl:top-[14%]">
         <div className="relative mx-auto h-full w-full max-md:max-w-full max-w-[26rem] md:max-w-[min(100%,64rem)] lg:max-w-[min(100%,68rem)]">
           <div className="pointer-events-auto absolute left-1/2 top-[1%] z-[3] w-[96%] max-w-[28rem] -translate-x-1/2 -translate-y-8 max-md:left-0 max-md:right-auto max-md:top-[14%] max-md:w-[47.5%] max-md:max-w-none max-md:translate-x-0 max-md:-translate-y-0 sm:max-w-[30rem] sm:-translate-y-10 md:left-0 md:top-0 md:w-[43%] md:max-w-none md:-translate-x-4 md:-translate-y-16 lg:w-[42%] lg:-translate-x-6 lg:-translate-y-[4.75rem] xl:w-[41%] xl:-translate-x-8 xl:-translate-y-[5.25rem] 2xl:-translate-x-12 2xl:-translate-y-[5.35rem]">
@@ -136,7 +136,7 @@ export function ProductHeroSection() {
         </div>
       </div>
 
-      {/* Full-bleed visual — not constrained by `max-w-6xl` so cards + graphic can scale */}
+      {/* Full-bleed visual - not constrained by `max-w-6xl` so cards + graphic can scale */}
       <div className="relative z-[1] mx-auto mt-5 w-full max-w-[min(100%,68rem)] origin-top px-2 max-md:mt-10 sm:mt-6 sm:px-3 md:origin-center md:scale-[0.94] md:px-5 lg:mt-8 lg:px-6 lg:scale-[0.92] xl:scale-[0.94]">
         <ProductHeroVisual
           imageLayerRef={imageLayerRef}

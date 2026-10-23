@@ -60,7 +60,7 @@ export function AboutTeamSection() {
           />
         </div>
 
-        {/* Content — sits above stars via z-10 */}
+        {/* Content - sits above stars via z-10 */}
         <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
           <ScrollReveal>
             <p className="text-center font-sans text-sm font-medium tracking-normal text-[#F92C99] sm:text-base">

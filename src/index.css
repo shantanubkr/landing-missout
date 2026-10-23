@@ -1,35 +1,37 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 @import './fonts.css';
+@import './lib/design/findus.css';
 
 @theme {
   /* Families loaded in `fonts.css` from `public/fonts/` */
-  --font-sans: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
-  --font-missout-display: 'Polymath Display', ui-serif, Georgia, serif;
-  --font-missout-pixel: 'Argent Pixel CF', 'Polymath Display', ui-serif, serif;
-  --font-canopee: 'Canopee', 'Polymath Display', ui-serif, Georgia, serif;
+ --font-sans: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
+ --font-missout-display: 'Polymath Display', ui-serif, Georgia, serif;
+ --font-missout-pixel: 'Argent Pixel CF', 'Polymath Display', ui-serif, serif;
+ --font-canopee: 'Canopee', 'Polymath Display', ui-serif, Georgia, serif;
 }
 
 @layer base {
   :root {
-    --color-brand-pink: #f92c99;
-    --color-brand-blue: #006afe;
-    --color-ink: #1a1a1a;
-    --color-canvas: #ffffff;
-    --nav-surface: rgba(190, 190, 190, 0.11);
-    --nav-stroke: #c5c5c5;
-    --nav-backdrop-blur: 12px;
+ --color-brand-pink: #f92c99;
+ --color-brand-blue: #006afe;
+ --color-ink: #1a1a1a;
+ --color-canvas: #ffffff;
+ --nav-surface: rgba(190, 190, 190, 0.11);
+ --nav-stroke: #c5c5c5;
+ --nav-backdrop-blur: 12px;
   }
 
   html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     margin: 0;
     min-height: 100dvh;
-    color: var(--color-ink);
-    background: var(--color-canvas);
+    color: var(--fu-ink);
+    background: var(--fu-canvas);
     font-family: var(--font-sans);
   }
 }
@@ -57,13 +59,13 @@
   }
 
   .missout-glass {
-    -webkit-backdrop-filter: blur(var(--nav-backdrop-blur, 12px));
+ -webkit-backdrop-filter: blur(var(--nav-backdrop-blur, 12px));
     backdrop-filter: blur(var(--nav-backdrop-blur, 12px));
   }
 
   @media (prefers-reduced-motion: reduce) {
     .missout-glass {
-      -webkit-backdrop-filter: none;
+ -webkit-backdrop-filter: none;
       backdrop-filter: none;
     }
   }
@@ -116,7 +118,7 @@
     }
   }
 
-  /** Partner fests — infinite horizontal logo strip */
+  /** Partner fests - infinite horizontal logo strip */
   @keyframes partner-marquee-scroll {
     from {
       transform: translate3d(0, 0, 0);
@@ -129,6 +131,10 @@
   .partner-marquee-track {
     animation: partner-marquee-scroll 40s linear infinite;
     will-change: transform;
+  }
+
+  .partner-marquee-track--fast {
+    animation-duration: 22s;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -148,7 +154,30 @@
     );
   }
 
-  /* People Involved — only the front face animates; gray back layers stay put */
+  /** Hero product stage — slow ken-burns on UI frame */
+  @keyframes fu-hero-ken-burns {
+    from {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.035) translate3d(-0.75%, -0.5%, 0);
+    }
+  }
+
+  .fu-hero-ken-burns > * {
+    animation: fu-hero-ken-burns 10s ease-in-out infinite alternate;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fu-hero-ken-burns > * {
+      animation: none;
+      will-change: auto;
+    }
+  }
+
+  /* People Involved - only the front face animates; gray back layers stay put */
   @keyframes people-card-exit-to-left {
     from {
       transform: translate3d(0, 0, 0) rotate(0deg);
@@ -221,7 +250,7 @@
   }
 
   /**
-   * Hero subhead (“Handle registrations…”) — 20px, medium, 26 line height, tight tracking.
+   * Hero subhead (“Handle registrations…”) - 20px, medium, 26 line height, tight tracking.
    * Color is set on the element (e.g. `text-[#5A5A5A]`).
    */
   .text-hero-subhead {
@@ -233,9 +262,8 @@
   }
 
   /**
-   * Hero pixel headline — comp: 80–120px, black, extremely tight tracking & line-height.
-   * Two lines: “Missout,” / “no more.” (Argent Pixel CF; Regular, weight is from the design).
-   * Keep line-height low so the wrapped pair reads as one block without a tall gap.
+   * Hero pixel headline - legacy brand mark style (About / older surfaces).
+   * Two lines: “Missout,” / “no more.” (Argent Pixel CF).
    */
   .text-hero-headline {
     font-family: var(--font-missout-pixel);
@@ -253,7 +281,19 @@
   }
 
   /**
-   * About hero — two-line headline (“Every event deserves” / “a full house”).
+   * Home hero one-liner (Notion-style) - large sans, room for an inline action pill.
+   */
+  .text-hero-oneliner {
+    font-family: var(--font-sans);
+    color: #1a1a1a;
+    font-size: clamp(2.25rem, 6.5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  /**
+   * About hero - two-line headline (“Every event deserves” / “a full house”).
    * Below `sm`, use a lower minimum size than `.text-hero-headline` so the first line does not break into three.
    */
   .text-about-hero-headline {

@@ -1,0 +1,481 @@
+/**
+ * FindUs CSS custom properties — values synced from `findus.ts`.
+ * Components should reference `var(--fu-*)`, not raw hex.
+ */
+
+:root {
+  /* Brand */
+  --fu-brand-blue: #006afe;
+  --fu-brand-pink: #f92c99;
+  --fu-brand-lime: #ccff24;
+
+  /* Neutrals */
+  --fu-canvas: #ffffff;
+  --fu-surface: #f7f7f5;
+  --fu-surface-elevated: #ffffff;
+  --fu-ink: #000000;
+  --fu-ink-secondary: #3d3d3d;
+  --fu-ink-muted: #6b6b6b;
+  --fu-ink-subtle: #8a8a8a;
+  --fu-hairline: rgb(0 0 0 / 0.08);
+  --fu-hairline-strong: rgb(0 0 0 / 0.12);
+  --fu-card-border: rgb(0 0 0 / 0.06);
+  --fu-card-border-hover: rgb(0 0 0 / 0.12);
+  --fu-card-border-width: 1px;
+
+  /* Soft fills */
+  --fu-tint-blue-soft: #dae9ff;
+  --fu-tint-pink-soft: #fee0f0;
+  --fu-tint-lime-soft: #f8ffdf;
+
+  /* Blue tints 0–10 (0 = lightest) */
+  --fu-blue-tint-0: #f2f8ff;
+  --fu-blue-tint-1: #dae9ff;
+  --fu-blue-tint-2: #c2dbff;
+  --fu-blue-tint-3: #aacdff;
+  --fu-blue-tint-4: #91bfff;
+  --fu-blue-tint-5: #79b1fe;
+  --fu-blue-tint-6: #61a3fe;
+  --fu-blue-tint-7: #4994fe;
+  --fu-blue-tint-8: #3086fe;
+  --fu-blue-tint-9: #1878fe;
+  --fu-blue-tint-10: #006afe;
+
+  /* Pink tints */
+  --fu-pink-tint-0: #fff4fa;
+  --fu-pink-tint-1: #fee0f0;
+  --fu-pink-tint-2: #fecce7;
+  --fu-pink-tint-3: #fdb8dd;
+  --fu-pink-tint-4: #fca4d3;
+  --fu-pink-tint-5: #fc90c9;
+  --fu-pink-tint-6: #fb7cc0;
+  --fu-pink-tint-7: #fb68b6;
+  --fu-pink-tint-8: #fa54ac;
+  --fu-pink-tint-9: #fa40a3;
+  --fu-pink-tint-10: #f92c99;
+
+  /* Lime tints */
+  --fu-lime-tint-0: #fcfff4;
+  --fu-lime-tint-1: #f8ffdf;
+  --fu-lime-tint-2: #f3ffca;
+  --fu-lime-tint-3: #eeffb6;
+  --fu-lime-tint-4: #e9ffa1;
+  --fu-lime-tint-5: #e4ff8c;
+  --fu-lime-tint-6: #dfff77;
+  --fu-lime-tint-7: #dbff62;
+  --fu-lime-tint-8: #d6ff4e;
+  --fu-lime-tint-9: #d1ff39;
+  --fu-lime-tint-10: #ccff24;
+
+  /* Bands & washes */
+  --fu-band-dark: #0a0a0a;
+  --fu-band-dark-ink: #ffffff;
+  --fu-band-dark-muted: rgba(255, 255, 255, 0.72);
+  --fu-band-lime-ink: #000000;
+  /* Deprecated — prefer canvas/surface sections; kept for legacy accent demos only */
+  --fu-wash-hero: var(--fu-canvas);
+  --fu-wash-cta-lime: var(--fu-surface);
+  --fu-wash-cta-dark:
+    radial-gradient(ellipse 80% 80% at 50% 100%, rgba(0, 106, 254, 0.25), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(249, 44, 153, 0.2), transparent 55%),
+    var(--fu-band-dark);
+
+  /* Geometry & elevation — synced with missout-v2 Backstage admin tokens */
+  --fu-radius: 12px;
+  --fu-radius-sm: 8px;
+  --fu-radius-xs: 6px;
+  --fu-shadow-soft: 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
+  --fu-shadow-media: 0 8px 30px rgb(0 0 0 / 0.06);
+
+  /* Typography — Polymath only on FindUs marketing */
+  --fu-font-sans: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
+  --fu-font-display: 'Polymath Text', ui-sans-serif, system-ui, sans-serif;
+
+  /* Backstage product UI chrome (operations demo) */
+  --fu-bs-canvas: #ffffff;
+  --fu-bs-elevated: #ffffff;
+  --fu-bs-input: #fafafa;
+  --fu-bs-border: rgb(0 0 0 / 0.08);
+  --fu-bs-ink: #1a1a1a;
+  --fu-bs-muted: #6b6b6b;
+  --fu-bs-subtle: #9a9a9a;
+  --fu-bs-primary-bg: #1a1a1a;
+  --fu-bs-primary-ink: #ffffff;
+  --fu-bs-avatar-bg: #efefef;
+  --fu-bs-avatar-ink: #3d3d3d;
+  --fu-bs-rail-active: #ffffff;
+  --fu-bs-rail-bg: #f7f7f5;
+  --fu-bs-rail-hover: rgb(0 0 0 / 0.04);
+
+  /* Backstage icon-well fills — synced with missout-v2 light admin */
+  --fu-bs-well-people-bg: color-mix(in srgb, var(--fu-brand-blue) 18%, #dce8fc);
+  --fu-bs-well-people-fg: var(--fu-brand-blue);
+  --fu-bs-well-org-bg: color-mix(in srgb, var(--fu-brand-pink) 16%, #fce4f0);
+  --fu-bs-well-org-fg: var(--fu-brand-pink);
+  --fu-bs-well-status-bg: color-mix(in srgb, #7a9916 22%, #e8efd4);
+  --fu-bs-well-status-fg: #7a9916;
+  --fu-bs-well-neutral-bg: color-mix(in srgb, rgb(0 0 0) 9%, #ececee);
+  --fu-bs-well-neutral-fg: rgb(0 0 0 / 0.62);
+  --fu-bs-well-danger-bg: color-mix(in srgb, #ef4444 18%, #fce8e8);
+  --fu-bs-well-danger-fg: #dc2626;
+  --fu-bs-well-danger-border: color-mix(in srgb, #ef4444 30%, transparent);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --fu-canvas: #0a0a0a;
+  --fu-surface: #111111;
+  --fu-surface-elevated: #161616;
+  --fu-ink: #f5f5f5;
+  --fu-ink-secondary: #d4d4d4;
+  --fu-ink-muted: #a3a3a3;
+  --fu-ink-subtle: #737373;
+  --fu-hairline: rgb(255 255 255 / 0.08);
+  --fu-hairline-strong: rgb(255 255 255 / 0.14);
+  --fu-card-border: rgb(255 255 255 / 0.035);
+  --fu-card-border-hover: rgb(255 255 255 / 0.07);
+  --fu-card-border-width: 0.5px;
+
+  --fu-tint-blue-soft: rgba(0, 106, 254, 0.18);
+  --fu-tint-pink-soft: rgba(249, 44, 153, 0.16);
+  --fu-tint-lime-soft: rgba(204, 255, 36, 0.12);
+
+  --fu-blue-tint-0: rgba(0, 106, 254, 0.08);
+  --fu-blue-tint-1: rgba(0, 106, 254, 0.14);
+  --fu-pink-tint-0: rgba(249, 44, 153, 0.08);
+  --fu-pink-tint-1: rgba(249, 44, 153, 0.14);
+  --fu-lime-tint-0: rgba(204, 255, 36, 0.08);
+  --fu-lime-tint-1: rgba(204, 255, 36, 0.12);
+
+  --fu-wash-hero: var(--fu-canvas);
+
+  --fu-shadow-soft: none;
+  --fu-shadow-media: 0 8px 30px rgb(0 0 0 / 0.2);
+
+  --fu-bs-canvas: #0a0a0a;
+  --fu-bs-elevated: #161616;
+  --fu-bs-input: #111111;
+  --fu-bs-border: rgb(255 255 255 / 0.08);
+  --fu-bs-ink: #f5f5f5;
+  --fu-bs-muted: #a3a3a3;
+  --fu-bs-subtle: #737373;
+  --fu-bs-primary-bg: #f5f5f5;
+  --fu-bs-primary-ink: #0a0a0a;
+  --fu-bs-avatar-bg: #262626;
+  --fu-bs-avatar-ink: #d4d4d4;
+  --fu-bs-rail-active: #161616;
+  --fu-bs-rail-bg: #111111;
+  --fu-bs-rail-hover: rgb(255 255 255 / 0.06);
+
+  --fu-bs-well-people-bg: color-mix(in srgb, var(--fu-brand-blue) 6%, color-mix(in srgb, #ffffff 4%, #252525));
+  --fu-bs-well-people-fg: #5eb3ff;
+  --fu-bs-well-org-bg: color-mix(in srgb, var(--fu-brand-pink) 5%, color-mix(in srgb, #ffffff 4%, #252525));
+  --fu-bs-well-org-fg: #ff5cad;
+  --fu-bs-well-status-bg: color-mix(in srgb, var(--fu-brand-lime) 5%, color-mix(in srgb, #ffffff 4%, #252525));
+  --fu-bs-well-status-fg: var(--fu-brand-lime);
+  --fu-bs-well-neutral-bg: color-mix(in srgb, rgb(255 255 255) 5%, #252525);
+  --fu-bs-well-neutral-fg: #b8b8b8;
+  --fu-bs-well-danger-bg: color-mix(in srgb, #ef4444 6%, color-mix(in srgb, #ffffff 4%, #252525));
+  --fu-bs-well-danger-fg: #ff7070;
+  --fu-bs-well-danger-border: color-mix(in srgb, #ef4444 38%, transparent);
+}
+
+@layer components {
+  .fu-bs-ui {
+    color: var(--fu-bs-ink);
+  }
+
+  .fu-font-sans {
+    font-family: var(--fu-font-sans);
+  }
+
+  .fu-font-display {
+    font-family: var(--fu-font-display);
+  }
+
+  .fu-type-display {
+    font-family: var(--fu-font-sans);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .fu-type-title {
+    font-family: var(--fu-font-sans);
+    font-size: clamp(1.75rem, 3vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .fu-type-h2 {
+    font-family: var(--fu-font-sans);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .fu-type-h3 {
+    font-family: var(--fu-font-sans);
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  .fu-type-body {
+    font-family: var(--fu-font-sans);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  .fu-type-body-sm {
+    font-family: var(--fu-font-sans);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .fu-type-meta {
+    font-family: var(--fu-font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .fu-type-button {
+    font-family: var(--fu-font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fu-motion-safe {
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
+    }
+  }
+
+  /** Pixel icons with a crisp ink outline (Notion-style link cards). */
+  .fu-icon-ink-stroke svg {
+    filter:
+      drop-shadow(0.55px 0 0 var(--fu-ink))
+      drop-shadow(-0.55px 0 0 var(--fu-ink))
+      drop-shadow(0 0.55px 0 var(--fu-ink))
+      drop-shadow(0 -0.55px 0 var(--fu-ink));
+  }
+
+  .fu-link-card {
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .fu-link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      var(--fu-link-card-wash, var(--fu-blue-tint-0)) 0%,
+      transparent 62%
+    );
+    transition: opacity 160ms ease;
+  }
+
+  .fu-link-card:hover,
+  .fu-link-card:focus-visible {
+    border-color: color-mix(in srgb, var(--fu-link-card-ink, var(--fu-brand-blue)) 28%, var(--fu-hairline-strong));
+    box-shadow: var(--fu-shadow-soft);
+  }
+
+  .fu-link-card:hover::before,
+  .fu-link-card:focus-visible::before {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fu-link-card::before {
+      transition: none;
+    }
+  }
+
+  /** Product headline shimmer — diagonal highlight band through saturated brand fill. */
+  .fu-product-headline-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    color: transparent;
+    line-height: 1.06;
+    padding-block: 0.04em 0.1em;
+  }
+
+  .fu-product-headline-gradient--pink {
+    background-image: linear-gradient(
+      112deg,
+      var(--fu-pink-tint-10) 0%,
+      var(--fu-brand-pink) 10%,
+      var(--fu-pink-tint-7) 26%,
+      var(--fu-pink-tint-4) 40%,
+      var(--fu-pink-tint-2) 50%,
+      var(--fu-pink-tint-5) 62%,
+      var(--fu-pink-tint-8) 76%,
+      var(--fu-brand-pink) 90%,
+      var(--fu-pink-tint-10) 100%
+    );
+  }
+
+  .fu-product-headline-gradient--lime {
+    background-image: linear-gradient(
+      112deg,
+      var(--fu-bs-well-status-fg) 0%,
+      var(--fu-brand-lime) 10%,
+      var(--fu-lime-tint-8) 26%,
+      var(--fu-lime-tint-5) 40%,
+      var(--fu-lime-tint-3) 50%,
+      var(--fu-lime-tint-6) 62%,
+      var(--fu-lime-tint-9) 76%,
+      var(--fu-brand-lime) 90%,
+      var(--fu-bs-well-status-fg) 100%
+    );
+  }
+
+  .fu-product-headline-gradient--blue {
+    background-image: linear-gradient(
+      112deg,
+      var(--fu-blue-tint-10) 0%,
+      var(--fu-brand-blue) 10%,
+      var(--fu-blue-tint-7) 26%,
+      var(--fu-blue-tint-4) 40%,
+      var(--fu-blue-tint-2) 50%,
+      var(--fu-blue-tint-5) 62%,
+      var(--fu-blue-tint-8) 76%,
+      var(--fu-brand-blue) 90%,
+      var(--fu-blue-tint-10) 100%
+    );
+  }
+
+  /** Floating device mockup — layered drop-shadow follows PNG alpha. */
+  .fu-iphone-mockup-shadow {
+    filter:
+      drop-shadow(0 32px 56px rgb(0 0 0 / 0.14))
+      drop-shadow(0 12px 24px rgb(0 0 0 / 0.1))
+      drop-shadow(0 4px 8px rgb(0 0 0 / 0.06));
+  }
+
+  .dark .fu-iphone-mockup-shadow {
+    filter:
+      drop-shadow(0 32px 56px rgb(0 0 0 / 0.42))
+      drop-shadow(0 12px 24px rgb(0 0 0 / 0.28))
+      drop-shadow(0 4px 8px rgb(0 0 0 / 0.18));
+  }
+
+  .missout-coordinator-avatar[data-animation='idle'] {
+    animation: missout-coordinator-float 3.4s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .missout-coordinator-avatar[data-animation='listening'] {
+    animation: missout-coordinator-listen 3.8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .missout-coordinator-avatar[data-animation='happy'] {
+    animation: missout-coordinator-happy 1.7s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .missout-coordinator-avatar[data-animation='curious'] {
+    animation: missout-coordinator-curious 2.5s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  @keyframes missout-coordinator-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes missout-coordinator-listen {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    35% {
+      transform: translateY(-4px) rotate(-2deg);
+    }
+    70% {
+      transform: translateY(2px) rotate(2deg);
+    }
+  }
+
+  @keyframes missout-coordinator-happy {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    40% {
+      transform: translateY(-10px) scale(1.02);
+    }
+    65% {
+      transform: translateY(-4px) scale(1.01);
+    }
+  }
+
+  @keyframes missout-coordinator-curious {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    45% {
+      transform: translateY(-5px) rotate(-3deg);
+    }
+    75% {
+      transform: translateY(0) rotate(3deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .missout-coordinator-avatar[data-animation] {
+      animation: none;
+    }
+  }
+}
+
+@keyframes fu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fu-enter {
+  animation: fu-enter 300ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fu-enter {
+    animation: none;
+  }
+}

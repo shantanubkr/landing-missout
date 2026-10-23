@@ -15,7 +15,7 @@ The URL on the site is: `/partner_fests/logos/<logoFile>`
 - Replace the placeholder: swap `logoFile` to your real filename per fest.
 - `festName` = display name of the **fest**
 - `college` = **college / host** name
-- `id` = stable string (e.g. slug) for keys; keep unique when you add more (10–40+).
+- `id` = stable string (e.g. slug) for keys; keep unique when you add more (10-40+).
 
 A generic placeholder is provided: `logos/placeholder-fest.svg` (used until you point each entry at a real file).
 

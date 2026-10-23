@@ -1,5 +1,6 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { BackstageFeaturePage } from '../components/findus/BackstageFeaturePage'
+import { REGISTRATIONS_PAGE } from '../lib/backstageFeaturePages'
 
 export function RegistrationsPage() {
-  return <PlaceholderPage title="Registrations & Contingents" />
+  return <BackstageFeaturePage content={REGISTRATIONS_PAGE} />
 }

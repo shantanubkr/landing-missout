@@ -1,128 +1,68 @@
-import { useState } from 'react'
-import { HERO_ASSETS } from '../../lib/heroAssets'
-import { cn } from '../../lib/cn'
-import { useHeroParallax } from '../../hooks/useHeroParallax'
-import { Button } from '../ui'
-import { WaitlistModal } from '../waitlist'
-import { CountdownLaunch } from './CountdownLaunch'
-import { FloatingProductPill } from './FloatingProductPill'
+import { ButtonAnchor, ButtonLink } from '../ui'
+import { PRODUCT_CREATE_HREF } from '../../lib/productUrls'
+import {
+  PRODUCT_HERO_BACKSTAGE_IMG,
+  ProductGlassShell,
+} from '../product/ProductGlassShell'
+import { RotatingActionPill } from './RotatingActionPill'
 
+/**
+ * Organiser-led hero: copy left, Manage through Backstage screenshot right.
+ */
 export function HeroSection() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false)
-  const {
-    sectionRef,
-    gridLayerRef,
-    imageLayerRef,
-    stagePillRef,
-    backstagePillRef,
-    stagePillMobileRef,
-    backstagePillMobileRef,
-  } = useHeroParallax()
-
   return (
     <section
-      ref={sectionRef}
       id="top"
       aria-label="Hero"
-      className="relative z-0 flex min-h-dvh flex-col overflow-hidden bg-white pt-20 sm:pt-24"
+      className="relative z-0 overflow-hidden bg-white px-4 pb-14 pt-28 sm:px-6 sm:pb-16 sm:pt-32"
     >
       <div
-        ref={gridLayerRef}
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden min-h-full w-full"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         aria-hidden
       >
-        <div className="hero-bg-grid absolute inset-0 min-h-full w-full" />
+        <div className="hero-bg-grid absolute inset-0 min-h-full w-full opacity-40" />
       </div>
 
-      {/* Zone 1 — copy + CTA (always on white, never overlaps the graphic) */}
-      <div className="relative z-10 w-full shrink-0 px-4 pb-2 sm:px-6 sm:pb-3 md:pb-4">
-        <div className="relative mx-auto w-full max-w-7xl">
-          <div className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 md:left-0 md:mt-8 md:flex lg:-left-1 xl:-left-3">
-            <div ref={stagePillRef}>
-              <FloatingProductPill
-                label="Stage"
-                className="relative"
-                onClick={() => setWaitlistOpen(true)}
-              />
-            </div>
-          </div>
-          <div className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 md:right-0 md:-mt-16 md:flex lg:-right-1 xl:-right-3">
-            <div ref={backstagePillRef}>
-              <FloatingProductPill label="Backstage" align="right" className="relative" />
-            </div>
-          </div>
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-12">
+        <div>
+          <h1 className="text-hero-oneliner text-balance text-left">
+            <span className="inline">One place to </span>
+            <RotatingActionPill className="mx-1 translate-y-[-0.05em] text-[0.72em] font-bold sm:mx-1.5 sm:text-[0.78em]" />
+            <span className="inline"> events.</span>
+          </h1>
 
-          <div className="mx-auto w-full max-w-4xl text-center sm:max-w-5xl">
-            <CountdownLaunch className="mb-6 mt-2 sm:mb-7 sm:mt-3" />
+          <p className="mt-4 max-w-lg text-pretty font-sans text-base font-medium leading-snug text-[#5A5A5A] sm:mt-5 sm:text-lg">
+            Registrations, check-in, updates, and discovery. No spreadsheet stack.
+          </p>
 
-            <h1 className="text-hero-headline">
-              Missout,
-              <br />
-              no more.
-            </h1>
-
-            <p className="text-hero-subhead mx-auto mt-3 max-w-2xl text-balance text-[#5A5A5A] sm:mt-4">
-              Handle registrations, teams, and updates
-              <br />
-              No back and forth
-            </p>
-
-            <div className="mt-5 flex flex-col items-center sm:mt-6">
-              <Button
-                type="button"
-                variant="primary"
-                theme="home"
-                size="lg"
-                onClick={() => setWaitlistOpen(true)}
-                className="!min-h-12 !px-10 !py-3 !text-lg !font-bold sm:!min-h-14 sm:!px-14 sm:!py-3.5 sm:!text-xl"
-              >
-                Join the Waitlist
-              </Button>
-            </div>
-
-            <div className="mt-10 flex justify-center gap-10 sm:mt-12 md:mt-10 md:hidden">
-              <div ref={stagePillMobileRef}>
-                <FloatingProductPill
-                label="Stage"
-                className="relative"
-                onClick={() => setWaitlistOpen(true)}
-              />
-              </div>
-              <div ref={backstagePillMobileRef}>
-                <FloatingProductPill label="Backstage" align="right" className="relative" />
-              </div>
-            </div>
+          <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
+            <ButtonAnchor
+              href={PRODUCT_CREATE_HREF}
+              variant="primary"
+              theme="home"
+              size="lg"
+              className="!min-h-12 !px-10 !text-base !font-semibold sm:!min-h-13 sm:!px-12 sm:!text-lg"
+            >
+              Let&apos;s create
+            </ButtonAnchor>
+            <ButtonLink
+              to="/#contact"
+              variant="outline"
+              theme="home"
+              size="lg"
+              className="!min-h-12 !px-10 !text-base !font-semibold sm:!px-12 sm:!text-lg"
+            >
+              Request a demo
+            </ButtonLink>
           </div>
         </div>
-      </div>
 
-      {/* Zone 2 — hero graphic fills remaining viewport height, shifted up toward copy */}
-      <div
-        className="pointer-events-none relative z-[1] -mb-20 -mt-[9.5rem] flex min-h-[min(22vh,380px)] w-full flex-1 flex-col justify-end max-sm:overflow-visible sm:-mb-28 sm:-mt-[20.35rem] sm:min-h-[min(21vh,420px)] md:-mb-36 md:-mt-[23.34rem] md:min-h-0 lg:-mb-40 lg:-mt-[29.25rem] xl:-mb-28 xl:-mt-[32.5rem]"
-        aria-hidden
-      >
-        <div
-          ref={imageLayerRef}
-          className="flex h-full w-full min-h-[inherit] items-end justify-center"
-        >
-          <div className="flex h-full w-full origin-bottom -translate-y-[7.5rem] scale-[1.06] items-end justify-center sm:-translate-y-[17.36rem] sm:scale-[0.92] md:-translate-y-[20.35rem] md:scale-[0.94] lg:-translate-y-[23.34rem] lg:scale-[0.96] xl:-translate-y-[8.45rem] xl:scale-[0.98]">
-            <img
-              src={HERO_ASSETS.graphic}
-              className={cn(
-                'h-full w-full max-w-none object-contain object-bottom',
-              )}
-              alt=""
-              width={1458}
-              height={995}
-              loading="eager"
-              decoding="async"
-              draggable={false}
-            />
-          </div>
-        </div>
+        <ProductGlassShell
+          src={PRODUCT_HERO_BACKSTAGE_IMG}
+          alt="Manage through Backstage"
+          loading="eager"
+        />
       </div>
-
-      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </section>
   )
 }

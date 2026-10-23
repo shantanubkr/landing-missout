@@ -3,10 +3,10 @@ import type { RefObject } from 'react'
 import { MOBILE_PARALLAX_SCALE } from './useMobileParallaxScale'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-/** Pink stripe — drifts with scroll. */
+/** Pink stripe - drifts with scroll. */
 const GRAPHIC_PARALLAX_Y_MAX = 52
 
-/** CTA copy — counter-drifts vs graphic for layered depth. */
+/** CTA copy - counter-drifts vs graphic for layered depth. */
 const TEXT_PARALLAX_Y_MAX = -36
 
 /** Card row counter-drift vs stripe (pixels at full progress ±1). */
@@ -35,7 +35,7 @@ function applyParallaxY(el: HTMLElement | null, progress: number, peakPx: number
 
 /**
  * Section-scrolled parallax: CTA graphic and copy drift on separate layers; optional card strip drifts opposite.
- * Applies direct `transform` — keep layout offsets (Tailwind `-translate-*`) on a parent.
+ * Applies direct `transform` - keep layout offsets (Tailwind `-translate-*`) on a parent.
  */
 export function usePartnerFestParallax(
   scopeRef: RefObject<HTMLElement | null>,

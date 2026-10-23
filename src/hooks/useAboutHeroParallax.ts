@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-/** Same constants as `useHeroParallax` — identical visual depth on identical elements. */
+/** Same constants as `useHeroParallax` - identical visual depth on identical elements. */
 const MOBILE_PARALLAX = 0.48
 
 const SCROLL_GRID = 0.066

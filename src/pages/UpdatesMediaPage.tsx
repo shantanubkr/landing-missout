@@ -1,5 +1,6 @@
-import { PlaceholderPage } from './PlaceholderPage'
+import { BackstageFeaturePage } from '../components/findus/BackstageFeaturePage'
+import { UPDATES_MEDIA_PAGE } from '../lib/backstageFeaturePages'
 
 export function UpdatesMediaPage() {
-  return <PlaceholderPage title="Updates & Media" />
+  return <BackstageFeaturePage content={UPDATES_MEDIA_PAGE} />
 }
