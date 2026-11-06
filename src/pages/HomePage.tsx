@@ -11,6 +11,7 @@ import { PixelTrail } from '../components/motion/PixelTrail'
 import { PixelIcon } from '../components/icons/PixelIcon'
 import { HeroStar } from '../components/motion/HeroStar'
 import { PixelWipe } from '../components/motion/PixelWipe'
+import { SiteMediaOrImage } from '../components/SiteMediaOrImage'
 import { SHOTS } from '../lib/assets'
 import { BACKSTAGE_ADMIN, BACKSTAGE_ONBOARDING, BOOK_DEMO_WHATSAPP, STAGE_APP } from '../lib/links'
 import { BACKSTAGE_SECTIONS } from '../lib/products'
@@ -211,12 +212,12 @@ function EcosystemColumn({ product, index }: { product: EcoProduct; index: numbe
         className="relative mx-[6.59%] mt-[6.59%] aspect-[645/664] overflow-hidden rounded-[clamp(8px,0.69vw,12px)]"
         style={{ backgroundImage: product.gradient }}
       >
-        <img
+        <SiteMediaOrImage
+          layout="fill"
           src={product.image}
           alt={product.alt}
-          loading="lazy"
-          decoding="async"
-          className="absolute top-[8.13%] left-[8.37%] h-[83.7%] w-[91.63%] rounded-l-[clamp(8px,0.69vw,12px)] object-cover object-left-top"
+          seed={product.name}
+          className="absolute top-[8.13%] left-[8.37%] h-[83.7%] w-[91.63%] rounded-l-[clamp(8px,0.69vw,12px)]"
         />
       </div>
 
@@ -319,16 +320,17 @@ function WayCard({ way, big, index }: { way: Way; big: boolean; index: number })
                 : 'left-[8%] -right-px bottom-[9%] rounded-r-none border-r-0'
           }`}
         >
-          <img
+          <SiteMediaOrImage
+            layout="fill"
             src={WAYS_IMAGES[way.id]}
             alt=""
-            loading="lazy"
-            decoding="async"
+            seed={way.id}
+            fit={way.fit === 'center' ? 'contain' : 'cover'}
             className={`block ${
               way.fit === 'center'
                 ? 'h-auto w-full'
                 : big
-                  ? 'size-full object-cover object-left-top'
+                  ? 'size-full'
                   : 'h-auto w-[175%] max-w-none'
             }`}
           />

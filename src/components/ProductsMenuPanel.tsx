@@ -12,6 +12,7 @@ import {
   REQUEST_DEMO_LABEL,
   SITE_LINKS,
 } from '../lib/siteRoutes'
+import { SiteMediaOrImage } from './SiteMediaOrImage'
 
 const MENU_ICON: Record<ProductsMenuLink['icon'], PixelIconName> = {
   committees: 'users',
@@ -56,9 +57,11 @@ function FeaturedProductCard({
       className="group flex items-center gap-6 rounded-xl p-2 no-underline transition-colors duration-150 hover:bg-black/[0.04]"
     >
       <span className="product-menu-thumb relative flex h-[152px] w-[228px] shrink-0 items-center justify-center overflow-hidden rounded-[14px]">
-        <img
+        <SiteMediaOrImage
+          layout="fill"
           src={product.image}
           alt=""
+          seed={product.title}
           className="h-[78%] w-[86%] rounded-[10px] object-cover object-left-top shadow-[0_6px_16px_rgba(0,0,0,0.12)]"
         />
       </span>

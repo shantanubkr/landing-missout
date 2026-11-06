@@ -433,6 +433,8 @@ button:focus-visible {
   inset: 0;
   z-index: 2;
   display: grid;
+  overflow: hidden;
+  border-radius: inherit;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(5, 1fr);
   pointer-events: none;
@@ -441,6 +443,7 @@ button:focus-visible {
 .pixel-wipe-grid > span {
   transform: scale(0);
   opacity: 0;
+  visibility: hidden;
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -515,15 +518,22 @@ button:focus-visible {
 @keyframes pixel-wipe-cell {
   0% {
     transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+  }
+  8% {
+    visibility: visible;
     opacity: 1;
   }
   35% {
     transform: scale(1);
     opacity: 1;
+    visibility: visible;
   }
   100% {
     transform: scale(1);
     opacity: 0;
+    visibility: hidden;
   }
 }
 

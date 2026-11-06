@@ -10,22 +10,24 @@ import { GET_STARTED_HREF, GET_STARTED_LABEL, REQUEST_DEMO_LABEL, REQUEST_DEMO_P
 import { FigmaButtonPrimary, FigmaButtonSecondary } from '../figma/FigmaPrimitives'
 import { PixelIcon } from '../icons/PixelIcon'
 import { AnimatedText, FadeUp } from '../motion/AnimatedText'
+import { SiteMediaOrImage } from '../SiteMediaOrImage'
 
 const BTN = '!h-9 !min-w-[104px] !px-4 !text-[14px] sm:!h-10 sm:!min-w-[120px] sm:!text-[15px]'
 
-function Screen({ visual, priority }: { visual: FeatureVisual; priority?: boolean }) {
+function Screen({ visual, priority, seed }: { visual: FeatureVisual; priority?: boolean; seed: string }) {
   const contain = visual.fit === 'contain'
+  const aspect = contain ? '1768/1053' : '16/10'
   return (
     <div className="relative overflow-hidden rounded-[6px] border border-line bg-white">
       <div className={`overflow-hidden ${contain ? 'aspect-[1768/1053] bg-[#f4f4f4]' : 'aspect-[16/10] bg-white'}`}>
-        <img
+        <SiteMediaOrImage
           src={visual.src}
           alt={visual.alt}
+          seed={seed}
+          aspect={aspect}
+          fit={contain ? 'contain' : 'cover'}
           loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          className={`size-full ${
-            contain ? 'object-contain object-center' : 'object-cover object-left-top'
-          }`}
+          className="size-full rounded-none"
         />
       </div>
     </div>
@@ -93,11 +95,13 @@ function Row({
   image,
   imageLeft,
   priority,
+  seed,
 }: {
   children: ReactNode
   image: FeatureVisual
   imageLeft?: boolean
   priority?: boolean
+  seed?: string
 }) {
   return (
     <section className="border-b border-line">
@@ -111,7 +115,7 @@ function Row({
           duration={800}
           className={`lg:col-span-7 ${imageLeft ? 'lg:order-1' : ''}`}
         >
-          <Screen visual={image} priority={priority} />
+          <Screen visual={image} priority={priority} seed={seed ?? image.alt} />
         </FadeUp>
       </div>
     </section>
@@ -162,7 +166,7 @@ export function FeatureStory({ page }: { page: FeaturePageData }) {
   return (
     <div className="mx-auto max-w-[1728px] bg-white">
       <div className="mx-4 border-x border-line sm:mx-[6.97%]">
-        <Row image={page.hero} priority>
+        <Row image={page.hero} priority seed={page.id}>
           <Copy eyebrow={page.eyebrow} title={page.title} body={page.lede} hero />
         </Row>
 

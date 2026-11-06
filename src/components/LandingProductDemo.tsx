@@ -6,6 +6,7 @@ import {
 } from '../lib/landingProductDemo'
 import { FadeUp } from './motion/AnimatedText'
 import { PixelWipeScreen } from './motion/PixelWipe'
+import { SiteMediaPlaceholder } from './SiteMediaPlaceholder'
 
 const WIPE_SWAP_MS = 250
 
@@ -17,18 +18,14 @@ function DemoMedia({ media, visible, eager }: { media: LandingDemoMedia; visible
 
   if (media.kind === 'placeholder') {
     return (
-      <div
-        className={`absolute inset-0 flex items-center justify-center ${
+      <SiteMediaPlaceholder
+        seed={media.seed ?? media.alt}
+        label={media.alt}
+        aspect="1768/1053"
+        showLabel={false}
+        className={`absolute inset-0 size-full rounded-none transition-opacity duration-300 ${
           visible ? 'opacity-100' : 'opacity-0'
         }`}
-        style={{
-          backgroundColor: '#f4f4f4',
-          backgroundImage:
-            'linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px)',
-          backgroundSize: '20px 20px',
-        }}
-        aria-label={visible ? media.alt : undefined}
-        aria-hidden={!visible}
       />
     )
   }

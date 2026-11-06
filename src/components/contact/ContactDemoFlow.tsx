@@ -8,7 +8,7 @@ import { PixelWipeGrid, usePixelWipePlay } from '../motion/PixelWipe'
 import { RollText } from '../motion/RollText'
 
 const BTN =
-  'anim-btn pixel-wipe group font-display relative inline-flex h-9 min-w-[112px] items-center justify-center overflow-hidden rounded-[6px] bg-black px-4 text-[14px] text-white disabled:opacity-40'
+  'anim-btn font-display relative inline-flex h-9 min-w-[112px] items-center justify-center overflow-hidden rounded-[6px] bg-black px-4 text-[14px] text-white disabled:opacity-40'
 
 function ContactWipeButton({
   className = '',
@@ -264,9 +264,9 @@ export function ContactDemoFlow() {
           ) : null}
 
           <div className="mt-8">
-            <ContactWipeButton type="submit" disabled={!canContinue || status === 'submitting'} className={BTN}>
+            <button type="submit" disabled={!canContinue || status === 'submitting'} className={BTN}>
               <RollText>{status === 'submitting' ? 'Sending…' : isLastStep ? 'Submit' : 'Next'}</RollText>
-            </ContactWipeButton>
+            </button>
           </div>
         </form>
 

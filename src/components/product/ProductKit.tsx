@@ -12,6 +12,7 @@ import { PixelWipe } from '../motion/PixelWipe'
 import { CountUp } from '../motion/CountUp'
 import { RollText } from '../motion/RollText'
 import type { ExploreCard, FeatureCard, ProductPageData, StoryTab, TextCard, WalkItem } from '../../lib/productPages'
+import { SiteMediaOrImage } from '../SiteMediaOrImage'
 
 const THUMB_GRID: CSSProperties = {
   backgroundColor: '#f6f6f6',
@@ -100,27 +101,23 @@ function StoryFrame({ tabs, activeId }: { tabs: StoryTab[]; activeId: string }) 
       duration={800}
       className="relative h-[var(--screen-h)] w-full overflow-hidden bg-[#f4f4f4]"
     >
-      {tabs.map((tab, i) => {
+      {tabs.map((tab) => {
         const on = tab.id === activeId
         const contain = tab.fit === 'contain'
         return (
           <div
             key={tab.id}
             className={`absolute inset-0 transition-[opacity,transform] duration-500 ease-out ${
-              contain ? 'flex items-center justify-center p-6' : ''
+              contain ? 'flex items-center justify-center p-6 sm:p-10' : ''
             } ${on ? 'scale-100 opacity-100' : 'scale-[1.015] opacity-0'}`}
           >
-            <img
+            <SiteMediaOrImage
               src={tab.src}
               alt={on ? tab.alt : ''}
-              aria-hidden={!on}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className={
-                contain
-                  ? 'size-full object-contain object-center p-6 sm:p-10'
-                  : 'size-full object-cover object-left-top'
-              }
+              seed={tab.id}
+              aspect="16/10"
+              fit={contain ? 'contain' : 'cover'}
+              className={`size-full max-w-[960px] ${contain ? 'rounded-[8px] border border-line' : 'min-h-full'}`}
             />
           </div>
         )
@@ -220,7 +217,7 @@ export function ProductHero({ page }: { page: ProductPageData }) {
         </div>
       </div>
 
-      <div className="site-cell border-b border-line py-5 text-center sm:py-6">
+      <div className="site-cell border-b border-line py-8 text-center sm:py-10">
         <StoryTabs tabs={page.tabs} activeId={activeId} onSelect={setActiveId} label={page.storyLabel} />
         <p
           key={active.id}
@@ -235,18 +232,18 @@ export function ProductHero({ page }: { page: ProductPageData }) {
 
 /* ------------------------------ Feature grid ----------------------------- */
 
-function Shot({ src, alt, contain }: { src: string; alt: string; contain?: boolean }) {
+function Shot({ src, alt, contain, seed }: { src: string; alt: string; contain?: boolean; seed?: string }) {
   return (
     <div className="relative overflow-hidden rounded-[6px] border border-line" style={THUMB_GRID}>
-      <div className="aspect-[16/10]">
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          className={`size-full ${contain ? 'object-contain object-center p-6' : 'object-cover object-left-top'}`}
-        />
-      </div>
+      <SiteMediaOrImage
+        src={src}
+        alt={alt}
+        seed={seed}
+        aspect="16/10"
+        fit={contain ? 'contain' : 'cover'}
+        className="aspect-[16/10] size-full rounded-[6px]"
+        imgClassName={contain ? 'object-contain object-center p-6' : 'object-cover object-left-top'}
+      />
     </div>
   )
 }
@@ -254,7 +251,7 @@ function Shot({ src, alt, contain }: { src: string; alt: string; contain?: boole
 function FeatureTile({ card }: { card: FeatureCard }) {
   return (
     <SmartLink to={card.to} href={card.href} className="group flex flex-col no-underline">
-      <Shot src={card.src} alt={card.alt} />
+      <Shot src={card.src} alt={card.alt} seed={card.title} />
       <h3 className="m-0 mt-6 font-display text-[clamp(22px,1.6vw,28px)] leading-[1.05] tracking-[0.01em] text-black transition-colors duration-200 group-hover:text-brand-pink">
         {card.title}
       </h3>
@@ -268,17 +265,41 @@ function FeatureTile({ card }: { card: FeatureCard }) {
   )
 }
 
+function ProductSectionNav({
+  items,
+}: {
+  items: { id: string; label: string }[]
+}) {
+  return (
+    <nav
+      className="site-cell flex flex-wrap justify-center gap-2 border-b border-line py-8 sm:gap-3 sm:py-10"
+      aria-label="On this page"
+    >
+      {items.map((item) => (
+        <button
+          key={item.id}
+          type="button"
+          onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          className="font-display rounded-full border border-line bg-[#fbfbfb] px-4 py-2 text-[13px] text-[#444] transition-colors duration-200 hover:border-brand-pink/35 hover:bg-[#fff5fa] hover:text-black"
+        >
+          {item.label}
+        </button>
+      ))}
+    </nav>
+  )
+}
+
 export function ProductFeatures({ title, cards }: { title: string; cards: FeatureCard[] }) {
   return (
-    <section className="bg-white" aria-labelledby="features-title">
-      <div className="site-cell border-b border-line py-10 text-center sm:py-12">
+    <section id="product-features" className="scroll-mt-[calc(var(--nav-h)+12px)] bg-white" aria-labelledby="features-title">
+      <div className="site-cell border-b border-line py-12 text-center sm:py-14">
         <FigmaH2 id="features-title" className="mx-auto max-w-[16ch]">
           {title}
         </FigmaH2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2">
         {cards.map((card, i) => (
-          <FadeUp key={card.title} delay={i * 100} className="site-cell border-b border-line sm:odd:border-r">
+          <FadeUp key={card.title} delay={i * 100} className="site-cell border-b border-line py-10 sm:odd:border-r sm:py-12">
             <FeatureTile card={card} />
           </FadeUp>
         ))}
@@ -294,7 +315,7 @@ function ToolCard({ card }: { card: TextCard }) {
     <SmartLink
       to={card.to}
       href={card.href}
-      className="group flex min-h-[220px] flex-col bg-white no-underline"
+      className="group flex min-h-[240px] flex-col rounded-[6px] bg-white py-2 no-underline transition-colors duration-200 hover:bg-[#fff5fa]/40"
     >
       <img src="/landing-figma/star-icon.svg" alt="" aria-hidden className="h-7 w-auto" />
       <h3 className="m-0 mt-5 font-display text-[clamp(20px,1.4vw,24px)] leading-[1.1] text-black transition-colors duration-200 group-hover:text-brand-pink">
@@ -313,15 +334,15 @@ function ToolCard({ card }: { card: TextCard }) {
 
 export function ProductTools({ title, cards }: { title: string; cards: TextCard[] }) {
   return (
-    <section className="bg-white" aria-labelledby="tools-title">
-      <div className="site-cell border-b border-line py-10 text-center sm:py-12">
+    <section id="product-tools" className="scroll-mt-[calc(var(--nav-h)+12px)] bg-white" aria-labelledby="tools-title">
+      <div className="site-cell border-b border-line py-12 text-center sm:py-14">
         <FigmaH2 id="tools-title" className="mx-auto max-w-[16ch]">
           {title}
         </FigmaH2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3">
         {cards.map((card, i) => (
-          <FadeUp key={card.title} delay={i * 100} className="site-cell border-b border-line sm:border-r sm:last:border-r-0">
+          <FadeUp key={card.title} delay={i * 100} className="site-cell border-b border-line py-10 sm:border-r sm:py-12 sm:last:border-r-0">
             <ToolCard card={card} />
           </FadeUp>
         ))}
@@ -337,14 +358,14 @@ export function ProductWalk({ title, items }: { title: string; items: WalkItem[]
   const current = items[open] ?? items[0]
 
   return (
-    <section className="bg-white" aria-labelledby="walk-title">
-      <div className="site-cell border-b border-line py-10 text-center sm:py-12">
+    <section id="product-walk" className="scroll-mt-[calc(var(--nav-h)+12px)] bg-white" aria-labelledby="walk-title">
+      <div className="site-cell border-b border-line py-12 text-center sm:py-14">
         <FigmaH2 id="walk-title" className="mx-auto max-w-[16ch]">
           {title}
         </FigmaH2>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="site-cell border-b border-line lg:border-r">
+        <div className="site-cell border-b border-line py-4 lg:border-r lg:py-8">
           {items.map((item, i) => {
             const on = i === open
             return (
@@ -353,7 +374,7 @@ export function ProductWalk({ title, items }: { title: string; items: WalkItem[]
                   type="button"
                   aria-expanded={on}
                   onClick={() => setOpen(i)}
-                  className="group flex w-full items-center justify-between gap-4 py-5 text-left"
+                  className={`group flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-200 ${on ? 'bg-[#fff5fa]/30' : ''}`}
                 >
                   <span className="font-display text-[clamp(20px,1.5vw,26px)] leading-[1.1] text-black transition-colors duration-200 group-hover:text-brand-pink">
                     {item.title}
@@ -376,13 +397,15 @@ export function ProductWalk({ title, items }: { title: string; items: WalkItem[]
             )
           })}
         </div>
-        <div className="border-b border-line" style={THUMB_GRID}>
-          <div className="h-[min(var(--screen-h),420px)] lg:h-full lg:min-h-[420px]">
-            <img
+        <div className="border-b border-line p-6 sm:p-10" style={THUMB_GRID}>
+          <div className="h-[min(var(--screen-h),420px)] overflow-hidden rounded-[8px] border border-line lg:h-full lg:min-h-[420px]">
+            <SiteMediaOrImage
               key={current.src}
               src={current.src}
               alt={current.alt}
-              className="size-full object-cover object-left-top"
+              seed={current.title}
+              aspect="16/10"
+              className="size-full min-h-full rounded-[8px]"
             />
           </div>
         </div>
@@ -442,7 +465,7 @@ function ExploreTile({ card, index }: { card: ExploreCard; index: number }) {
   return (
     <FadeUp delay={index * 100} className="site-cell border-b border-line sm:odd:border-r">
       <SmartLink to={card.to} href={card.href} className="group flex flex-col no-underline">
-        <Shot src={card.src} alt={card.alt} />
+        <Shot src={card.src} alt={card.alt} seed={card.title} />
         <h3 className="m-0 mt-5 font-display text-[clamp(22px,1.5vw,26px)] text-black transition-colors duration-200 group-hover:text-brand-pink">
           {card.title}
         </h3>
@@ -474,6 +497,13 @@ export function ProductPage({ page }: { page: ProductPageData }) {
     <div className="site-grid">
       <div className="site-grid-col">
         <ProductHero page={page} />
+        <ProductSectionNav
+          items={[
+            { id: 'product-features', label: page.featuresTitle },
+            { id: 'product-tools', label: page.toolsTitle },
+            { id: 'product-walk', label: page.walkTitle },
+          ]}
+        />
         <ProductFeatures title={page.featuresTitle} cards={page.features} />
         <ProductTools title={page.toolsTitle} cards={page.tools} />
         <ProductWalk title={page.walkTitle} items={page.walk} />
