@@ -15,12 +15,7 @@ export function placeholderTone(seed: string) {
 }
 
 /** Slots with no uploaded asset yet — still show tinted placeholders. */
-const PLACEHOLDER_SLOTS = new Set([
-  'about-mission',
-  'registrations',
-  'contingents',
-  'payments',
-])
+const PLACEHOLDER_SLOTS = new Set(['about-mission'])
 
 /** Optional: force placeholder even when a src exists (broken / stock art). */
 const PLACEHOLDER_SRC = new Set<string>([

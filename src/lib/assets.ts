@@ -1,44 +1,45 @@
 /**
  * Every replaceable screenshot on the site.
  *
- * Files live in `public/`. To swap a shot: drop the new file in that folder
- * and point the slot below at it. Decorative SVGs stay in
- * components. About team photo is `src/assets/about/team.jpg`.
+ * Primary delivery: WebP under `public/landing-figma/`.
+ * Masters also live under `assets/product-visuals/` for export.
  */
 const F = '/landing-figma'
 const WAYS = `${F}/ways`
 const DEMO = `${F}/product-demo`
 
 export const SHOTS = {
-  backstageHome: `${F}/backstage-home.jpg`,
-  stageHome: `${F}/stage-home.jpg`,
+  backstageHome: `${F}/backstage-home.webp`,
+  stageHome: `${F}/stage-home.webp`,
+  /** Stage ticket / passes — not the same as home listing. */
+  stagePasses: `${F}/stage/passes.webp`,
 
   ways: {
-    buildPublish: `${WAYS}/build-publish.jpg`,
-    runCheckIns: `${WAYS}/run-check-ins.jpg`,
-    manageCommittees: `${WAYS}/manage-committees.jpg`,
-    sendUpdates: `${WAYS}/send-updates.jpg`,
-    recruit: `${WAYS}/recruit-your-team.jpg`,
-    money: `${WAYS}/money-proof.jpg`,
+    buildPublish: `${WAYS}/build-publish.webp`,
+    runCheckIns: `${WAYS}/run-check-ins.webp`,
+    manageCommittees: `${WAYS}/manage-committees.webp`,
+    sendUpdates: `${WAYS}/send-updates.webp`,
+    recruit: `${WAYS}/recruit-your-team.webp`,
+    money: `${WAYS}/money-proof.webp`,
   },
 
   demo: {
-    makeEvent: `${DEMO}/make-event.png`,
-    backstageHomeUi: `${DEMO}/backstage-home-ui.png`,
-    checkInUi: `${DEMO}/check-in-ui.png`,
-    checkInDesk: `${DEMO}/check-in-desk.jpg`,
-    checkIn: `${DEMO}/check-in.png`,
-    registrationsHub: `${DEMO}/registrations-hub.jpg`,
-    registrations: `${DEMO}/registrations.png`,
-    contingentsList: `${DEMO}/contingents-list.jpg`,
-    contingents: `${DEMO}/contingents.png`,
-    paymentsMoney: `${DEMO}/payments-money.jpg`,
-    payments: `${DEMO}/payments.png`,
+    makeEvent: `${DEMO}/make-event.webp`,
+    backstageHomeUi: `${DEMO}/backstage-home-ui.webp`,
+    checkInUi: `${DEMO}/check-in-ui.webp`,
+    checkInDesk: `${DEMO}/check-in-desk.webp`,
+    checkIn: `${DEMO}/check-in.webp`,
+    registrationsHub: `${DEMO}/registrations-hub.webp`,
+    registrations: `${DEMO}/registrations.webp`,
+    contingentsList: `${DEMO}/contingents-list.webp`,
+    contingents: `${DEMO}/contingents.webp`,
+    paymentsMoney: `${DEMO}/payments-money.webp`,
+    payments: `${DEMO}/payments.webp`,
   },
 
   menu: {
-    backstage: `${F}/backstage-home.jpg`,
-    stage: `${F}/stage-home.jpg`,
+    backstage: `${F}/menu/backstage.webp`,
+    stage: `${F}/menu/stage.webp`,
   },
 } as const
 

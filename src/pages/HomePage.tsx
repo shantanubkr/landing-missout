@@ -217,7 +217,7 @@ function EcosystemColumn({ product, index }: { product: EcoProduct; index: numbe
           src={product.image}
           alt={product.alt}
           seed={product.name}
-          className="absolute top-[8.13%] left-[8.37%] h-[83.7%] w-[91.63%] rounded-l-[clamp(8px,0.69vw,12px)]"
+          className="absolute inset-0 size-full rounded-[clamp(8px,0.69vw,12px)]"
         />
       </div>
 
@@ -288,13 +288,6 @@ const WAYS: Way[] = [
   { id: 'money-proof', title: 'Money, stalls & proof', subtitle: 'Payments, stalls, sponsors and reporting', cta: 'Explore payments', fit: 'bleed' },
 ]
 
-const THUMB_GRID: CSSProperties = {
-  backgroundColor: '#f6f6f6',
-  backgroundImage:
-    'linear-gradient(to right, rgba(0,0,0,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.045) 1px, transparent 1px)',
-  backgroundSize: '12px 12px',
-}
-
 function WayCard({ way, big, index }: { way: Way; big: boolean; index: number }) {
   const reveal = useReveal<HTMLAnchorElement>({ delay: index * 100 })
   return (
@@ -307,34 +300,17 @@ function WayCard({ way, big, index }: { way: Way; big: boolean; index: number })
       }`}
     >
       <div
-        className={`relative overflow-hidden rounded-[6px] border border-line ${big ? 'aspect-[16/9]' : 'aspect-[4/3.3]'}`}
-        style={THUMB_GRID}
+        className={`relative overflow-hidden rounded-[6px] border border-line bg-[#f6f6f6] ${big ? 'aspect-[16/9]' : 'aspect-[4/3.3]'}`}
         aria-hidden
       >
-        <div
-          className={`absolute top-[9%] overflow-hidden rounded-[6px] border border-line border-b-[3px] border-l-[3px] border-b-brand-pink border-l-brand-pink bg-white ${
-            way.fit === 'center'
-              ? 'left-1/2 w-[62%] -translate-x-1/2'
-              : big
-                ? 'right-[7%] left-[7%] bottom-[9%]'
-                : 'left-[8%] -right-px bottom-[9%] rounded-r-none border-r-0'
-          }`}
-        >
-          <SiteMediaOrImage
-            layout="fill"
-            src={WAYS_IMAGES[way.id]}
-            alt=""
-            seed={way.id}
-            fit={way.fit === 'center' ? 'contain' : 'cover'}
-            className={`block ${
-              way.fit === 'center'
-                ? 'h-auto w-full'
-                : big
-                  ? 'size-full'
-                  : 'h-auto w-[175%] max-w-none'
-            }`}
-          />
-        </div>
+        <SiteMediaOrImage
+          layout="fill"
+          src={WAYS_IMAGES[way.id]}
+          alt=""
+          seed={way.id}
+          fit={way.fit === 'center' ? 'contain' : 'cover'}
+          className="absolute inset-0 size-full"
+        />
       </div>
 
       <h3 className="m-0 mt-[clamp(18px,1.62vw,28px)] font-display text-[clamp(20px,1.39vw,24px)] leading-[1.05] tracking-[0.01em] text-black transition-colors duration-200 group-hover:text-brand-pink">

@@ -22,14 +22,18 @@ function FeatureCard({ page, large }: { page: (typeof FEATURE_PAGES)[number]; la
         to={page.path}
         className="group flex h-full flex-col border-b border-line no-underline sm:border-r sm:last:border-r-0"
       >
-        <div className={`overflow-hidden border-b border-line ${large ? 'aspect-[21/9]' : 'aspect-[16/10]'}`}>
+        <div
+          className={`relative overflow-hidden border-b border-line bg-[#f0f0f0] ${
+            large ? 'aspect-[21/9]' : 'aspect-[16/10]'
+          }`}
+        >
           <SiteMediaOrImage
+            layout="fill"
             src={page.hero.src}
             alt={page.hero.alt}
             seed={page.id}
-            aspect={large ? '21/9' : '16/10'}
             fit={page.hero.fit === 'contain' ? 'contain' : 'cover'}
-            className="size-full rounded-none"
+            className="absolute inset-0 size-full"
           />
         </div>
         <div className="flex flex-1 flex-col px-[clamp(20px,2.08vw,36px)] py-8 sm:py-10">

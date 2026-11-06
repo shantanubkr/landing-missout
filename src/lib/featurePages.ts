@@ -53,8 +53,8 @@ export const FEATURE_PAGES: FeaturePageData[] = [
       {
         title: 'Access follows the department',
         body: 'Overview, registrations, schedule, and updates, per team.',
-        src: SHOTS.demo.contingentsList,
-        alt: 'Contingents in Backstage',
+        src: SHOTS.ways.manageCommittees,
+        alt: 'Departments list in Backstage',
       },
     ],
     band: {
@@ -191,8 +191,8 @@ export const FEATURE_PAGES: FeaturePageData[] = [
       {
         title: 'Heads see their own queue',
         body: 'Reviews stay with the department that asked for the help.',
-        src: SHOTS.demo.contingentsList,
-        alt: 'Team list in Backstage',
+        src: SHOTS.ways.recruit,
+        alt: 'Recruitment in Backstage',
       },
     ],
     band: {

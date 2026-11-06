@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import {
   FigmaButtonPrimary,
@@ -13,13 +13,6 @@ import { CountUp } from '../motion/CountUp'
 import { RollText } from '../motion/RollText'
 import type { ExploreCard, FeatureCard, ProductPageData, StoryTab, TextCard, WalkItem } from '../../lib/productPages'
 import { SiteMediaOrImage } from '../SiteMediaOrImage'
-
-const THUMB_GRID: CSSProperties = {
-  backgroundColor: '#f6f6f6',
-  backgroundImage:
-    'linear-gradient(to right, rgba(0,0,0,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.045) 1px, transparent 1px)',
-  backgroundSize: '12px 12px',
-}
 
 const BTN = '!h-9 !min-w-[104px] !px-4 !text-[14px] sm:!h-10 sm:!min-w-[120px] sm:!text-[15px]'
 
@@ -99,7 +92,7 @@ function StoryFrame({ tabs, activeId }: { tabs: StoryTab[]; activeId: string }) 
       y={0}
       scale={0.97}
       duration={800}
-      className="relative h-[var(--screen-h)] w-full overflow-hidden bg-[#f4f4f4]"
+      className="relative h-[var(--screen-h)] w-full overflow-hidden bg-[#f0f0f0]"
     >
       {tabs.map((tab) => {
         const on = tab.id === activeId
@@ -108,16 +101,16 @@ function StoryFrame({ tabs, activeId }: { tabs: StoryTab[]; activeId: string }) 
           <div
             key={tab.id}
             className={`absolute inset-0 transition-[opacity,transform] duration-500 ease-out ${
-              contain ? 'flex items-center justify-center p-6 sm:p-10' : ''
-            } ${on ? 'scale-100 opacity-100' : 'scale-[1.015] opacity-0'}`}
+              on ? 'scale-100 opacity-100' : 'scale-[1.015] opacity-0 pointer-events-none'
+            }`}
           >
             <SiteMediaOrImage
+              layout="fill"
               src={tab.src}
               alt={on ? tab.alt : ''}
               seed={tab.id}
-              aspect="16/10"
               fit={contain ? 'contain' : 'cover'}
-              className={`size-full max-w-[960px] ${contain ? 'rounded-[8px] border border-line' : 'min-h-full'}`}
+              className="size-full"
             />
           </div>
         )
@@ -232,17 +225,16 @@ export function ProductHero({ page }: { page: ProductPageData }) {
 
 /* ------------------------------ Feature grid ----------------------------- */
 
-function Shot({ src, alt, contain, seed }: { src: string; alt: string; contain?: boolean; seed?: string }) {
+function Shot({ src, alt, seed }: { src: string; alt: string; seed?: string }) {
   return (
-    <div className="relative overflow-hidden rounded-[6px] border border-line" style={THUMB_GRID}>
+    <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] border border-line bg-[#f6f6f6]">
       <SiteMediaOrImage
+        layout="fill"
         src={src}
         alt={alt}
         seed={seed}
-        aspect="16/10"
-        fit={contain ? 'contain' : 'cover'}
-        className="aspect-[16/10] size-full rounded-[6px]"
-        imgClassName={contain ? 'object-contain object-center p-6' : 'object-cover object-left-top'}
+        fit="cover"
+        className="size-full"
       />
     </div>
   )
@@ -397,15 +389,16 @@ export function ProductWalk({ title, items }: { title: string; items: WalkItem[]
             )
           })}
         </div>
-        <div className="border-b border-line p-6 sm:p-10" style={THUMB_GRID}>
-          <div className="h-[min(var(--screen-h),420px)] overflow-hidden rounded-[8px] border border-line lg:h-full lg:min-h-[420px]">
+        <div className="border-b border-line bg-[#f0f0f0]">
+          <div className="relative min-h-[min(var(--screen-h),420px)] w-full overflow-hidden lg:min-h-[min(56vh,520px)]">
             <SiteMediaOrImage
               key={current.src}
+              layout="fill"
               src={current.src}
               alt={current.alt}
               seed={current.title}
-              aspect="16/10"
-              className="size-full min-h-full rounded-[8px]"
+              fit="cover"
+              className="absolute inset-0 size-full min-h-full"
             />
           </div>
         </div>

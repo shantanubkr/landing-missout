@@ -40,7 +40,7 @@ export function SiteMediaOrImage({
   }
 
   const objectClass =
-    fit === 'contain' ? 'object-contain object-center' : 'object-cover object-left-top'
+    fit === 'contain' ? 'object-contain object-center' : 'object-cover object-left'
 
   if (layout === 'fill') {
     return (

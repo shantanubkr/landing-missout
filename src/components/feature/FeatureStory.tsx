@@ -16,18 +16,17 @@ const BTN = '!h-9 !min-w-[104px] !px-4 !text-[14px] sm:!h-10 sm:!min-w-[120px] s
 
 function Screen({ visual, priority, seed }: { visual: FeatureVisual; priority?: boolean; seed: string }) {
   const contain = visual.fit === 'contain'
-  const aspect = contain ? '1768/1053' : '16/10'
   return (
-    <div className="relative overflow-hidden rounded-[6px] border border-line bg-white">
-      <div className={`overflow-hidden ${contain ? 'aspect-[1768/1053] bg-[#f4f4f4]' : 'aspect-[16/10] bg-white'}`}>
+    <div className="relative overflow-hidden rounded-[6px] border border-line bg-[#f0f0f0]">
+      <div className={`relative w-full overflow-hidden ${contain ? 'aspect-[1768/1053]' : 'aspect-[16/10]'}`}>
         <SiteMediaOrImage
+          layout="fill"
           src={visual.src}
           alt={visual.alt}
           seed={seed}
-          aspect={aspect}
           fit={contain ? 'contain' : 'cover'}
           loading={priority ? 'eager' : 'lazy'}
-          className="size-full rounded-none"
+          className="absolute inset-0 size-full"
         />
       </div>
     </div>

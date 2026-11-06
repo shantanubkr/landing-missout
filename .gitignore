@@ -27,3 +27,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Large local export masters (WebP/PNG copied to public/landing-figma for the site)
+/assets/product-visuals/
+/assets/.visual-transfer/
