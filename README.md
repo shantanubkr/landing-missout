@@ -1,31 +1,40 @@
 # Missout | Landing Page
 
-Marketing landing site for [Missout](https://missout.in), a college event discovery and management platform.
+Marketing landing site for [Missout](https://missout.in) — Figma NEW UI (Stage + Backstage).
 
 ## Stack
 
 - **React 19** + **TypeScript**
-- **Vite** (build tool)
-- **Tailwind CSS** (utility-first styles)
-- **React Router v7** (client-side routing)
-- **Framer Motion** (scroll animations / parallax)
-- **Web3Forms** (contact form submissions)
+- **Vite**
+- **Tailwind CSS v4**
+- **React Router v7**
+- **Web3Forms** (optional contact form POST)
+- **Vercel Analytics**
 - **Vercel** (hosting)
 
 ## Pages
 
 | Route | Page |
 |-------|------|
-| `/` | Home: hero, value props, FAQ, partners, contact |
-| `/product` | Product: discover events (Stage) + manage events (Backstage) |
-| `/about` | About: mission, audience, team |
+| `/` | Home (Figma frame, product demo, CTAs) |
+| `/products/backstage` | Backstage product |
+| `/products/stage` | Stage product |
+| `/features` | Features hub |
+| `/features/:featureId` | Feature story (e.g. `build-publish`, `run-check-ins`) |
+| `/about` | About |
+| `/developers` | Developers / students |
+| `/contact` | Contact + demo request flow |
+| `/privacy` | Privacy policy |
+| `/terms-of-service` | Terms of service |
 | `*` | 404 |
+
+Legacy URLs (e.g. `/stage`, `/product/backstage`, old `/features/*` paths) redirect to the routes above.
 
 ## Local development
 
 ```bash
 npm install
-cp .env.example .env      # fill in optional keys (see below)
+cp .env.example .env   # optional keys
 npm run dev
 ```
 
@@ -33,42 +42,32 @@ Open [http://localhost:5173](http://localhost:5173).
 
 ## Environment variables
 
-Copy `.env.example` to `.env` and fill in the values:
-
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `VITE_WEB3FORMS_ACCESS_KEY` | Optional | [Web3Forms](https://web3forms.com) access key. Without it the contact form falls back to opening the visitor's mail client. |
-| `VITE_WAITLIST_WEB3FORMS_ACCESS_KEY` | Required for waitlist | Web3Forms key for the **Join the Waitlist** modal. Connect it to a Google Sheet in the Web3Forms dashboard so sign-ups land there. |
-| `VITE_SITE_URL` | Optional (recommended for prod) | Canonical site URL (e.g. `https://missout.in`). Used to set `<link rel="canonical">`, `og:url`, and `og:image`. |
+| `VITE_WEB3FORMS_ACCESS_KEY` | Optional | [Web3Forms](https://web3forms.com) key for in-browser contact submit. Without it, submit uses mailto. |
+| `VITE_SITE_URL` | Optional (recommended for prod) | Canonical origin, e.g. `https://missout.in`. Updates `og:url` and social images at runtime. |
 
-Set both in the **Vercel dashboard → Settings → Environment Variables** before deploying.
+Set in **Vercel → Settings → Environment Variables** for production.
 
 ## Build
 
 ```bash
-npm run build      # outputs to dist/
-npm run preview    # serve the built output locally
+npm run build
+npm run preview
 ```
 
 ## Static assets
 
-Images that need to be added to `public/` before deploy:
-
-| Folder | Contents |
-|--------|----------|
-| `public/people/` | Team portrait PNGs: `Shantanu.png`, `Aryan.png`, `Samarth.png` (504×630 px) |
-| `public/product/` | `Stage.png`, `backstage.png` (product hero cards) |
-| `public/product/discover-bento/` | `1_missout.png` … `8_logo.png` |
-| `public/product/manage-bento/` | `1_Your_whole.png` … `8_manage_event.png` |
-| `public/partner_fests/logos/` | `umang_logo.jpg` + logos for other partner fests |
+Product shots, Figma exports, brand, and partner logos live under `public/` (notably `public/landing-figma/`, `public/product/`, `public/brand/`). Path slots are defined in `src/lib/assets.ts`.
 
 ## Project structure
 
 ```
 src/
-  pages/          # Route-level page components
-  components/     # Feature-grouped UI components
-  hooks/          # Custom React hooks (parallax, scroll, meta)
-  lib/            # Static data and utility helpers
+  pages/          # Route-level pages
+  components/     # UI (Figma shell, motion, product kit)
+  hooks/
+  lib/            # Routes, feature data, asset paths
 public/           # Static files served at /
+docs/             # Design IA notes (optional reference)
 ```

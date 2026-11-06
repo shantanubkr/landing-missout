@@ -3,14 +3,8 @@
 interface ImportMetaEnv {
   readonly VITE_SITE_URL?: string
   readonly VITE_WEB3FORMS_ACCESS_KEY?: string
-  readonly VITE_WAITLIST_WEB3FORMS_ACCESS_KEY?: string
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv
-}
-
-declare module '*.avatar.json' {
-  const value: Record<string, unknown>
-  export default value
 }

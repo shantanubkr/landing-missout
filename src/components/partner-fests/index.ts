@@ -1,1 +1,0 @@
-export { PartnerFestsSection } from './PartnerFestsSection'

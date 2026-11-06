@@ -4,50 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/brand/missout_star.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Missout | Campus events, without the FOMO</title>
+    <title>MissOut · Made to show up</title>
     <meta
       name="description"
-      content="Discover and manage campus events in one place. Missout helps students and organisers stay aligned, so nobody misses what matters."
+      content="MissOut — Stage for students, Backstage for fest teams. Discover, register, check-in, and updates in one platform."
     />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href="https://missout.in/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Missout" />
     <meta property="og:url" content="https://missout.in/" />
-    <meta property="og:title" content="Missout | Campus events, without the FOMO" />
+    <meta property="og:title" content="MissOut · Made to show up" />
     <meta
       property="og:description"
-      content="Discover and manage campus events in one place. Missout helps students and organisers stay aligned, so nobody misses what matters."
+      content="MissOut — Stage for students, Backstage for fest teams. Discover, register, check-in, and updates in one platform."
     />
-    <meta
-      property="og:image"
-      content="https://missout.in/brand/missout_wordmark.svg"
-    />
+    <meta property="og:image" content="https://missout.in/brand/missout_wordmark.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Missout | Campus events, without the FOMO" />
+    <meta name="twitter:title" content="MissOut · Made to show up" />
     <meta
       name="twitter:description"
-      content="Discover and manage campus events in one place. Missout helps students and organisers stay aligned, so nobody misses what matters."
+      content="MissOut — Stage for students, Backstage for fest teams. Discover, register, check-in, and updates in one platform."
     />
-    <meta
-      name="twitter:imageAlt"
-      content="Missout wordmark"
-    />
+    <meta name="twitter:imageAlt" content="Missout wordmark" />
     <meta name="twitter:image" content="https://missout.in/brand/missout_wordmark.svg" />
   </head>
   <body>
-    <script>
-      ;(() => {
-        const stored = localStorage.getItem('missout-color-theme')
-        const theme =
-          stored === 'light' || stored === 'dark'
-            ? stored
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-        document.documentElement.classList.toggle('dark', theme === 'dark')
-        document.documentElement.style.colorScheme = theme
-      })()
-    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -4,7 +4,8 @@ const SITE = 'Missout'
 
 function setHeadMeta(attr: 'name' | 'property', key: string, content: string) {
   const el =
-    document.querySelector(`meta[${attr}="${key}"]`) ?? (() => {
+    document.querySelector(`meta[${attr}="${key}"]`) ??
+    (() => {
       const meta = document.createElement('meta')
       meta.setAttribute(attr, key)
       document.head.appendChild(meta)
